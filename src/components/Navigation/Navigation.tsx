@@ -1,0 +1,24 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import * as ROUTES from '../../constants/routs'
+import "./Navigation.css"
+
+const Navigation = () => (
+  <div>
+    <ul>
+      <li>
+        <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+      </li>
+      <li>
+        <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+      </li>
+      <li>
+        <Link to={ROUTES.DASHBOARD}>Dashboard</Link>
+      </li>
+      <li>
+        <Link to={ROUTES.EDITOR}>Editor</Link>
+      </li>
+    </ul>
+  </div>
+);
+export default Navigation;
