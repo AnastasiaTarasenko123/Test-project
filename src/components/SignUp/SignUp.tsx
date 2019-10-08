@@ -47,7 +47,7 @@ class SignUpFormBase extends React.Component<IProps, IState> {
         error: null
     };
 
-    onSubmit = (event: Event) => {
+    onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         if (this.props.firebase !== null) {
             this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
                 .then(authUser => {
@@ -84,7 +84,7 @@ class SignUpFormBase extends React.Component<IProps, IState> {
 
     render() {
         return (
-            <form className="test-form" noValidate autoComplete="off">
+            <form className="test-form" noValidate autoComplete="off" onSubmit={this.onSubmit}>
                 <TextField
                     id="outlined-name"
                     label="First Name"
