@@ -148,6 +148,6 @@ class SignUpFormBase extends React.Component<IProps, IState> {
     }
 }
 
-const SignUpForm = compose(withRouter, withFirebase)(SignUpFormBase);
+const SignUpForm = compose<IProps, {}>(withRouter, withFirebase)(SignUpFormBase);
 
 export default SignUpPage;
