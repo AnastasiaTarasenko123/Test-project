@@ -1,9 +1,18 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import SignUpLink from '../SignUp/SignUpLink'
 import './SignIn.css'
 
-class SignIn extends React.Component {
+const SignInPage: React.FC = ():React.ReactElement =>(
+         <div className="sign-in-page">
+            <SignInForm/>
+            <br/>
+            <SignUpLink/>
+        </div>
+)
+
+class SignInForm extends React.Component {
     render() {
         return (
             <form className="test-form" noValidate autoComplete="off">
@@ -36,4 +45,4 @@ class SignIn extends React.Component {
     }
 }
 
-export default SignIn;
+export default SignInPage;
