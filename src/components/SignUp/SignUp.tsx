@@ -1,9 +1,11 @@
 import React from 'react'
+
 import './SignUp.css'
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-//import Firebase from '../Firebase/firebase';
+import * as ROUTES from '../../constants/routs';
+import { Link } from 'react-router-dom';
 
 interface IProps { }
 interface IState {
@@ -13,6 +15,22 @@ interface IState {
     password: string,
     confPassword: string
 }
+
+const SignUpPage: React.FC = ():React.ReactElement =>(
+    <div className="sign-up-page">
+        <h1>Sign Up</h1>
+        <p>Account Information</p>
+        <SignUpForm />
+    </div>
+)
+
+// const SignUpLink: React.FC = ():React.ReactElement =>(
+//     <div>
+//         <p>Don't have an account?</p>
+//         <button>Sign Up</button>
+//         <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+//     </div>
+// )
 
 class SignUpForm extends React.Component<IProps, IState> {
     constructor(props: IProps) {
@@ -111,4 +129,4 @@ class SignUpForm extends React.Component<IProps, IState> {
     }
 }
 
-export default SignUpForm;
+export default SignUpPage;
