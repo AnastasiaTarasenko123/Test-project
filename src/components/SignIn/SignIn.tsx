@@ -37,7 +37,7 @@ class SignInForm extends React.Component {
                 />
                 <br />
                 <br />
-                <Button variant="contained" className='button-c'>
+                <Button variant="contained" className='button-sign-in'>
                     Login
                 </Button>
             </form>
