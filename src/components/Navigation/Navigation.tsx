@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routs'
 import "./Navigation.css"
+import SignOut from '../SignOut/SignOut';
 
 const Navigation = () => (
   <div>
@@ -17,6 +18,9 @@ const Navigation = () => (
       </li>
       <li>
         <Link to={ROUTES.EDITOR}>Editor</Link>
+      </li>
+      <li>
+        <SignOut/>
       </li>
     </ul>
   </div>
