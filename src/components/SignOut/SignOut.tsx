@@ -2,6 +2,7 @@ import React from 'react'
 import Firebase from '../Firebase/Firebase'
 import { withFirebase } from '../Firebase/FirebaseContext'
 import './SignOut.css'
+import { withAuthorization } from '../Session/WithAuthorization'
 
 interface IProps{
     firebase: Firebase
@@ -13,4 +14,6 @@ const SignOut: React.FC <IProps> = (props):React.ReactElement => (
     </button>
 )
 
-export default withFirebase(SignOut);
+const condition = (authUser: any) => !!authUser;
+export default withAuthorization(condition)(withFirebase(SignOut));
+
