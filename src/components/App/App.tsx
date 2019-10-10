@@ -7,56 +7,19 @@ import SignInPage from '../SignIn/SignIn'
 //import Editor from '../Editor/Editor'
 import * as ROUTES from '../../constants/routs';
 import './App.css'
-import Firebase from '../Firebase/Firebase';
 import { withFirebase } from '../Firebase/FirebaseContext';
+import { withAuthentication } from '../Session/WithAuthentication'
 
-interface IProps { 
-  firebase: Firebase
-}
-
-interface IState {
-  authUser: any
-}
-
-class App extends React.Component<IProps, IState> {
-  constructor(props: IProps) {
-    super(props);
-    this.state = {
-      authUser: null
-    }
-  }
-
-  listener: any;
-
-  componentDidMount() {
-    this.listener = this.props.firebase.auth.onAuthStateChanged(
-      authUser => {
-        authUser 
-        ? this.setState({authUser}) 
-        : this.setState({authUser: null}) 
-      }
-    ); 
-  }
-
-  componentWillUnmount() {
-    this.listener();
-  }
-
-  render() {
-    return (
-      <div>
-        <Router>
-          <div>
-            <Navigation authUser = {this.state.authUser}/>
-            <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-            <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
-            {/* <Route path={ROUTES.DASHBOARD} component={Dashboard} />
+const App: React.FC = () => (
+  <Router>
+    <div>
+      <Navigation />
+      <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+      <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
+      {/* <Route path={ROUTES.DASHBOARD} component={Dashboard} />
                 <Route path={ROUTES.EDITOR} component={Editor} /> */}
-          </div>
-        </Router>
-      </div>
-    );
-  }
-}
+    </div>
+  </Router>
+);
 
-export default withFirebase(App);
+export default withAuthentication(withFirebase(App));

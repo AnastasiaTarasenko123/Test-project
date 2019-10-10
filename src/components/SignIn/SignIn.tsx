@@ -44,7 +44,7 @@ class SignInFormBase extends React.Component<IProps, IState> {
             this.props.firebase.doSignInWithEmailAndPassword(this.state.email, this.state.password)
                 .then(authUser => {
                     this.setState({ ... this.value });
-                    this.props.history.push(ROUTES.EDITOR);
+                    this.props.history.push(ROUTES.DASHBOARD);
                 })
                 .catch(error => {
                     this.setState({ error });

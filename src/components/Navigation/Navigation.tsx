@@ -3,14 +3,17 @@ import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routs'
 import SignOut from '../SignOut/SignOut';
 
+
 import "./Navigation.css"
+import { AuthUserContext } from '../Session/SessionContext';
 
-interface IProps {
-  authUser: null
-}
 
-const Navigation: React.FC<IProps> = (props): React.ReactElement => (
-  <div>{props.authUser ? <NavigationAuth /> : <NavigationNonAuth />}</div>
+const Navigation: React.FC = () => (
+  <div>
+    <AuthUserContext.Consumer>
+      {authUser => authUser ? <NavigationAuth /> : <NavigationNonAuth />}
+    </AuthUserContext.Consumer>
+  </div>
 );
 
 const NavigationAuth: React.FC = () => (
