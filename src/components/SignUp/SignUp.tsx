@@ -20,7 +20,7 @@ interface IState {
 }
 
 interface IProps {
-    firebase: Firebase | null,
+    firebase: Firebase,
     history: any
 }
 
@@ -50,6 +50,12 @@ class SignUpFormBase extends React.Component<IProps, IState> {
     onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         if (this.props.firebase !== null) {
             this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
+                .then(authUser => {
+                    return this.props.firebase
+                        .user(authUser.user!.uid)
+                        .set({firstName: this.state.firstName,
+                            email: this.state.email});
+                })
                 .then(authUser => {
                     this.setState({ ... this.value });
                     this.props.history.push(ROUTES.DASHBOARD);
