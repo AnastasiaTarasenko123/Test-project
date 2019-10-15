@@ -39,19 +39,21 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
     }
 
     onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        if (this.props.firebase !== null) {
-            this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
+        const { firebase, history } = this.props
+        const { firstName, email } = this.state
+        if (firebase !== null) {
+            firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
                 .then(authUser => {
-                    return this.props.firebase
+                    return firebase
                         .user(authUser.user!.uid)
                         .set({
-                            firstName: this.state.firstName,
-                            email: this.state.email
+                            firstName: firstName,
+                            email: email
                         });
                 })
                 .then(authUser => {
                     this.setState({ ... this.value });
-                    this.props.history.push(ROUTES.DASHBOARD);
+                    history.push(ROUTES.DASHBOARD);
                 })
                 .catch(error => {
                     this.setState({ error });

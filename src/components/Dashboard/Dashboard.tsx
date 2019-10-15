@@ -1,9 +1,11 @@
 import React from 'react'
 import { withAuthorization } from '../Session/WithAuthorization'
+import Applications from '../Applications/Applications'
 
 class Dashboard extends React.Component {
     render() {
-        return (<div></div>);
+        return (
+            <Applications />);
     }
 }
 

@@ -34,11 +34,13 @@ class SignInFormBase extends React.Component<IProps, IStateSignIn> {
 
     //in service
     onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        if (this.props.firebase !== null) {
-            this.props.firebase.doSignInWithEmailAndPassword(this.state.email, this.state.password)
+        const { firebase, history } = this.props;
+        const { email, password } = this.state;
+        if (firebase !== null) {
+            firebase.doSignInWithEmailAndPassword(email, password)
                 .then(authUser => {
                     this.setState({ ... this.value });
-                    this.props.history.push(ROUTES.DASHBOARD);
+                    history.push(ROUTES.DASHBOARD);
                 })
                 .catch(error => {
                     this.setState({ error });
@@ -56,6 +58,7 @@ class SignInFormBase extends React.Component<IProps, IStateSignIn> {
     }
 
     render() {
+    const { error } = this.state;
         return (
             <form className="test-form" noValidate autoComplete="off" onSubmit={this.onSubmit}>
                 <TextField
@@ -80,7 +83,7 @@ class SignInFormBase extends React.Component<IProps, IStateSignIn> {
                 <Button variant="contained" type="submit" disabled={isDataValidSignIn(this.state)}>
                     Login
                 </Button>
-                {this.state.error && <p>{this.state.error.message}</p>}
+                {error && <p>{error.message}</p>}
             </form>
         );
     }
