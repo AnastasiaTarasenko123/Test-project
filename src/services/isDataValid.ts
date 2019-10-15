@@ -1,5 +1,5 @@
-import { IStateSignUp } from '../components/SignUp/SignUp'
-import { IStateSignIn } from '../components/SignIn/SignIn'
+import { IStateSignUp } from '../components/SignUp/SignUpForm'
+import { IStateSignIn } from '../components/SignIn/SignInForm'
 
 // plus email validation
 export const isDataValidSignUp = (data: IStateSignUp): boolean => {

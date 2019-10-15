@@ -23,14 +23,6 @@ interface IProps {
     history: any
 }
 
-const SignUpPage: React.FC<IProps> = ({ firebase }): React.ReactElement => (
-    <div className="signUpPage">
-        <h1>Sign Up</h1>
-        <p>Account Information</p>
-        <SignUpForm />
-    </div>
-)
-
 class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
     value: IStateSignUp = {
         firstName: "",
@@ -132,6 +124,4 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
     }
 }
 
-const SignUpForm = compose<IProps, {}>(withRouter, withFirebase)(SignUpFormBase);
-
-export default SignUpPage
+export const SignUpForm = compose<IProps, {}>(withRouter, withFirebase)(SignUpFormBase)

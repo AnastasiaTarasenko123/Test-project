@@ -3,20 +3,11 @@ import { compose } from 'recompose'
 import { withRouter } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import SignUpLink from '../SignUp/SignUpLink'
 import './SignIn.scss'
 import Firebase from '../../firebase/Firebase'
 import * as ROUTES from '../../constants/routs';
 import { withFirebase } from '../../firebase/FirebaseContext'
 import { isDataValidSignIn } from '../../services/isDataValid'
-
-const SignInPage: React.FC = (): React.ReactElement => (
-    <div className="signInPage">
-        <SignInForm />
-        <br />
-        <SignUpLink />
-    </div>
-)
 
 export interface IStateSignIn {
     email: string,
@@ -95,6 +86,4 @@ class SignInFormBase extends React.Component<IProps, IStateSignIn> {
     }
 }
 
-const SignInForm = compose<IProps, {}>(withRouter, withFirebase)(SignInFormBase);
-
-export default SignInPage
+export const SignInForm = compose<IProps, {}>(withRouter, withFirebase)(SignInFormBase)
