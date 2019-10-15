@@ -7,11 +7,7 @@ interface IProps {
 }
 
 interface IState {
-    applications: []
-}
-
-interface IListProps {
-    applications: Array<IProps>
+    applications: Array<Object>
 }
 
 class Applications extends React.Component<IProps, IState>{
@@ -23,7 +19,20 @@ class Applications extends React.Component<IProps, IState>{
     }
 
     componentDidMount() {
-        this.props.firebase.applications().on('value', snapshot => { })
+        this.props.firebase.applications().on('value', snapshot => {
+            const applicationObject = snapshot.val();
+            if (applicationObject) {
+                const applicationList = Object.keys(applicationObject).map(key => ({
+                    ...applicationObject[key],
+                    uid: key,
+                }));
+                this.setState({
+                    applications: applicationList
+                });
+            } else {
+                this.setState({ applications: [] });
+            }
+        });
     }
 
     componentWillUnmount() {
@@ -31,11 +40,16 @@ class Applications extends React.Component<IProps, IState>{
     }
 
     render() {
-        return (<ApplicationList applications={this.state.applications} />);
+        const { applications } = this.state;
+        return (
+            <div>
+                {applications.length > 0 ? (<ApplicationList applications={this.state.applications} />) : (<p>No applications yet.</p>)}
+            </div>
+        );
     }
 }
 
-const ApplicationList: React.FC<IListProps> = ({ applications }) => (
+const ApplicationList: React.FC<IState> = ({ applications }) => (
     <ul>
         {applications.map(application => (
             <ApplicationItem application={application} />

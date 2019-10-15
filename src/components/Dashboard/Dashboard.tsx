@@ -5,7 +5,10 @@ import Applications from '../Applications/Applications'
 class Dashboard extends React.Component {
     render() {
         return (
-            <Applications />);
+            <div>
+                <h1>My Dashboard</h1>
+                <Applications />
+            </div>);
     }
 }
 
