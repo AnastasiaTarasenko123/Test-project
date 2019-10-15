@@ -1,8 +1,8 @@
 import React from 'react'
-import Firebase from '../Firebase/Firebase'
+import Firebase from '../../firebase/Firebase'
 import * as ROUTES from '../../constants/routs'
 import { withRouter } from 'react-router'
-import { withFirebase } from '../Firebase/FirebaseContext'
+import { withFirebase } from '../../firebase/FirebaseContext'
 import { compose } from 'recompose'
 
 interface IProps {

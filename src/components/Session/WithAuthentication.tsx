@@ -1,7 +1,7 @@
 import React from 'react'
-import Firebase from '../Firebase/Firebase'
+import Firebase from '../../firebase/Firebase'
 import { AuthUserContext } from './SessionContext'
-import { withFirebase } from '../Firebase/FirebaseContext'
+import { withFirebase } from '../../firebase/FirebaseContext'
 
 interface IProps {
     firebase: Firebase
@@ -25,9 +25,7 @@ export const withAuthentication = (Component: any) => {
         componentDidMount() {
             this.listener = this.props.firebase.auth.onAuthStateChanged(
                 authUser => {
-                    authUser
-                        ? this.setState({ authUser })
-                        : this.setState({ authUser: null })
+                    this.setState({ authUser: authUser || null })
                 }
             );
         }

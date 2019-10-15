@@ -6,7 +6,7 @@ import SignInPage from '../SignIn/SignIn'
 //import Dashboard from '../Dashboard/Dashboard'
 //import Editor from '../Editor/Editor'
 import * as ROUTES from '../../constants/routs'
-import { withFirebase } from '../Firebase/FirebaseContext'
+import { withFirebase } from '../../firebase/FirebaseContext'
 import { withAuthentication } from '../Session/WithAuthentication'
 import './App.scss'
 

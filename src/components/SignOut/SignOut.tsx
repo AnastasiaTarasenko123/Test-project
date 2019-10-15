@@ -1,6 +1,6 @@
 import React from 'react'
-import Firebase from '../Firebase/Firebase'
-import { withFirebase } from '../Firebase/FirebaseContext'
+import Firebase from '../../firebase/Firebase'
+import { withFirebase } from '../../firebase/FirebaseContext'
 import './SignOut.scss'
 import { withAuthorization } from '../Session/WithAuthorization'
 

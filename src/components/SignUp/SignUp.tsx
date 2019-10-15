@@ -3,12 +3,13 @@ import { withRouter } from 'react-router-dom'
 import './SignUp.scss'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import { withFirebase } from '../Firebase/FirebaseContext'
-import Firebase from '../Firebase/Firebase'
+import { withFirebase } from '../../firebase/FirebaseContext'
+import Firebase from '../../firebase/Firebase'
 import * as ROUTES from '../../constants/routs'
 import { compose } from 'recompose'
+import { isDataValidSignUp } from '../../services/isDataValid'
 
-interface IState {
+export interface IStateSignUp {
     firstName: string,
     lastName: string,
     email: string,
@@ -23,15 +24,15 @@ interface IProps {
 }
 
 const SignUpPage: React.FC<IProps> = ({ firebase }): React.ReactElement => (
-    <div className="sign-up-page">
+    <div className="signUpPage">
         <h1>Sign Up</h1>
         <p>Account Information</p>
         <SignUpForm />
     </div>
 )
 
-class SignUpFormBase extends React.Component<IProps, IState> {
-    value: IState = {
+class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
+    value: IStateSignUp = {
         firstName: "",
         lastName: "",
         email: "",
@@ -67,7 +68,7 @@ class SignUpFormBase extends React.Component<IProps, IState> {
         event.preventDefault();
     }
 
-    onChange = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange = (key: keyof IStateSignUp) => (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target
         this.setState(prev => ({
             ...prev,
@@ -75,34 +76,18 @@ class SignUpFormBase extends React.Component<IProps, IState> {
         }))
     }
 
-    // + валідація форми
-    isInvalid = (): boolean => {
-        if (this.state.password === this.state.confPassword &&
-            this.state.password !== "" &&
-            this.state.password.length >= 8 &&
-            this.state.firstName !== "" &&
-            this.state.lastName !== "")
-            return false;
-        else
-            return true;
-    }
-
     render() {
         return (
             <form className="test-form" noValidate autoComplete="off" onSubmit={this.onSubmit}>
                 <TextField
-                    id="outlined-name"
                     label="First Name"
-                    className="input-sign-up"
                     value={this.state.firstName}
                     margin="normal"
                     variant="outlined"
                     onChange={this.onChange("firstName")}
                 />
                 <TextField
-                    id="outlined-name"
                     label="Last Name"
-                    className="input-sign-up"
                     value={this.state.lastName}
                     margin="normal"
                     variant="outlined"
@@ -110,9 +95,7 @@ class SignUpFormBase extends React.Component<IProps, IState> {
                 />
                 <br />
                 <TextField
-                    id="outlined-email-input"
                     label="Email"
-                    className="input-sign-up"
                     value={this.state.email}
                     type="email"
                     autoComplete="email"
@@ -122,9 +105,7 @@ class SignUpFormBase extends React.Component<IProps, IState> {
                 />
                 <br />
                 <TextField
-                    id="outlined-password-input"
                     label="Password"
-                    className="input-sign-up"
                     value={this.state.password}
                     type="password"
                     autoComplete="current-password"
@@ -133,9 +114,7 @@ class SignUpFormBase extends React.Component<IProps, IState> {
                     onChange={this.onChange("password")}
                 />
                 <TextField
-                    id="outlined-password-input"
                     label="Confirm Password"
-                    className="input-sign-up"
                     value={this.state.confPassword}
                     type="password"
                     autoComplete="current-password"
@@ -145,7 +124,7 @@ class SignUpFormBase extends React.Component<IProps, IState> {
                 />
                 <br />
                 <br />
-                <Button variant="contained" className="button-sign-up" type="submit" disabled={this.isInvalid()}>
+                <Button variant="contained" className="button-sign-up" type="submit" disabled={isDataValidSignUp(this.state)}>
                     Submit
                 </Button>
             </form>

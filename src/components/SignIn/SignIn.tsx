@@ -5,19 +5,20 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import SignUpLink from '../SignUp/SignUpLink'
 import './SignIn.scss'
-import Firebase from '../Firebase/Firebase'
+import Firebase from '../../firebase/Firebase'
 import * as ROUTES from '../../constants/routs';
-import { withFirebase } from '../Firebase/FirebaseContext'
+import { withFirebase } from '../../firebase/FirebaseContext'
+import { isDataValidSignIn } from '../../services/isDataValid'
 
 const SignInPage: React.FC = (): React.ReactElement => (
-    <div className="sign-in-page">
+    <div className="signInPage">
         <SignInForm />
         <br />
         <SignUpLink />
     </div>
 )
 
-interface IState {
+export interface IStateSignIn {
     email: string,
     password: string,
     error: Error | null
@@ -28,18 +29,19 @@ interface IProps {
     history: any
 }
 
-class SignInFormBase extends React.Component<IProps, IState> {
-    value: IState = {
+class SignInFormBase extends React.Component<IProps, IStateSignIn> {
+    value: IStateSignIn = {
         email: "",
         password: "",
         error: null
     };
-    
+
     constructor(props: IProps) {
         super(props);
         this.state = this.value;
     }
 
+    //in service
     onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         if (this.props.firebase !== null) {
             this.props.firebase.doSignInWithEmailAndPassword(this.state.email, this.state.password)
@@ -54,22 +56,19 @@ class SignInFormBase extends React.Component<IProps, IState> {
         event.preventDefault();
     }
 
-    onChange = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange = (key: keyof IStateSignIn) => (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target
         this.setState(prev => ({
             ...prev,
             [key]: value
         }))
     }
-    
+
     render() {
-        const isInvalid = this.state.email === "" || this.state.password === "";
         return (
             <form className="test-form" noValidate autoComplete="off" onSubmit={this.onSubmit}>
                 <TextField
-                    id="outlined-email-input"
                     label="Email"
-                    className="email-sign-in"
                     onChange={this.onChange("email")}
                     type="email"
                     autoComplete="email"
@@ -78,9 +77,7 @@ class SignInFormBase extends React.Component<IProps, IState> {
                 />
                 <br />
                 <TextField
-                    id="outlined-password-input"
                     label="Password"
-                    className="password-sign-up"
                     onChange={this.onChange("password")}
                     type="password"
                     autoComplete="current-password"
@@ -89,7 +86,7 @@ class SignInFormBase extends React.Component<IProps, IState> {
                 />
                 <br />
                 <br />
-                <Button variant="contained" className="button-sign-in" type="submit" disabled={isInvalid}>
+                <Button variant="contained" type="submit" disabled={isDataValidSignIn(this.state)}>
                     Login
                 </Button>
                 {this.state.error && <p>{this.state.error.message}</p>}
