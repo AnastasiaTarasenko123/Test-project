@@ -1,14 +1,14 @@
-import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Navigation from '../Navigation/Navigation';
-import SignUpPage from '../SignUp/SignUp';
+import React from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Navigation from '../Navigation/Navigation'
+import SignUpPage from '../SignUp/SignUp'
 import SignInPage from '../SignIn/SignIn'
 //import Dashboard from '../Dashboard/Dashboard'
 //import Editor from '../Editor/Editor'
-import * as ROUTES from '../../constants/routs';
-import './App.css'
-import { withFirebase } from '../Firebase/FirebaseContext';
+import * as ROUTES from '../../constants/routs'
+import { withFirebase } from '../Firebase/FirebaseContext'
 import { withAuthentication } from '../Session/WithAuthentication'
+import './App.scss'
 
 const App: React.FC = () => (
   <Router>
@@ -22,4 +22,4 @@ const App: React.FC = () => (
   </Router>
 );
 
-export default withAuthentication(withFirebase(App));
+export default withAuthentication(withFirebase(App))

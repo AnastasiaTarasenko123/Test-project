@@ -1,6 +1,6 @@
 import React from 'react'
-import * as ROUTES from '../../constants/routs';
-import { Link } from 'react-router-dom';
+import * as ROUTES from '../../constants/routs'
+import { Link } from 'react-router-dom'
 
 const SignUpLink: React.FC = ():React.ReactElement =>(
     <div>
@@ -9,5 +9,4 @@ const SignUpLink: React.FC = ():React.ReactElement =>(
     </div>
 )
 
-export default SignUpLink;
-
+export default SignUpLink

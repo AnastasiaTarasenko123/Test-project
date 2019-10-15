@@ -1,5 +1,5 @@
 import app from 'firebase/app'
-import 'firebase/auth';
+import 'firebase/auth'
 import 'firebase/database'
 
 const config = {
@@ -15,6 +15,7 @@ const config = {
 class Firebase {
   auth: app.auth.Auth;
   db: app.database.Database;
+
   constructor() {
     app.initializeApp(config);
     this.auth = app.auth();
@@ -30,8 +31,7 @@ class Firebase {
   doSignOut = () => this.auth.signOut();
 
   user = (uid: any) => this.db.ref(`users/${uid}`);
-  users = () => this.db.ref('users');
-
+  users = () => this.db.ref("users");
 }
 
-export default Firebase;
+export default Firebase

@@ -1,12 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 import * as ROUTES from '../../constants/routs'
-import SignOut from '../SignOut/SignOut';
-
-
-import "./Navigation.css"
-import { AuthUserContext } from '../Session/SessionContext';
-
+import SignOut from '../SignOut/SignOut'
+import './Navigation.scss'
+import { AuthUserContext } from '../Session/SessionContext'
 
 const Navigation: React.FC = () => (
   <div>
@@ -42,4 +39,4 @@ const NavigationNonAuth: React.FC = () => (
   </div>
 );
 
-export default Navigation;
+export default Navigation

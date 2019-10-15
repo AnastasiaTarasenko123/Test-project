@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.scss'
 import App from './components/App/App'
 import Firebase from './components/Firebase/Firebase'
 import { FirebaseContext } from './components/Firebase/FirebaseContext'

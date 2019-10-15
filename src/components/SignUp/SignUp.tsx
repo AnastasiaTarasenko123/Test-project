@@ -1,13 +1,11 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom';
-
-import './SignUp.css'
-
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { withRouter } from 'react-router-dom'
+import './SignUp.scss'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
 import { withFirebase } from '../Firebase/FirebaseContext'
-import Firebase from '../Firebase/Firebase';
-import * as ROUTES from '../../constants/routs';
+import Firebase from '../Firebase/Firebase'
+import * as ROUTES from '../../constants/routs'
 import { compose } from 'recompose'
 
 interface IState {
@@ -33,11 +31,6 @@ const SignUpPage: React.FC<IProps> = ({ firebase }): React.ReactElement => (
 )
 
 class SignUpFormBase extends React.Component<IProps, IState> {
-    constructor(props: IProps) {
-        super(props);
-        this.state = this.value;
-    }
-
     value: IState = {
         firstName: "",
         lastName: "",
@@ -47,14 +40,21 @@ class SignUpFormBase extends React.Component<IProps, IState> {
         error: null
     };
 
+    constructor(props: IProps) {
+        super(props);
+        this.state = this.value;
+    }
+
     onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         if (this.props.firebase !== null) {
             this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
                 .then(authUser => {
                     return this.props.firebase
                         .user(authUser.user!.uid)
-                        .set({firstName: this.state.firstName,
-                            email: this.state.email});
+                        .set({
+                            firstName: this.state.firstName,
+                            email: this.state.email
+                        });
                 })
                 .then(authUser => {
                     this.setState({ ... this.value });
@@ -76,7 +76,6 @@ class SignUpFormBase extends React.Component<IProps, IState> {
     }
 
     // + валідація форми
-
     isInvalid = (): boolean => {
         if (this.state.password === this.state.confPassword &&
             this.state.password !== "" &&
@@ -94,20 +93,20 @@ class SignUpFormBase extends React.Component<IProps, IState> {
                 <TextField
                     id="outlined-name"
                     label="First Name"
-                    className='input-sign-up'
+                    className="input-sign-up"
                     value={this.state.firstName}
                     margin="normal"
                     variant="outlined"
-                    onChange={this.onChange('firstName')}
+                    onChange={this.onChange("firstName")}
                 />
                 <TextField
                     id="outlined-name"
                     label="Last Name"
-                    className='input-sign-up'
+                    className="input-sign-up"
                     value={this.state.lastName}
                     margin="normal"
                     variant="outlined"
-                    onChange={this.onChange('lastName')}
+                    onChange={this.onChange("lastName")}
                 />
                 <br />
                 <TextField
@@ -119,7 +118,7 @@ class SignUpFormBase extends React.Component<IProps, IState> {
                     autoComplete="email"
                     margin="normal"
                     variant="outlined"
-                    onChange={this.onChange('email')}
+                    onChange={this.onChange("email")}
                 />
                 <br />
                 <TextField
@@ -131,7 +130,7 @@ class SignUpFormBase extends React.Component<IProps, IState> {
                     autoComplete="current-password"
                     margin="normal"
                     variant="outlined"
-                    onChange={this.onChange('password')}
+                    onChange={this.onChange("password")}
                 />
                 <TextField
                     id="outlined-password-input"
@@ -142,11 +141,11 @@ class SignUpFormBase extends React.Component<IProps, IState> {
                     autoComplete="current-password"
                     margin="normal"
                     variant="outlined"
-                    onChange={this.onChange('confPassword')}
+                    onChange={this.onChange("confPassword")}
                 />
                 <br />
                 <br />
-                <Button variant="contained" className='button-sign-up' type="submit" disabled={this.isInvalid()}>
+                <Button variant="contained" className="button-sign-up" type="submit" disabled={this.isInvalid()}>
                     Submit
                 </Button>
             </form>
@@ -156,4 +155,4 @@ class SignUpFormBase extends React.Component<IProps, IState> {
 
 const SignUpForm = compose<IProps, {}>(withRouter, withFirebase)(SignUpFormBase);
 
-export default SignUpPage;
+export default SignUpPage
