@@ -17,6 +17,12 @@ export const isDataValidSignIn = (data: IStateSignIn): boolean => (
     data.email === "" || data.password === ""
 )
 
-export const isAppNameValid = (data: string): boolean => (
-    data === ""
-)
+export const isModalsValid = (data: any, count: number): boolean => {
+    var result: boolean;
+    switch(count){
+        case 0: result = data === ""; break;
+        default: 
+            result = false;
+    }
+    return result;
+}
