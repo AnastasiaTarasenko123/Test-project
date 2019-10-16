@@ -1,0 +1,17 @@
+.modalWindow{
+    height: 100vh;
+    width: 100vw;
+    position: fixed; 
+    z-index: 1; 
+    top: 0;
+    left: 0;
+    background-color: rgba(183, 186, 228, 0.4);
+}
+
+.modalBlock{
+    height: 50vh;
+    width: 50vw;
+    align-content: center;
+    background: white;
+    margin: 15% auto; 
+}

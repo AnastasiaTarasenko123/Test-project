@@ -1,15 +1,21 @@
 import React from 'react'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import Firebase from '../../firebase/Firebase'
-import { Button, TextField } from '@material-ui/core';
+import { Button } from '@material-ui/core'
+import CreateApp from '../CreateApp/CreateApp';
+import './Applications.scss'
 
 interface IProps {
     firebase: Firebase
 }
 
 interface IState {
+    applications: Array<IApplication>,
+    modalActive: boolean
+}
+
+interface IListApplications {
     applications: Array<IApplication>
-   // testState: any
 }
 
 interface IApplication {
@@ -26,13 +32,10 @@ class Applications extends React.Component<IProps, IState>{
     constructor(props: IProps) {
         super(props);
         this.state = {
-            applications: []
+            applications: [],
+            modalActive: false
         }
     }
-
-    // setTest = (info: any) => {
-    //     this.setState({testState: info})
-    // }
 
     componentDidMount() {
         this.props.firebase.applications().on('value', snapshot => {
@@ -59,43 +62,31 @@ class Applications extends React.Component<IProps, IState>{
 
     onChangeApplication() { }
 
+    openModal() {
+        this.setState({ modalActive: true });
+    }
+
+    closeModal() {
+        this.setState({ modalActive: false })
+    }
+
     render() {
-        const { applications } = this.state;
+        const { applications, modalActive } = this.state;
         return (
             <div>
                 {applications.length > 0 ? (<ApplicationList applications={this.state.applications} />) : (<p>No applications yet.</p>)}
-                <form onSubmit={this.onCreateApplication}>
-                    <TextField
-                        label="Name"
-                       // value={values.name}
-                       // onChange={handleChange('name')}
-                        margin="normal"
-                    />
-                    <Button variant="contained" type="submit">
-                        Add
-                    </Button>
-                    {/* <Test valueChange={this.setTest} /> */}
-                </form>
+                <Button variant="contained" type="submit" onClick={this.openModal.bind(this)}>
+                    + Create App
+                </Button>
+                <div className={`modals ${modalActive ? `active` : ``}`}>
+                    <CreateApp modalChange = {this.closeModal.bind(this)} />
+                </div>
             </div>
         );
     }
 }
 
-// interface TestProps {
-//     valueChange: (val: any) => void
-// }
-
-// class Test extends React.Component<TestProps> {
-//     render() {
-//         return (
-//             <div onClick={() => this.props.valueChange('sss')}>
-
-//             </div>
-//         )
-//     }
-// }
-
-const ApplicationList: React.FC<IState> = ({ applications }) => (
+const ApplicationList: React.FC<IListApplications> = ({ applications }) => (
     <ul>
         {applications.map(application => (
             <ApplicationItem application={application} />
