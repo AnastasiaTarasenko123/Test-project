@@ -1,3 +1,11 @@
+.modalBlocks{
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
 .modalWindow{
     height: 100vh;
     width: 100vw;
@@ -9,9 +17,33 @@
 }
 
 .modalBlock{
-    height: 50vh;
-    width: 50vw;
-    align-content: center;
+    position: relative;
+    height: 70vh;
+    width: 30vw;
     background: white;
-    margin: 15% auto; 
+    margin: 7% auto; 
+    border-radius: 10px;
+}
+
+.buttonClose {
+    position: absolute !important;
+    top: 1%;
+    right: 1%;
+}
+
+.buttonNext {
+    position: absolute !important;
+    bottom: 3%;
+    left: 43%;
+}
+
+.appName {
+    width: 60%;
+    margin: 0% auto; 
+    text-align: center;
+    padding-top: 30%;
+}
+
+.textRemember{
+    margin-top: 15%;
 }

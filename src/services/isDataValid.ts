@@ -17,3 +17,6 @@ export const isDataValidSignIn = (data: IStateSignIn): boolean => (
     data.email === "" || data.password === ""
 )
 
+export const isAppNameValid = (data: string): boolean => (
+    data === ""
+)
