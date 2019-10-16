@@ -9,7 +9,6 @@ import * as ROUTES from '../../constants/routs';
 import { withFirebase } from '../../firebase/FirebaseContext'
 import { isDataValidSignIn } from '../../services/isDataValid'
 import { login } from '../../services/login'
-import { thisExpression } from '@babel/types'
 
 export interface IStateSignIn {
     email: string,
@@ -34,23 +33,12 @@ class SignInFormBase extends React.Component<IProps, IStateSignIn> {
         this.state = this.value;
     }
 
-    //in service
     onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         const { firebase, history } = this.props;
         const { email, password } = this.state;
         if (firebase) {
             login(firebase, email, password, authUser => {this.setState({...this.value}); history.push(ROUTES.DASHBOARD);}, (error) => this.setState({error}))
         }
-        // if (firebase !== null) {
-        //     firebase.doSignInWithEmailAndPassword(email, password)
-        //         .then(authUser => {
-        //             this.setState({ ... this.value });
-        //             history.push(ROUTES.DASHBOARD);
-        //         })
-        //         .catch(error => {
-        //             this.setState({ error });
-        //         });
-        // }
         event.preventDefault();
     }
 

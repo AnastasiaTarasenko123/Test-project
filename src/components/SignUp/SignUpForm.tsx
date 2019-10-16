@@ -8,6 +8,7 @@ import Firebase from '../../firebase/Firebase'
 import * as ROUTES from '../../constants/routs'
 import { compose } from 'recompose'
 import { isDataValidSignUp } from '../../services/isDataValid'
+import { registration } from '../../services/registration'
 
 export interface IStateSignUp {
     firstName: string,
@@ -40,24 +41,14 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
 
     onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         const { firebase, history } = this.props
-        const { firstName, email } = this.state
+        const { firstName, email, password } = this.state
         if (firebase !== null) {
-            firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
-                .then(authUser => {
-                    return firebase
-                        .user(authUser.user!.uid)
-                        .set({
-                            firstName: firstName,
-                            email: email
-                        });
-                })
-                .then(authUser => {
-                    this.setState({ ... this.value });
-                    history.push(ROUTES.DASHBOARD);
-                })
-                .catch(error => {
-                    this.setState({ error });
-                });
+            registration(firebase, firstName, email, password, authUser => {
+                this.setState({ ... this.value });
+                history.push(ROUTES.DASHBOARD);
+            }, (error: any) => {
+                this.setState({ error });
+            });
         }
         event.preventDefault();
     }

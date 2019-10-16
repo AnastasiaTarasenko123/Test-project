@@ -1,13 +1,22 @@
 import Firebase from "../firebase/Firebase"
 
-export const login = (
+export const registration = (
     firebase: Firebase,
+    firstName: string,
     email: string,
     password: string,
     successcallback?: (user: firebase.auth.UserCredential) => void,
     errorcallback?: (error: any) => void
 ) => {
-    firebase.doSignInWithEmailAndPassword(email, password)
+    firebase.doCreateUserWithEmailAndPassword(email, password)
+        .then(authUser => {
+            return firebase
+                .user(authUser.user!.uid)
+                .set({
+                    firstName: firstName,
+                    email: email
+                });
+        })
         .then(authUser => {
             successcallback && successcallback(authUser)
         })
