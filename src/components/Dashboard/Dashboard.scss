@@ -1,0 +1,21 @@
+@import '../../constants/style';
+
+.dashboardContent {
+    margin: 3rem 15rem;
+    .headerDashboard {
+        display: flex;
+        align-items: center;
+        div {
+            width: 50%;
+        }
+        .headerText {
+            color: $useColor;
+        }
+        .headerBtn {
+            text-align: right;  
+        }
+    }
+    .myApps {
+        margin-top: 3rem;
+    }
+}

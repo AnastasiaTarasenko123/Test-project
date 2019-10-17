@@ -1,9 +1,9 @@
-@import '../SignIn/SignIn.scss';
+@import '../../constants/style';
 
 .signUpLink {
     margin-top: 1.5rem;
     a {
-        color: white !important;
+        color: $useColor !important;
     }
 }
 

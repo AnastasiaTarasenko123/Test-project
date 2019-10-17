@@ -3,6 +3,7 @@ import { withAuthorization } from '../Session/WithAuthorization'
 import Applications from '../Applications/Applications'
 import { Button } from '@material-ui/core'
 import ModalCreateApp from '../ModalCreateApp/ModalCreateApp'
+import './Dashboard.scss'
 
 interface IProps { }
 
@@ -29,19 +30,22 @@ class Dashboard extends React.Component<IProps, IState> {
     render() {
         const { isModalActive } = this.state;
         return (
-            <div>
+            <div className="dashboardContent">
                 <div className="headerDashboard">
-                    <h1>My Dashboard</h1>
-                    <Button variant="contained" type="submit" color="primary" onClick={this.openModal.bind(this)}>
-                        + Create App
-                    </Button>
-                    <div className={`modals ${isModalActive ? `active` : ``}`}>
-                        <ModalCreateApp modalChange={this.closeModal.bind(this)} />
+                    <div className="headerText">
+                        <h1>My Dashboard</h1>
+                    </div>
+                    <div className="headerBtn">
+                        <Button variant="outlined" color="primary" type="submit" onClick={this.openModal.bind(this)}>+ Create App</Button>
                     </div>
                 </div>
-                <p>Apps</p>
-                <Applications />
-            </div>);
+                <div className="myApps">
+                    <Applications />
+                </div>
+                <div className={`modals ${isModalActive ? `active` : ``}`}>
+                    <ModalCreateApp modalChange={this.closeModal.bind(this)} />
+                </div>
+            </div >);
     }
 }
 

@@ -62,7 +62,7 @@ class Applications extends React.Component<IProps, IState>{
         const { applications } = this.state;
         return (
             <div>
-                {applications.length > 0 ? (<ApplicationList applications={this.state.applications} />) : (<p>No applications yet.</p>)}
+                {applications.length > 0 ? (<div><p>Apps</p> <ApplicationList applications={this.state.applications} /></div>) : (<p>No applications yet.</p>)}
             </div>
         );
     }

@@ -14,7 +14,7 @@ const Navigation: React.FC = () => (
 );
 
 const NavigationAuth: React.FC = () => (
-  <div>
+  <div className="navigaton">
     <ul>
       <li>
         <SignOut />
@@ -30,7 +30,7 @@ const NavigationAuth: React.FC = () => (
 );
 
 const NavigationNonAuth: React.FC = () => (
-  <div>
+  <div className="navigaton">
     <ul>
       <li>
         <Link to={ROUTES.SIGN_IN}>Sign In</Link>
