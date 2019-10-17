@@ -7,45 +7,40 @@
     z-index: 1; 
     top: 0;
     left: 0;
-    background-color: rgba(183, 186, 228, 0.4);
+    background-color: $colorBgModal;
+    .modalBlock{
+        position: relative;
+        height: 70vh;
+        width: 30vw;
+        background: white;
+        margin: 7% auto; 
+        border-radius: 10px;
+        .buttonClose {
+            position: $positionButton;
+            top: 1%;
+            right: 1%;
+        }
+        .buttonNext {
+            position: $positionButton;
+            bottom: 3%;
+            left: 43%;
+        }
+        .blocks{
+            display: none;
+            margin: 0% auto; 
+            text-align: center;
+        }
+        .active {
+            display: block;
+        }
+        .welcome {
+            width: 60%;
+            padding-top: 30%;
+        }      
+        .textRemember{
+            margin-top: 15%;
+        }
+    }
+    
 }
 
-.modalBlocks{
-    display: none;
-    margin: 0% auto; 
-    text-align: center;
-}
-
-.active {
-    display: block;
-}
-
-.modalBlock{
-    position: relative;
-    height: 70vh;
-    width: 30vw;
-    background: white;
-    margin: 7% auto; 
-    border-radius: 10px;
-}
-
-.buttonClose {
-    position: $positionButton;
-    top: 1%;
-    right: 1%;
-}
-
-.buttonNext {
-    position: $positionButton;
-    bottom: 3%;
-    left: 43%;
-}
-
-.appName {
-    width: 60%;
-    padding-top: 30%;
-}
-
-.textRemember{
-    margin-top: 15%;
-}
