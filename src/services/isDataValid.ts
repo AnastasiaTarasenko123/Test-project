@@ -1,27 +1,30 @@
 import { IStateSignUp } from '../components/SignUp/SignUpForm'
 import { IStateSignIn } from '../components/SignIn/SignInForm'
 
-// plus email validation
-export const isDataValidSignUp = (data: IStateSignUp): boolean => {
-    if (data.password === data.confPassword &&
-        data.password !== "" &&
-        data.password.length >= 8 &&
-        data.firstName !== "" &&
-        data.lastName !== "")
-        return false;
-    else
-        return true;
+const checkEmail = (check: string): boolean => {
+    return /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(check);
 }
 
+export const isDataValidSignUp = (data: IStateSignUp): boolean => (
+    data.password !== data.confPassword ||
+    data.password === "" ||
+    data.password.length <= 8 ||
+    data.firstName === "" ||
+    data.lastName === "" ||
+    !checkEmail(data.email)
+)
+
 export const isDataValidSignIn = (data: IStateSignIn): boolean => (
-    data.email === "" || data.password === ""
+    data.email === "" ||
+    data.password === "" ||
+    !checkEmail(data.email)
 )
 
 export const isModalsValid = (data: any, count: number): boolean => {
     var result: boolean;
-    switch(count){
+    switch (count) {
         case 0: result = data === ""; break;
-        default: 
+        default:
             result = false;
     }
     return result;
