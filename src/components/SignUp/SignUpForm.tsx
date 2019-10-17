@@ -63,7 +63,7 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
 
     render() {
         return (
-            <form className="test-form" noValidate autoComplete="off" onSubmit={this.onSubmit}>
+            <form className="signUpForm" noValidate autoComplete="off" onSubmit={this.onSubmit}>
                 <TextField
                     label="First Name"
                     value={this.state.firstName}
@@ -81,6 +81,7 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
                 <br />
                 <TextField
                     label="Email"
+                    className="emailSignUp"
                     value={this.state.email}
                     type="email"
                     autoComplete="email"
@@ -109,7 +110,7 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
                 />
                 <br />
                 <br />
-                <Button variant="contained" className="button-sign-up" type="submit" disabled={isDataValidSignUp(this.state)}>
+                <Button variant="contained" className="button-sign-up" color="primary" type="submit" disabled={isDataValidSignUp(this.state)}>
                     Submit
                 </Button>
             </form>

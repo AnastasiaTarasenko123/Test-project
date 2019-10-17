@@ -1,12 +1,4 @@
-.modalBlocks{
-    display: none;
-    margin: 0% auto; 
-    text-align: center;
-}
-
-.active {
-    display: block;
-}
+$positionButton: absolute !important;
 
 .modalWindow{
     height: 100vh;
@@ -16,6 +8,16 @@
     top: 0;
     left: 0;
     background-color: rgba(183, 186, 228, 0.4);
+}
+
+.modalBlocks{
+    display: none;
+    margin: 0% auto; 
+    text-align: center;
+}
+
+.active {
+    display: block;
 }
 
 .modalBlock{
@@ -28,13 +30,13 @@
 }
 
 .buttonClose {
-    position: absolute !important;
+    position: $positionButton;
     top: 1%;
     right: 1%;
 }
 
 .buttonNext {
-    position: absolute !important;
+    position: $positionButton;
     bottom: 3%;
     left: 43%;
 }

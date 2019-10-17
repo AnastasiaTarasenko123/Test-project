@@ -1,8 +1,14 @@
-.signInPage{
+.loginPage{
     text-align: center;
-}
-
-a {
-    color: black;
-    text-decoration: none;
+    display: flex;
+    height: 95vh;
+    .loginContext {
+        width: 40vw;
+        height: 50vh;
+        margin: auto;
+    }
+    a {
+        color: black;
+        text-decoration: none;
+    }
 }

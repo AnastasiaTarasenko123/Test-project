@@ -3,7 +3,6 @@ import { compose } from 'recompose'
 import { withRouter } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import './SignIn.scss'
 import Firebase from '../../firebase/Firebase'
 import * as ROUTES from '../../constants/routs';
 import { withFirebase } from '../../firebase/FirebaseContext'
@@ -37,7 +36,7 @@ class SignInFormBase extends React.Component<IProps, IStateSignIn> {
         const { firebase, history } = this.props;
         const { email, password } = this.state;
         if (firebase) {
-            login(firebase, email, password, authUser => {this.setState({...this.value}); history.push(ROUTES.DASHBOARD);}, (error) => this.setState({error}))
+            login(firebase, email, password, authUser => { this.setState({ ...this.value }); history.push(ROUTES.DASHBOARD); }, (error) => this.setState({ error }))
         }
         event.preventDefault();
     }
@@ -51,7 +50,7 @@ class SignInFormBase extends React.Component<IProps, IStateSignIn> {
     }
 
     render() {
-    const { error } = this.state;
+        const { error } = this.state;
         return (
             <form className="test-form" noValidate autoComplete="off" onSubmit={this.onSubmit}>
                 <TextField
@@ -73,7 +72,7 @@ class SignInFormBase extends React.Component<IProps, IStateSignIn> {
                 />
                 <br />
                 <br />
-                <Button variant="contained" type="submit" disabled={isDataValidSignIn(this.state)}>
+                <Button variant="contained" color="primary" type="submit" disabled={isDataValidSignIn(this.state)}>
                     Login
                 </Button>
                 {error && <p>{error.message}</p>}
