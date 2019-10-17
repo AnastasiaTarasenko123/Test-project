@@ -17,13 +17,13 @@ const NavigationAuth: React.FC = () => (
   <div>
     <ul>
       <li>
-        <Link to={ROUTES.DASHBOARD}>Dashboard</Link>
+        <SignOut />
       </li>
       <li>
         <Link to={ROUTES.EDITOR}>Editor</Link>
       </li>
       <li>
-        <SignOut />
+        <Link to={ROUTES.DASHBOARD}>Dashboard</Link>
       </li>
     </ul>
   </div>

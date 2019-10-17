@@ -3,15 +3,17 @@ import Firebase from '../../firebase/Firebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import './SignOut.scss'
 import { withAuthorization } from '../Session/WithAuthorization'
+import { Link } from 'react-router-dom'
+import * as ROUTES from '../../constants/routs'
 
 interface IProps {
     firebase: Firebase
 }
 
 const SignOut: React.FC<IProps> = (props): React.ReactElement => (
-    <button type="button" onClick={props.firebase.doSignOut}>
-        Sign Out
-    </button>
+    <li onClick={props.firebase.doSignOut}>
+        <Link to={ROUTES.SIGN_IN}>Sign Out</Link>
+    </li>
 )
 
 const condition = (authUser: any) => !!authUser;

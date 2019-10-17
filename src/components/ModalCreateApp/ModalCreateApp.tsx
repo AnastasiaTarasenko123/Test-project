@@ -1,5 +1,5 @@
 import React from 'react'
-import "./CreateApp.scss"
+import "./ModalCreateApp.scss"
 import { Button, TextField } from '@material-ui/core'
 import { isModalsValid } from '../../services/isDataValid';
 
@@ -12,7 +12,7 @@ interface IState {
     blockActive: number
 }
 
-class CreateApp extends React.Component<IProps, IState> {
+class ModalCreateApp extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
@@ -83,4 +83,4 @@ class CreateApp extends React.Component<IProps, IState> {
     }
 }
 
-export default CreateApp
+export default ModalCreateApp

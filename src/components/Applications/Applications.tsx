@@ -1,17 +1,14 @@
 import React from 'react'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import Firebase from '../../firebase/Firebase'
-import { Button } from '@material-ui/core'
-import CreateApp from '../CreateApp/CreateApp';
 import './Applications.scss'
 
 interface IProps {
-    firebase: Firebase
+    firebase: Firebase,
 }
 
 interface IState {
-    applications: Array<IApplication>,
-    modalActive: boolean
+    applications: Array<IApplication>
 }
 
 interface IListApplications {
@@ -33,7 +30,6 @@ class Applications extends React.Component<IProps, IState>{
         super(props);
         this.state = {
             applications: [],
-            modalActive: false
         }
     }
 
@@ -62,25 +58,11 @@ class Applications extends React.Component<IProps, IState>{
 
     onChangeApplication() { }
 
-    openModal() {
-        this.setState({ modalActive: true });
-    }
-
-    closeModal() {
-        this.setState({ modalActive: false })
-    }
-
     render() {
-        const { applications, modalActive } = this.state;
+        const { applications } = this.state;
         return (
             <div>
                 {applications.length > 0 ? (<ApplicationList applications={this.state.applications} />) : (<p>No applications yet.</p>)}
-                <Button variant="contained" type="submit" onClick={this.openModal.bind(this)}>
-                    + Create App
-                </Button>
-                <div className={`modals ${modalActive ? `active` : ``}`}>
-                    <CreateApp modalChange = {this.closeModal.bind(this)} />
-                </div>
             </div>
         );
     }

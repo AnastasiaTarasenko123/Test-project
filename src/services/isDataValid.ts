@@ -17,6 +17,7 @@ export const isDataValidSignUp = (data: IStateSignUp): boolean => (
 export const isDataValidSignIn = (data: IStateSignIn): boolean => (
     data.email === "" ||
     data.password === "" ||
+    data.password.length <= 8 ||
     !checkEmail(data.email)
 )
 
