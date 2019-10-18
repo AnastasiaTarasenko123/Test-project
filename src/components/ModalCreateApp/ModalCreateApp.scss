@@ -57,16 +57,13 @@
         .branding {
             width: 90%;
             margin-top: 2rem;
-            div {
-                width: 45%;
-                height: 70%;
-                padding-left: 1%;
-            }
             .uploadImg {
                 float: left;
+                width: 45%;
             }
             .chooseColor {
                 float: right;
+                width: 45%;
             }
         }   
     }

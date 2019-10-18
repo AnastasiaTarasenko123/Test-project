@@ -2,6 +2,8 @@ import React from 'react'
 import "./ModalCreateApp.scss"
 import { Button, TextField, Radio } from '@material-ui/core'
 import { isModalsValid } from '../../services/isDataValid';
+import ImageUploader from 'react-images-upload';
+import { ChromePicker, ColorChangeHandler, } from 'react-color'
 
 interface IProps {
     modalChange: () => void
@@ -9,6 +11,8 @@ interface IProps {
 
 interface IState {
     appName: string,
+    picture: ImageUploader | null,
+    color: string,
     blockActive: number,
     next: number,
     valueBtn: string
@@ -19,6 +23,8 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         super(props);
         this.state = {
             appName: "",
+            picture: null,
+            color: "#000000",
             blockActive: 0,
             next: 0,
             valueBtn: "Next" || "Finish"
@@ -51,8 +57,14 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             this.setState({ valueBtn: "Next" });
     }
 
+    onChangeColorPicker = () => {
+
+    }
+
+    //ColorPicker, ImageUpload haven't done
+
     render() {
-        const { appName, blockActive, valueBtn, next } = this.state;
+        const { appName, color, blockActive, valueBtn, next } = this.state;
         return (
             <div className="modalWindow">
                 <div className="modalBlock">
@@ -128,10 +140,24 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                     <div className={`blocks branding ${(this.whichBlockActive() == 1) ? `active` : ``}`}>
                         <div className="uploadImg">
                             <p>Upload Your App Image</p>
-                            
+                            {<ImageUploader
+                                withIcon={true}
+                                buttonText="Choose images"
+                                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                                maxFileSize={5242880}
+                            /> }
                         </div>
                         <div className="chooseColor">
                             <p>Choose Your Accent</p>
+                            <TextField
+                                label="Choose your color"
+                                margin="normal"
+                                value={color}
+                                onChange={this.onChange("color")}
+                            />
+                            <ChromePicker
+                                color={color}
+                            />
                         </div>
                     </div>
                     <div className={`blocks info ${(this.whichBlockActive() == 2) ? `active` : ``}`}>
