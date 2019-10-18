@@ -38,6 +38,16 @@
         .blocks{
             display: none;
             margin: 0% auto; 
+            width: 90%;
+            margin-top: 2rem;
+            .divLeft {
+                float: left;
+                width: 45%;
+            }
+            .divRight {
+                float: right;
+                width: 45%;
+            }
         }
         .active {
             display: block;
@@ -45,7 +55,7 @@
         .welcome {
             width: 45%;
             height: 100%;
-            padding-top: 7rem;
+            padding-top: 4rem;
             text-align: center;
             p{
                 padding-bottom: 1rem;
@@ -53,19 +63,12 @@
             .textRemember {
                 margin-top: 3rem;
             }
-        }   
-        .branding {
-            width: 90%;
-            margin-top: 2rem;
-            .uploadImg {
-                float: left;
-                width: 45%;
+        }
+        .info {
+            #description {
+                width: 17rem;
             }
-            .chooseColor {
-                float: right;
-                width: 45%;
-            }
-        }   
+        }
     }
 }
 

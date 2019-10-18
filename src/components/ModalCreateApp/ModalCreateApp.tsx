@@ -13,6 +13,7 @@ interface IState {
     appName: string,
     picture: ImageUploader | null,
     color: string,
+    description: string,
     blockActive: number,
     next: number,
     valueBtn: string
@@ -25,6 +26,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             appName: "",
             picture: null,
             color: "#000000",
+            description: "",
             blockActive: 0,
             next: 0,
             valueBtn: "Next" || "Finish"
@@ -64,7 +66,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
     //ColorPicker, ImageUpload haven't done
 
     render() {
-        const { appName, color, blockActive, valueBtn, next } = this.state;
+        const { appName, color, description, blockActive, valueBtn, next } = this.state;
         return (
             <div className="modalWindow">
                 <div className="modalBlock">
@@ -138,16 +140,16 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                         <p className="textRemember">Remember, you can always change your options in our App Configuration screens.</p>
                     </div>
                     <div className={`blocks branding ${(this.whichBlockActive() == 1) ? `active` : ``}`}>
-                        <div className="uploadImg">
+                        <div className="uploadImg divLeft">
                             <p>Upload Your App Image</p>
                             {<ImageUploader
                                 withIcon={true}
                                 buttonText="Choose images"
                                 imgExtension={['.jpg', '.gif', '.png', '.gif']}
                                 maxFileSize={5242880}
-                            /> }
+                            />}
                         </div>
-                        <div className="chooseColor">
+                        <div className="chooseColor divRight">
                             <p>Choose Your Accent</p>
                             <TextField
                                 label="Choose your color"
@@ -161,10 +163,20 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                         </div>
                     </div>
                     <div className={`blocks info ${(this.whichBlockActive() == 2) ? `active` : ``}`}>
-                        <div>
+                        <div className="description divLeft">
                             <p>Add Your Description</p>
+                            <TextField
+                                id="description"
+                                label="Description"
+                                multiline
+                                rows="18"
+                                value={description}
+                                onChange={this.onChange("description")}
+                                margin="normal"
+                                variant="outlined"
+                            />
                         </div>
-                        <div>
+                        <div className="location divRight">
                             <p>Enter Your App Location</p>
                         </div>
                     </div>
