@@ -15,9 +15,19 @@
         background: white;
         margin: 7% auto; 
         border-radius: 10px;
+        .navigationModal{
+            display: flex;
+            width: 100%;
+            padding-top: 1.5rem;
+            color:rgba(17, 16, 19, 0.596);
+            .radioBtn{
+                width: 18%;
+                text-align: center;
+            }
+        }
         .buttonClose {
             position: $positionButton;
-            top: 1%;
+            top: 4%;
             right: 1%;
         }
         .buttonNext {
@@ -35,12 +45,13 @@
         }
         .welcome {
             width: 60%;
-            padding-top: 30%;
+            padding-top: 10rem;
         }      
         .textRemember{
-            margin-top: 15%;
+            margin-top: 3rem;
         }
     }
-    
 }
+
+
 

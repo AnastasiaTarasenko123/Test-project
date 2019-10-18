@@ -9,7 +9,9 @@ interface IProps {
 
 interface IState {
     appName: string,
-    blockActive: number
+    blockActive: number,
+    next: number,
+    valueBtn: string
 }
 
 class ModalCreateApp extends React.Component<IProps, IState> {
@@ -17,15 +19,19 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         super(props);
         this.state = {
             appName: "",
-            blockActive: 0
+            blockActive: 0,
+            next: 0,
+            valueBtn: "Next" || "Finish"
         }
     }
 
     whichBlockActive = () => (this.state.blockActive);
 
     nextBlock = () => {
-        var temp: number = this.state.blockActive + 1;
-        this.setState({ blockActive: temp })
+        var temp: number = this.state.blockActive;
+        var nextTemp: number = this.state.next;
+        this.checkBtn(++temp);
+        this.setState({ blockActive: temp, next: ++nextTemp });
     }
 
     onChange = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,70 +40,77 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             ...prev,
             [key]: value
         }))
+        this.checkBtn(Number(value));
+    }
+
+    checkBtn = (temp: number) => {
+        if (this.state.valueBtn == "Next" && temp > 3)
+            this.setState({ valueBtn: "Finish" });
+        else if (this.state.valueBtn == "Finish" && temp < 4)
+            this.setState({ valueBtn: "Next" });
     }
 
     render() {
-        const { appName, blockActive } = this.state;
+        const { appName, blockActive, valueBtn, next } = this.state;
         return (
             <div className="modalWindow">
                 <div className="modalBlock">
                     <div className="navigationModal">
-
-                        <label>
+                        <div className="radioBtn">
                             <Radio
-                                // checked={selectedValue === 'd'}
-                                // onChange={handleChange}
-                                value="b"
+                                checked={blockActive == 0}
+                                onChange={this.onChange("blockActive")}
+                                value="0"
                                 color="default"
-                                name="radio-button-demo"
-                                inputProps={{ 'aria-label': 'D' }}
+                                disabled = {!(next >= 0)}
                             />
-                            Welcome
-                        </label>
-                        <label>
+                            <br />
+                            <label>Welcome</label>
+                        </div>
+                        <div className="radioBtn">
                             <Radio
-                                // checked={selectedValue === 'd'}
-                                // onChange={handleChange}
-                                value="d"
+                                checked={blockActive == 1}
+                                onChange={this.onChange("blockActive")}
+                                value={1}
                                 color="default"
-                                name="radio-button-demo"
-                                inputProps={{ 'aria-label': 'D' }}
+                                disabled = {!(next >= 1)}
                             />
-                            Branding
-                        </label>
-                        <label>
+                            <br />
+                            <label>Branding</label>
+                        </div>
+                        <div className="radioBtn">
                             <Radio
-                                // checked={selectedValue === 'd'}
-                                // onChange={handleChange}
-                                value="d"
+                                checked={blockActive == 2}
+                                onChange={this.onChange("blockActive")}
+                                value={2}
                                 color="default"
-                                name="radio-button-demo"
-                                inputProps={{ 'aria-label': 'D' }}
+                                disabled = {!(next >= 2)}
                             />
-                            Info
-                        </label>
-                        <label>
+                            <br />
+                            <label>Info</label>
+                        </div>
+                        <div className="radioBtn">
                             <Radio
-                                // checked={selectedValue === 'd'}
-                                // onChange={handleChange}
-                                value="d"
+                                checked={blockActive == 3}
+                                onChange={this.onChange("blockActive")}
+                                value={3}
                                 color="default"
-                                name="radio-button-demo"
-                                inputProps={{ 'aria-label': 'D' }}
+                                disabled = {!(next >= 3)}
                             />
-                            Features
-                        </label>
-                        <label>
+                            <br />
+                            <label>Features</label>
+                        </div>
+                        <div className="radioBtn">
                             <Radio
-                                // checked={selectedValue === 'd'}
-                                // onChange={handleChange}
-                                value="d"
+                                checked={blockActive == 4}
+                                onChange={this.onChange("blockActive")}
+                                value={4}
                                 color="default"
-                                name="radio-button-demo"
-                                inputProps={{ 'aria-label': 'D' }}
+                                disabled = {!(next >= 4)}
                             />
-                            Preview
-                        </label>
+                            <br />
+                            <label>Preview</label>
+                        </div>
                     </div>
                     <div className={`blocks welcome ${(this.whichBlockActive() == 0) ? `active` : ``}`}>
                         <p>Welcome! Let us help you get started!</p>
@@ -134,7 +147,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                         <p>the end.</p>
                     </div>
                     <Button color="primary" className="btn buttonClose" onClick={this.props.modalChange}>X</Button>
-                    <Button variant="contained" color="primary" className="btn buttonNext" disabled={isModalsValid(appName, blockActive)} onClick={this.nextBlock.bind(this)}>Next</Button>
+                    <Button variant="contained" color="primary" className="btn buttonNext" disabled={isModalsValid(appName, blockActive)} onClick={this.nextBlock.bind(this)}>{valueBtn}</Button>
                 </div>
             </div>
         )
