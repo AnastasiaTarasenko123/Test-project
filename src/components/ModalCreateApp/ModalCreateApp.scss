@@ -1,6 +1,6 @@
 @import '../../constants/style';
 
-.modalWindow{
+.modalWindow {
     height: 100vh;
     width: 100vw;
     position: fixed; 
@@ -8,19 +8,19 @@
     top: 0;
     left: 0;
     background-color: $colorBgModal;
-    .modalBlock{
+    .modalBlock {
         position: relative;
         height: 70vh;
-        width: 30vw;
+        width: 40vw;
         background: white;
         margin: 7% auto; 
         border-radius: 10px;
-        .navigationModal{
+        .navigationModal {
             display: flex;
             width: 100%;
             padding-top: 1.5rem;
-            color:rgba(17, 16, 19, 0.596);
-            .radioBtn{
+            color: $navigationColor;
+            .radioBtn {
                 width: 18%;
                 text-align: center;
             }
@@ -32,24 +32,43 @@
         }
         .buttonNext {
             position: $positionButton;
-            bottom: 3%;
+            bottom: 4%;
             left: 43%;
         }
         .blocks{
             display: none;
             margin: 0% auto; 
-            text-align: center;
         }
         .active {
             display: block;
         }
         .welcome {
-            width: 60%;
-            padding-top: 10rem;
-        }      
-        .textRemember{
-            margin-top: 3rem;
-        }
+            width: 45%;
+            height: 100%;
+            padding-top: 7rem;
+            text-align: center;
+            p{
+                padding-bottom: 1rem;
+            }
+            .textRemember {
+                margin-top: 3rem;
+            }
+        }   
+        .branding {
+            width: 90%;
+            margin-top: 2rem;
+            div {
+                width: 45%;
+                height: 70%;
+                padding-left: 1%;
+            }
+            .uploadImg {
+                float: left;
+            }
+            .chooseColor {
+                float: right;
+            }
+        }   
     }
 }
 

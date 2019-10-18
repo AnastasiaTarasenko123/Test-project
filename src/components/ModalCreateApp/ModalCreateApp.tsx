@@ -40,7 +40,8 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             ...prev,
             [key]: value
         }))
-        this.checkBtn(Number(value));
+        if (e.target.name == "blockActive")
+            this.checkBtn(Number(value));
     }
 
     checkBtn = (temp: number) => {
@@ -62,7 +63,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 onChange={this.onChange("blockActive")}
                                 value="0"
                                 color="default"
-                                disabled = {!(next >= 0)}
+                                disabled={!(next >= 0)}
                             />
                             <br />
                             <label>Welcome</label>
@@ -73,7 +74,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 onChange={this.onChange("blockActive")}
                                 value={1}
                                 color="default"
-                                disabled = {!(next >= 1)}
+                                disabled={!(next >= 1)}
                             />
                             <br />
                             <label>Branding</label>
@@ -84,7 +85,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 onChange={this.onChange("blockActive")}
                                 value={2}
                                 color="default"
-                                disabled = {!(next >= 2)}
+                                disabled={!(next >= 2)}
                             />
                             <br />
                             <label>Info</label>
@@ -95,7 +96,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 onChange={this.onChange("blockActive")}
                                 value={3}
                                 color="default"
-                                disabled = {!(next >= 3)}
+                                disabled={!(next >= 3)}
                             />
                             <br />
                             <label>Features</label>
@@ -106,7 +107,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 onChange={this.onChange("blockActive")}
                                 value={4}
                                 color="default"
-                                disabled = {!(next >= 4)}
+                                disabled={!(next >= 4)}
                             />
                             <br />
                             <label>Preview</label>
@@ -125,10 +126,11 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                         <p className="textRemember">Remember, you can always change your options in our App Configuration screens.</p>
                     </div>
                     <div className={`blocks branding ${(this.whichBlockActive() == 1) ? `active` : ``}`}>
-                        <div>
+                        <div className="uploadImg">
                             <p>Upload Your App Image</p>
+                            
                         </div>
-                        <div>
+                        <div className="chooseColor">
                             <p>Choose Your Accent</p>
                         </div>
                     </div>
