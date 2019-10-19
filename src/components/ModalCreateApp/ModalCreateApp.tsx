@@ -1,8 +1,8 @@
 import React from 'react'
 import "./ModalCreateApp.scss"
 import { Button, TextField, Radio } from '@material-ui/core'
-import { isModalsValid } from '../../services/isDataValid';
-import ImageUploader from 'react-images-upload';
+import { isModalsValid } from '../../services/isDataValid'
+import ImageUploader from 'react-images-upload'
 import { ChromePicker, ColorChangeHandler, } from 'react-color'
 
 interface IProps {
@@ -14,6 +14,7 @@ interface IState {
     picture: ImageUploader | null,
     color: string,
     description: string,
+    location: string,
     blockActive: number,
     next: number,
     valueBtn: string
@@ -25,8 +26,9 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         this.state = {
             appName: "",
             picture: null,
-            color: "#000000",
+            color: "",
             description: "",
+            location: "",
             blockActive: 0,
             next: 0,
             valueBtn: "Next" || "Finish"
@@ -66,7 +68,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
     //ColorPicker, ImageUpload haven't done
 
     render() {
-        const { appName, color, description, blockActive, valueBtn, next } = this.state;
+        const { appName, color, description, location, blockActive, valueBtn, next } = this.state;
         return (
             <div className="modalWindow">
                 <div className="modalBlock">
@@ -153,12 +155,11 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                             <p>Choose Your Accent</p>
                             <TextField
                                 label="Choose your color"
+                                className="colorInput"
                                 margin="normal"
                                 value={color}
                                 onChange={this.onChange("color")}
-                            />
-                            <ChromePicker
-                                color={color}
+                                type="color"
                             />
                         </div>
                     </div>
@@ -166,22 +167,37 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                         <div className="description divLeft">
                             <p>Add Your Description</p>
                             <TextField
-                                id="description"
-                                label="Description"
+                                label="Add a description of your app"
                                 multiline
                                 rows="18"
                                 value={description}
                                 onChange={this.onChange("description")}
                                 margin="normal"
                                 variant="outlined"
+                                className="inputInfo"
                             />
                         </div>
                         <div className="location divRight">
                             <p>Enter Your App Location</p>
+                            <TextField
+                                label="Enter Your Location"
+                                onChange={this.onChange("location")}
+                                margin="normal"
+                                variant="outlined"
+                                className="inputInfo"
+                            />
                         </div>
                     </div>
                     <div className={`blocks features ${(this.whichBlockActive() == 3) ? `active` : ``}`}>
                         <p>Turn on the feature you want to include in your app.</p>
+                        <div className="categories divLeft">
+                            <h1>Categories</h1>
+                            <p>Include more than one list of categories</p>
+                        </div>
+                        <div className="GPS divLeft">
+                            <h1>GPS Map</h1>
+                            <p>Include a GPS map</p>
+                        </div>
                     </div>
                     <div className={`blocks preview ${(this.whichBlockActive() == 4) ? `active` : ``}`}>
                         <p>the end.</p>

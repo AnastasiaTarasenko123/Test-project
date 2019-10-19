@@ -42,11 +42,11 @@
             margin-top: 2rem;
             .divLeft {
                 float: left;
-                width: 45%;
+                width: 47%;
             }
             .divRight {
                 float: right;
-                width: 45%;
+                width: 47%;
             }
         }
         .active {
@@ -64,10 +64,18 @@
                 margin-top: 3rem;
             }
         }
-        .info {
-            #description {
-                width: 17rem;
+        .branding {
+            .colorInput {
+                width: 100%;
             }
+        }
+        .info {
+            .inputInfo {
+                width: 16vw;
+            }
+        }
+        .features {
+            text-align: center;
         }
     }
 }
