@@ -68,6 +68,9 @@
             .colorInput {
                 width: 100%;
             }
+            .imageInput {
+                margin-top: 2.05rem;
+            }
         }
         .info {
             .inputInfo {
@@ -75,6 +78,28 @@
             }
         }
         .features {
+            text-align: center;
+            margin-top: 3rem;
+            div {
+                box-sizing: border-box;
+                margin: 4vh 1vw;
+                border: 1px solid $navigationColor;
+                border-radius: 10px;
+                width: 43% !important;
+                height: 33vh;
+                padding: 5vh 3vw;
+                h1 {
+                    margin-bottom: 3vh;
+                }
+                p {
+                    margin-bottom: 4vh;
+                }
+                .gpsSwitch {
+                    margin-top: 1.5vh;
+                }
+            }
+        }
+        .preview {
             text-align: center;
         }
     }

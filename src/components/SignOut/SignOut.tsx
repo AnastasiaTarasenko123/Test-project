@@ -11,9 +11,11 @@ interface IProps {
 }
 
 const SignOut: React.FC<IProps> = (props): React.ReactElement => (
-    <li onClick={props.firebase.doSignOut}>
-        <Link to={ROUTES.SIGN_IN}>Sign Out</Link>
-    </li>
+    <ul>
+        <li onClick={props.firebase.doSignOut}>
+            <Link to={ROUTES.SIGN_IN}>Sign Out</Link>
+        </li>
+    </ul>
 )
 
 const condition = (authUser: any) => !!authUser;

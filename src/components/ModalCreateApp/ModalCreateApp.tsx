@@ -1,9 +1,7 @@
 import React from 'react'
 import "./ModalCreateApp.scss"
-import { Button, TextField, Radio } from '@material-ui/core'
+import { Button, TextField, Radio, Switch } from '@material-ui/core'
 import { isModalsValid } from '../../services/isDataValid'
-import ImageUploader from 'react-images-upload'
-import { ChromePicker, ColorChangeHandler, } from 'react-color'
 
 interface IProps {
     modalChange: () => void
@@ -11,10 +9,12 @@ interface IProps {
 
 interface IState {
     appName: string,
-    picture: ImageUploader | null,
+    picture: string,
     color: string,
     description: string,
     location: string,
+    isCategories: boolean,
+    isGPS: boolean,
     blockActive: number,
     next: number,
     valueBtn: string
@@ -25,17 +25,19 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         super(props);
         this.state = {
             appName: "",
-            picture: null,
+            picture: "",
             color: "",
             description: "",
             location: "",
+            isCategories: true,
+            isGPS: true,
             blockActive: 0,
             next: 0,
             valueBtn: "Next" || "Finish"
         }
     }
 
-    whichBlockActive = () => (this.state.blockActive);
+    whichBlockActive = () => (Number(this.state.blockActive));
 
     nextBlock = () => {
         var temp: number = this.state.blockActive;
@@ -44,38 +46,50 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         this.setState({ blockActive: temp, next: ++nextTemp });
     }
 
+    //if it is file -> fakepath
     onChange = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target
+        const { value } = e.target;
         this.setState(prev => ({
-            ...prev,
-            [key]: value
+            ...prev, [key]: value
         }))
-        if (e.target.name == "blockActive")
+        if (e.target.name === "blockActive")
             this.checkBtn(Number(value));
     }
 
+    onChangeSwitch = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState(prev => ({
+            ...prev, [key]: !this.state[key]
+        }))
+    }
+
+    onChangePicture = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        // var uploadFile: string = "";
+        // if(e.target.files != null)
+        // {
+        //     uploadFile = e.target.files[0].path;
+        // }
+        // this.setState(prev => ({
+        //     ...prev, [key]: uploadFile
+        // }))
+    }
+
     checkBtn = (temp: number) => {
-        if (this.state.valueBtn == "Next" && temp > 3)
+        if (this.state.valueBtn === "Next" && temp > 3)
             this.setState({ valueBtn: "Finish" });
-        else if (this.state.valueBtn == "Finish" && temp < 4)
+        else if (this.state.valueBtn === "Finish" && temp < 4)
             this.setState({ valueBtn: "Next" });
     }
 
-    onChangeColorPicker = () => {
-
-    }
-
-    //ColorPicker, ImageUpload haven't done
-
     render() {
-        const { appName, color, description, location, blockActive, valueBtn, next } = this.state;
+        const { appName, picture, color, description, isCategories, isGPS, blockActive, valueBtn, next } = this.state;
+        var tempImg = picture === "" ? "" : require(picture);
         return (
             <div className="modalWindow">
                 <div className="modalBlock">
                     <div className="navigationModal">
                         <div className="radioBtn">
                             <Radio
-                                checked={blockActive == 0}
+                                checked={blockActive === 0}
                                 onChange={this.onChange("blockActive")}
                                 value="0"
                                 color="default"
@@ -86,7 +100,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                         </div>
                         <div className="radioBtn">
                             <Radio
-                                checked={blockActive == 1}
+                                checked={blockActive === 1}
                                 onChange={this.onChange("blockActive")}
                                 value={1}
                                 color="default"
@@ -97,7 +111,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                         </div>
                         <div className="radioBtn">
                             <Radio
-                                checked={blockActive == 2}
+                                checked={blockActive === 2}
                                 onChange={this.onChange("blockActive")}
                                 value={2}
                                 color="default"
@@ -108,7 +122,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                         </div>
                         <div className="radioBtn">
                             <Radio
-                                checked={blockActive == 3}
+                                checked={blockActive === 3}
                                 onChange={this.onChange("blockActive")}
                                 value={3}
                                 color="default"
@@ -119,7 +133,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                         </div>
                         <div className="radioBtn">
                             <Radio
-                                checked={blockActive == 4}
+                                checked={blockActive === 4}
                                 onChange={this.onChange("blockActive")}
                                 value={4}
                                 color="default"
@@ -129,7 +143,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                             <label>Preview</label>
                         </div>
                     </div>
-                    <div className={`blocks welcome ${(this.whichBlockActive() == 0) ? `active` : ``}`}>
+                    <div className={`blocks welcome ${(this.whichBlockActive() === 0) ? `active` : ``}`}>
                         <p>Welcome! Let us help you get started!</p>
                         <form>
                             <TextField
@@ -141,15 +155,18 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                         </form>
                         <p className="textRemember">Remember, you can always change your options in our App Configuration screens.</p>
                     </div>
-                    <div className={`blocks branding ${(this.whichBlockActive() == 1) ? `active` : ``}`}>
+                    <div className={`blocks branding ${(this.whichBlockActive() === 1) ? `active` : ``}`}>
                         <div className="uploadImg divLeft">
                             <p>Upload Your App Image</p>
-                            {<ImageUploader
-                                withIcon={true}
-                                buttonText="Choose images"
-                                imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                                maxFileSize={5242880}
-                            />}
+                            <TextField
+                                className="imageInput"
+                                margin="normal"
+                                onChange={this.onChangePicture("picture")}
+                                type="file"
+                            />
+                            <div>
+                                <img src={tempImg} alt="Picture for app" />
+                            </div>
                         </div>
                         <div className="chooseColor divRight">
                             <p>Choose Your Accent</p>
@@ -163,7 +180,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                             />
                         </div>
                     </div>
-                    <div className={`blocks info ${(this.whichBlockActive() == 2) ? `active` : ``}`}>
+                    <div className={`blocks info ${(this.whichBlockActive() === 2) ? `active` : ``}`}>
                         <div className="description divLeft">
                             <p>Add Your Description</p>
                             <TextField
@@ -188,19 +205,34 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                             />
                         </div>
                     </div>
-                    <div className={`blocks features ${(this.whichBlockActive() == 3) ? `active` : ``}`}>
+                    <div className={`blocks features ${(this.whichBlockActive() === 3) ? `active` : ``}`}>
                         <p>Turn on the feature you want to include in your app.</p>
                         <div className="categories divLeft">
                             <h1>Categories</h1>
                             <p>Include more than one list of categories</p>
+                            <Switch
+                                checked={!isCategories}
+                                onChange={this.onChangeSwitch("isCategories")}
+                                value={isCategories}
+                                color="primary"
+                            />
                         </div>
-                        <div className="GPS divLeft">
+                        <div className="GPS divRight">
                             <h1>GPS Map</h1>
                             <p>Include a GPS map</p>
+                            <Switch
+                                checked={!isGPS}
+                                onChange={this.onChangeSwitch("isGPS")}
+                                value={isGPS}
+                                color="primary"
+                                className="gpsSwitch"
+                            />
                         </div>
                     </div>
-                    <div className={`blocks preview ${(this.whichBlockActive() == 4) ? `active` : ``}`}>
-                        <p>the end.</p>
+                    <div className={`blocks preview ${(this.whichBlockActive() === 4) ? `active` : ``}`}>
+                        <h1>{appName}</h1>
+                        <img src={picture} alt="Picture for app" />
+
                     </div>
                     <Button color="primary" className="btn buttonClose" onClick={this.props.modalChange}>X</Button>
                     <Button variant="contained" color="primary" className="btn buttonNext" disabled={isModalsValid(appName, blockActive)} onClick={this.nextBlock.bind(this)}>{valueBtn}</Button>
