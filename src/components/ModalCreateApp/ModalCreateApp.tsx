@@ -46,7 +46,6 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         this.setState({ blockActive: temp, next: ++nextTemp });
     }
 
-    //if it is file -> fakepath
     onChange = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         this.setState(prev => ({
@@ -62,36 +61,43 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         }))
     }
 
-    onChangePicture = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        // var uploadFile: string = "";
-        // if(e.target.files != null)
-        // {
-        //     uploadFile = e.target.files[0].path;
-        // }
-        // this.setState(prev => ({
-        //     ...prev, [key]: uploadFile
-        // }))
+    onChangeFile = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.target.files &&
+            this.readFileASync(e.target.files[0]).then(v => {
+                this.setState(prev => ({
+                    ...prev, [key]: v
+                }))
+            })
+
     }
 
+    readFileASync = (file: File) => (
+        new Promise((resolve: (v: string) => void, reject) => {
+            const reader = new FileReader()
+            reader.onload = () => resolve(reader.result as string)
+            reader.onerror = reject
+            reader.readAsDataURL(file)
+        })
+    )
+
     checkBtn = (temp: number) => {
-        if (this.state.valueBtn === "Next" && temp > 3)
+        if (this.state.valueBtn == "Next" && temp > 3)
             this.setState({ valueBtn: "Finish" });
-        else if (this.state.valueBtn === "Finish" && temp < 4)
+        else if (this.state.valueBtn == "Finish" && temp < 4)
             this.setState({ valueBtn: "Next" });
     }
 
     render() {
         const { appName, picture, color, description, isCategories, isGPS, blockActive, valueBtn, next } = this.state;
-        var tempImg = picture === "" ? "" : require(picture);
         return (
             <div className="modalWindow">
                 <div className="modalBlock">
                     <div className="navigationModal">
                         <div className="radioBtn">
                             <Radio
-                                checked={blockActive === 0}
+                                checked={blockActive == 0}
                                 onChange={this.onChange("blockActive")}
-                                value="0"
+                                value={0}
                                 color="default"
                                 disabled={!(next >= 0)}
                             />
@@ -100,7 +106,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                         </div>
                         <div className="radioBtn">
                             <Radio
-                                checked={blockActive === 1}
+                                checked={blockActive == 1}
                                 onChange={this.onChange("blockActive")}
                                 value={1}
                                 color="default"
@@ -111,7 +117,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                         </div>
                         <div className="radioBtn">
                             <Radio
-                                checked={blockActive === 2}
+                                checked={blockActive == 2}
                                 onChange={this.onChange("blockActive")}
                                 value={2}
                                 color="default"
@@ -122,7 +128,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                         </div>
                         <div className="radioBtn">
                             <Radio
-                                checked={blockActive === 3}
+                                checked={blockActive == 3}
                                 onChange={this.onChange("blockActive")}
                                 value={3}
                                 color="default"
@@ -133,7 +139,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                         </div>
                         <div className="radioBtn">
                             <Radio
-                                checked={blockActive === 4}
+                                checked={blockActive == 4}
                                 onChange={this.onChange("blockActive")}
                                 value={4}
                                 color="default"
@@ -161,11 +167,11 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                             <TextField
                                 className="imageInput"
                                 margin="normal"
-                                onChange={this.onChangePicture("picture")}
+                                onChange={this.onChangeFile("picture")}
                                 type="file"
                             />
                             <div>
-                                <img src={tempImg} alt="Picture for app" />
+                                <img src={picture} alt="Picture for app" className="imgModal"/>
                             </div>
                         </div>
                         <div className="chooseColor divRight">

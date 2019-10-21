@@ -71,6 +71,13 @@
             .imageInput {
                 margin-top: 2.05rem;
             }
+            .imgModal {
+                margin-top: 3vh;
+                width: 100%;  
+            }
+            .active {
+                display: block;
+            }
         }
         .info {
             .inputInfo {
@@ -104,6 +111,3 @@
         }
     }
 }
-
-
-
