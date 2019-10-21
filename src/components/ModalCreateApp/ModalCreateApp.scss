@@ -75,9 +75,6 @@
                 margin-top: 3vh;
                 width: 100%;  
             }
-            .active {
-                display: block;
-            }
         }
         .info {
             .inputInfo {
@@ -108,6 +105,9 @@
         }
         .preview {
             text-align: center;
+            .imgPreview {
+                width: 50%;
+            }
         }
     }
 }

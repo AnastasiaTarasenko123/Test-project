@@ -16,7 +16,7 @@ interface IState {
     isCategories: boolean,
     isGPS: boolean,
     blockActive: number,
-    next: number,
+    activeNum: number,
     valueBtn: string
 }
 
@@ -32,7 +32,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             isCategories: true,
             isGPS: true,
             blockActive: 0,
-            next: 0,
+            activeNum: 0,
             valueBtn: "Next" || "Finish"
         }
     }
@@ -40,19 +40,31 @@ class ModalCreateApp extends React.Component<IProps, IState> {
     whichBlockActive = () => (Number(this.state.blockActive));
 
     nextBlock = () => {
-        var temp: number = this.state.blockActive;
-        var nextTemp: number = this.state.next;
-        this.checkBtn(++temp);
-        this.setState({ blockActive: temp, next: ++nextTemp });
+        var temp: number = Number(this.state.blockActive) + 1;
+        var active: number = Number(this.state.activeNum) + 1;
+        this.setState({
+            blockActive: temp,
+            activeNum: active
+        });
+        this.checkBtn(temp);
+    }
+
+    checkBtn = (temp: number) => {
+        const { valueBtn } = this.state;
+        if (valueBtn.toString() == "Next" && temp > 3)
+            this.setState({ valueBtn: "Finish" });
+        else if (valueBtn.toString() == "Finish" && temp < 4)
+            this.setState({ valueBtn: "Next" });
     }
 
     onChange = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         this.setState(prev => ({
             ...prev, [key]: value
-        }))
-        if (e.target.name === "blockActive")
+        }));
+        if(key == "blockActive") {
             this.checkBtn(Number(value));
+        }
     }
 
     onChangeSwitch = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,7 +80,6 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                     ...prev, [key]: v
                 }))
             })
-
     }
 
     readFileASync = (file: File) => (
@@ -80,70 +91,64 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         })
     )
 
-    checkBtn = (temp: number) => {
-        if (this.state.valueBtn == "Next" && temp > 3)
-            this.setState({ valueBtn: "Finish" });
-        else if (this.state.valueBtn == "Finish" && temp < 4)
-            this.setState({ valueBtn: "Next" });
-    }
-
     render() {
-        const { appName, picture, color, description, isCategories, isGPS, blockActive, valueBtn, next } = this.state;
+        const { appName, picture, color, description, isCategories, isGPS, blockActive, valueBtn, activeNum } = this.state;
+        console.log(this.state.blockActive);
         return (
             <div className="modalWindow">
                 <div className="modalBlock">
                     <div className="navigationModal">
                         <div className="radioBtn">
                             <Radio
-                                checked={blockActive == 0}
+                                checked={this.whichBlockActive() === 0}
                                 onChange={this.onChange("blockActive")}
                                 value={0}
                                 color="default"
-                                disabled={!(next >= 0)}
+                                disabled={!(activeNum >= 0)}
                             />
                             <br />
                             <label>Welcome</label>
                         </div>
                         <div className="radioBtn">
                             <Radio
-                                checked={blockActive == 1}
+                                checked={this.whichBlockActive() === 1}
                                 onChange={this.onChange("blockActive")}
                                 value={1}
                                 color="default"
-                                disabled={!(next >= 1)}
+                                disabled={!(activeNum >= 1)}
                             />
                             <br />
                             <label>Branding</label>
                         </div>
                         <div className="radioBtn">
                             <Radio
-                                checked={blockActive == 2}
+                                checked={this.whichBlockActive() === 2}
                                 onChange={this.onChange("blockActive")}
                                 value={2}
                                 color="default"
-                                disabled={!(next >= 2)}
+                                disabled={!(activeNum >= 2)}
                             />
                             <br />
                             <label>Info</label>
                         </div>
                         <div className="radioBtn">
                             <Radio
-                                checked={blockActive == 3}
+                                checked={this.whichBlockActive() === 3}
                                 onChange={this.onChange("blockActive")}
                                 value={3}
                                 color="default"
-                                disabled={!(next >= 3)}
+                                disabled={!(activeNum >= 3)}
                             />
                             <br />
                             <label>Features</label>
                         </div>
                         <div className="radioBtn">
                             <Radio
-                                checked={blockActive == 4}
+                                checked={this.whichBlockActive() === 4}
                                 onChange={this.onChange("blockActive")}
                                 value={4}
                                 color="default"
-                                disabled={!(next >= 4)}
+                                disabled={!(activeNum >= 4)}
                             />
                             <br />
                             <label>Preview</label>
@@ -171,7 +176,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 type="file"
                             />
                             <div>
-                                <img src={picture} alt="Picture for app" className="imgModal"/>
+                                <img src={picture} alt="Picture for app" className="imgModal" />
                             </div>
                         </div>
                         <div className="chooseColor divRight">
@@ -237,8 +242,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                     </div>
                     <div className={`blocks preview ${(this.whichBlockActive() === 4) ? `active` : ``}`}>
                         <h1>{appName}</h1>
-                        <img src={picture} alt="Picture for app" />
-
+                        <img src={picture} alt="Picture for app" className="imgPreview" />
                     </div>
                     <Button color="primary" className="btn buttonClose" onClick={this.props.modalChange}>X</Button>
                     <Button variant="contained" color="primary" className="btn buttonNext" disabled={isModalsValid(appName, blockActive)} onClick={this.nextBlock.bind(this)}>{valueBtn}</Button>
