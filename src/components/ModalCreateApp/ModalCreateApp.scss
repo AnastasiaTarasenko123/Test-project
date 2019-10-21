@@ -48,6 +48,12 @@
                 float: right;
                 width: 47%;
             }
+            .imgBlock {
+                display: none;
+            }
+            .imgActive {
+                display: block;
+            }
         }
         .active {
             display: block;
@@ -105,8 +111,15 @@
         }
         .preview {
             text-align: center;
-            .imgPreview {
-                width: 50%;
+            .imgBlock {
+                height: 20vh;
+                .imgPreview {
+                    max-width: 50%;
+                    max-height: 100%;
+                }
+            }
+            .tablePreview {
+                overflow-x:auto;
             }
         }
     }

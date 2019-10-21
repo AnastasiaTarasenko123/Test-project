@@ -1,6 +1,6 @@
 import React from 'react'
 import "./ModalCreateApp.scss"
-import { Button, TextField, Radio, Switch } from '@material-ui/core'
+import { Button, TextField, Radio, Switch, Table, TableHead, TableCell, TableRow, TableBody } from '@material-ui/core'
 import { isModalsValid } from '../../services/isDataValid'
 
 interface IProps {
@@ -20,40 +20,61 @@ interface IState {
     valueBtn: string
 }
 
+// interface tableData {
+//     name: string,
+//     value: any
+// }
+
 class ModalCreateApp extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
             appName: "",
             picture: "",
-            color: "",
+            color: "#000000",
             description: "",
-            location: "",
-            isCategories: true,
-            isGPS: true,
+            location: "home",
+            isCategories: false,
+            isGPS: false,
             blockActive: 0,
             activeNum: 0,
             valueBtn: "Next" || "Finish"
         }
     }
 
+    // rows: Array<tableData> = [
+    //     { name: "Color", value: this.state.color == undefined ? "" : this.state.color},
+    //     { name: "Description", value: this.state.description },
+    //     { name: "Location", value: this.state.location },
+    //     { name: "Feauters", value: `${(this.state.isCategories === true ? `Gategories` : ``) + (this.state.isGPS === true ? `GPS` : ``)}` }
+    // ];
+
     whichBlockActive = () => (Number(this.state.blockActive));
 
+    finishSend = () => {
+        this.props.modalChange();
+        
+    }
+
     nextBlock = () => {
-        var temp: number = Number(this.state.blockActive) + 1;
-        var active: number = Number(this.state.activeNum) + 1;
-        this.setState({
-            blockActive: temp,
-            activeNum: active
-        });
-        this.checkBtn(temp);
+        if (this.state.blockActive === 4)
+            this.finishSend();
+        else {
+            var temp: number = Number(this.state.blockActive) + 1;
+            var active: number = Number(this.state.activeNum) + 1;
+            this.setState({
+                blockActive: temp,
+                activeNum: active
+            });
+            this.checkBtn(temp);
+        }
     }
 
     checkBtn = (temp: number) => {
         const { valueBtn } = this.state;
-        if (valueBtn.toString() == "Next" && temp > 3)
+        if (valueBtn.toString() === "Next" && temp > 3)
             this.setState({ valueBtn: "Finish" });
-        else if (valueBtn.toString() == "Finish" && temp < 4)
+        else if (valueBtn.toString() === "Finish" && temp < 4)
             this.setState({ valueBtn: "Next" });
     }
 
@@ -62,7 +83,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         this.setState(prev => ({
             ...prev, [key]: value
         }));
-        if(key == "blockActive") {
+        if (key === "blockActive") {
             this.checkBtn(Number(value));
         }
     }
@@ -92,8 +113,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
     )
 
     render() {
-        const { appName, picture, color, description, isCategories, isGPS, blockActive, valueBtn, activeNum } = this.state;
-        console.log(this.state.blockActive);
+        const { appName, picture, color, description, location, isCategories, isGPS, blockActive, valueBtn, activeNum } = this.state;
         return (
             <div className="modalWindow">
                 <div className="modalBlock">
@@ -175,8 +195,8 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 onChange={this.onChangeFile("picture")}
                                 type="file"
                             />
-                            <div>
-                                <img src={picture} alt="Picture for app" className="imgModal" />
+                            <div className={`imgBlock ${(picture !== "") ? `imgActive` : ``}`}>
+                                <img src={picture} alt="app" className="imgModal" />
                             </div>
                         </div>
                         <div className="chooseColor divRight">
@@ -222,9 +242,9 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                             <h1>Categories</h1>
                             <p>Include more than one list of categories</p>
                             <Switch
-                                checked={!isCategories}
+                                checked={isCategories}
                                 onChange={this.onChangeSwitch("isCategories")}
-                                value={isCategories}
+                                value={!isCategories}
                                 color="primary"
                             />
                         </div>
@@ -232,9 +252,9 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                             <h1>GPS Map</h1>
                             <p>Include a GPS map</p>
                             <Switch
-                                checked={!isGPS}
+                                checked={isGPS}
                                 onChange={this.onChangeSwitch("isGPS")}
-                                value={isGPS}
+                                value={!isGPS}
                                 color="primary"
                                 className="gpsSwitch"
                             />
@@ -242,7 +262,32 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                     </div>
                     <div className={`blocks preview ${(this.whichBlockActive() === 4) ? `active` : ``}`}>
                         <h1>{appName}</h1>
-                        <img src={picture} alt="Picture for app" className="imgPreview" />
+                        <div className={`imgBlock ${(picture !== "") ? `imgActive` : ``}`}>
+                            <img src={picture} alt="app" className="imgPreview" />
+                        </div>
+                        <div className="tablePreview" >
+                            <Table>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell>Color: </TableCell>
+                                        <TableCell>{color}</TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell>Description: </TableCell>
+                                        <TableCell>{description}</TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell>Location: </TableCell>
+                                        <TableCell>{location}</TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell>Features: </TableCell>
+                                        <TableCell>{this.state.isCategories === true ? "Gategories" : ""} {this.state.isGPS === true ? "GPS" : ""}
+                                            {this.state.isCategories === false && this.state.isGPS === false ? "none" : ""} </TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </div>
                     </div>
                     <Button color="primary" className="btn buttonClose" onClick={this.props.modalChange}>X</Button>
                     <Button variant="contained" color="primary" className="btn buttonNext" disabled={isModalsValid(appName, blockActive)} onClick={this.nextBlock.bind(this)}>{valueBtn}</Button>
