@@ -1,7 +1,8 @@
 import React from 'react'
 import "./ModalCreateApp.scss"
-import { Button, TextField, Radio, Switch, Table, TableHead, TableCell, TableRow, TableBody } from '@material-ui/core'
+import { Button, TextField, Radio, Switch, Table, TableCell, TableRow, TableBody } from '@material-ui/core'
 import { isModalsValid } from '../../services/isDataValid'
+import MapContainer from '../MapContainer/MapContainer'
 
 interface IProps {
     modalChange: () => void
@@ -20,11 +21,6 @@ interface IState {
     valueBtn: string
 }
 
-// interface tableData {
-//     name: string,
-//     value: any
-// }
-
 class ModalCreateApp extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
@@ -42,18 +38,10 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         }
     }
 
-    // rows: Array<tableData> = [
-    //     { name: "Color", value: this.state.color == undefined ? "" : this.state.color},
-    //     { name: "Description", value: this.state.description },
-    //     { name: "Location", value: this.state.location },
-    //     { name: "Feauters", value: `${(this.state.isCategories === true ? `Gategories` : ``) + (this.state.isGPS === true ? `GPS` : ``)}` }
-    // ];
-
     whichBlockActive = () => (Number(this.state.blockActive));
 
     finishSend = () => {
         this.props.modalChange();
-        
     }
 
     nextBlock = () => {
@@ -234,6 +222,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 variant="outlined"
                                 className="inputInfo"
                             />
+                            <MapContainer />
                         </div>
                     </div>
                     <div className={`blocks features ${(this.whichBlockActive() === 3) ? `active` : ``}`}>
