@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import * as ROUTES from '../../constants/routs'
 import SignOut from '../SignOut/SignOut'
 import './Navigation.scss'
 import { AuthUserContext } from '../Session/SessionContext'
+import { Link } from '@material-ui/core'
 
 const Navigation: React.FC = () => (
   <div>
@@ -20,10 +21,10 @@ const NavigationAuth: React.FC = () => (
         <SignOut />
       </li>
       <li>
-        <Link to={ROUTES.EDITOR}>Editor</Link>
+        <RouterLink to={ROUTES.EDITOR}>Editor</RouterLink>
       </li>
       <li>
-        <Link to={ROUTES.DASHBOARD}>Dashboard</Link>
+        <RouterLink to={ROUTES.DASHBOARD}>Dashboard</RouterLink>
       </li>
     </ul>
   </div>
@@ -33,7 +34,7 @@ const NavigationNonAuth: React.FC = () => (
   <div className="navigaton">
     <ul>
       <li>
-        <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+        <RouterLink to={ROUTES.SIGN_IN}>Sign In</RouterLink>
       </li>
     </ul>
   </div>

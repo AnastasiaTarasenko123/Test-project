@@ -7,7 +7,7 @@ import Firebase from '../../firebase/Firebase'
 import * as ROUTES from '../../constants/routs';
 import { withFirebase } from '../../firebase/FirebaseContext'
 import { isDataValidSignIn } from '../../services/isDataValid'
-import { login } from '../../services/login'
+import { login } from '../../services/auth'
 
 export interface IStateSignIn {
     email: string,

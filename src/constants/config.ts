@@ -7,3 +7,5 @@ export const config = {
     messagingSenderId: "102358788103",
     appId: "1:102358788103:web:05f4c3745797b492dd22a2"
 }
+
+export const API_KEY = 'AIzaSyAOaxRNcyr2A29H3Y8mS1YWQRDdEeRrycI'

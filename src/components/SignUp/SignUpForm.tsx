@@ -8,7 +8,8 @@ import Firebase from '../../firebase/Firebase'
 import * as ROUTES from '../../constants/routs'
 import { compose } from 'recompose'
 import { isDataValidSignUp } from '../../services/isDataValid'
-import { registration } from '../../services/registration'
+import { registration } from '../../services/auth'
+
 
 export interface IStateSignUp {
     firstName: string,
@@ -62,18 +63,19 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
     }
 
     render() {
+        const { firstName, lastName, email, password, confPassword } = this.state;
         return (
             <form className="signUpForm" noValidate autoComplete="off" onSubmit={this.onSubmit}>
                 <TextField
                     label="First Name"
-                    value={this.state.firstName}
+                    value={firstName}
                     margin="normal"
                     variant="outlined"
                     onChange={this.onChange("firstName")}
                 />
                 <TextField
                     label="Last Name"
-                    value={this.state.lastName}
+                    value={lastName}
                     margin="normal"
                     variant="outlined"
                     onChange={this.onChange("lastName")}
@@ -82,7 +84,7 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
                 <TextField
                     label="Email"
                     className="emailSignUp"
-                    value={this.state.email}
+                    value={email}
                     type="email"
                     autoComplete="email"
                     margin="normal"
@@ -92,7 +94,7 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
                 <br />
                 <TextField
                     label="Password"
-                    value={this.state.password}
+                    value={password}
                     type="password"
                     autoComplete="current-password"
                     margin="normal"
@@ -101,7 +103,7 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
                 />
                 <TextField
                     label="Confirm Password"
-                    value={this.state.confPassword}
+                    value={confPassword}
                     type="password"
                     autoComplete="current-password"
                     margin="normal"

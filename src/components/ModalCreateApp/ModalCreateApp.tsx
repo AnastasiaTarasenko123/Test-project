@@ -18,7 +18,7 @@ interface IState {
     isGPS: boolean,
     blockActive: number,
     activeNum: number,
-    valueBtn: string
+    valueBtn: "Next" | "Finish"
 }
 
 class ModalCreateApp extends React.Component<IProps, IState> {
@@ -34,7 +34,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             isGPS: false,
             blockActive: 0,
             activeNum: 0,
-            valueBtn: "Next" || "Finish"
+            valueBtn: "Next"
         }
     }
 
@@ -42,10 +42,13 @@ class ModalCreateApp extends React.Component<IProps, IState> {
 
     finishSend = () => {
         this.props.modalChange();
+        //send to firebase
+        //update
+        //clean component
     }
 
     nextBlock = () => {
-        if (this.state.blockActive === 4)
+        if (Number(this.state.blockActive) === 4)
             this.finishSend();
         else {
             var temp: number = Number(this.state.blockActive) + 1;
@@ -102,6 +105,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
 
     render() {
         const { appName, picture, color, description, location, isCategories, isGPS, blockActive, valueBtn, activeNum } = this.state;
+        console.log(blockActive);
         return (
             <div className="modalWindow">
                 <div className="modalBlock">
@@ -279,7 +283,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                         </div>
                     </div>
                     <Button color="primary" className="btn buttonClose" onClick={this.props.modalChange}>X</Button>
-                    <Button variant="contained" color="primary" className="btn buttonNext" disabled={isModalsValid(appName, blockActive)} onClick={this.nextBlock.bind(this)}>{valueBtn}</Button>
+                    <Button variant="contained" color="primary" className="btn buttonNext" disabled={isModalsValid(appName)} onClick={this.nextBlock.bind(this)}>{valueBtn}</Button>
                 </div>
             </div>
         )

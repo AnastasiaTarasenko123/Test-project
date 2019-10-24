@@ -1,11 +1,16 @@
 import React from 'react'
-import { Map, GoogleApiWrapper, MapProps } from 'google-maps-react'
-import API_KEY from '../../constants/apiKey'
+import { Map, GoogleApiWrapper, MapProps, Marker, MarkerProps } from 'google-maps-react'
+import { API_KEY } from '../../constants/config'
 import './MapContainer.scss'
 
 interface IProps extends MapProps { }
 
-export class MapContainer extends React.Component<IProps> {
+interface IState {}
+
+export class MapContainer extends React.Component<IProps, IState> {
+    constructor(props: IProps) {
+        super(props);
+    }
     render() {
         return (
             <div className="mapGoogle">

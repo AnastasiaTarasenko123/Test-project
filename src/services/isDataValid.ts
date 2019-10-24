@@ -21,12 +21,6 @@ export const isDataValidSignIn = (data: IStateSignIn): boolean => (
     !checkEmail(data.email)
 )
 
-export const isModalsValid = (data: any, count: number): boolean => {
-    var result: boolean;
-    switch (count) {
-        case 0: result = data === ""; break;
-        default:
-            result = false;
-    }
-    return result;
-}
+export const isModalsValid = (data: any): boolean => (
+    data === ""
+)
