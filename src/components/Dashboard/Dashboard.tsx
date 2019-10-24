@@ -8,7 +8,7 @@ import './Dashboard.scss'
 interface IProps { }
 
 interface IState {
-    isModalActive: boolean;
+    isModalActive: boolean
 }
 
 class Dashboard extends React.Component<IProps, IState> {

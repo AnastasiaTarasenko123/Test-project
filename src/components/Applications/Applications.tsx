@@ -34,20 +34,20 @@ class Applications extends React.Component<IProps, IState>{
     }
 
     componentDidMount() {
-        this.props.firebase.applications().on('value', snapshot => {
-            const applicationObject = snapshot.val();
-            if (applicationObject) {
-                const applicationList = Object.keys(applicationObject).map(key => ({
-                    ...applicationObject[key],
-                    uid: key,
-                }));
-                this.setState({
-                    applications: applicationList
-                });
-            } else {
-                this.setState({ applications: [] });
-            }
-        });
+        // this.props.firebase.applications().on('value', snapshot => {
+        //     const applicationObject = snapshot.val();
+        //     if (applicationObject) {
+        //         const applicationList = Object.keys(applicationObject).map(key => ({
+        //             ...applicationObject[key],
+        //             uid: key,
+        //         }));
+        //         this.setState({
+        //             applications: applicationList
+        //         });
+        //     } else {
+        //         this.setState({ applications: [] });
+        //     }
+        // });
     }
 
     // componentWillUnmount() {
