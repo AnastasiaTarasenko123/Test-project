@@ -6,8 +6,8 @@ import MapContainer from '../MapContainer/MapContainer'
 import Firebase from '../../firebase/Firebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import { AuthUserContext } from '../Session/SessionContext'
-import { Marker } from 'google-maps-react'
 import { LatLng } from '../MapContainer/MapContainer'
+import { API_KEY } from '../../constants/config'
 
 interface IProps {
     modalChange: () => void,
@@ -19,6 +19,7 @@ interface IState {
     picture: string,
     color: string,
     description: string,
+    location: string,
     selectedPlace: LatLng,
     isCategories: boolean,
     isGPS: boolean,
@@ -35,6 +36,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             picture: "",
             color: "#000000",
             description: "",
+            location: "",
             selectedPlace: { lat: 0, lng: 0 },
             isCategories: false,
             isGPS: false,
@@ -63,6 +65,8 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             picture: "",
             color: "#000000",
             description: "",
+            location: "",
+            selectedPlace: { lat: 0, lng: 0 },
             isCategories: false,
             isGPS: false,
             blockActive: 0,
@@ -103,11 +107,46 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             })
     }
 
+    onChangeCodeAddress = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        this.setState(prev => ({
+            ...prev, [key]: value
+        }));
+        this.codeAddress(value);
+    }
+
     onMapClicked = (place: LatLng) => {
         this.setState({
             selectedPlace: place
         });
-        
+        this.codePlace(place);
+    }
+
+    codeAddress = async (value: any) => {
+        const { results, status } = await (await fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/Geocode/json?
+        key=${API_KEY}&address=${value}`)).json()
+        if (status == 'OK') {
+            this.setState({
+                selectedPlace: {
+                    lat: results[0].geometry.location.lat(),
+                    lng: results[0].geometry.location.lng()
+                }
+            });
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    }
+
+    codePlace = async (value: LatLng) => {
+       const { results, status } = await (await fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/Geocode/json?
+       key=${API_KEY}&lat=${value.lat}&lng=${value.lng}`)).json()
+        if (status === 'OK') {
+            this.setState({
+                location: results[0].formatted_address
+            })
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
     }
 
     readFileASync = (file: File) => (
@@ -120,7 +159,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
     )
 
     render() {
-        const { appName, picture, color, description, selectedPlace, isCategories, isGPS, blockActive, valueBtn, activeNum } = this.state;
+        const { appName, picture, color, description, location, selectedPlace, isCategories, isGPS, blockActive, activeNum } = this.state;
         return (
             <AuthUserContext.Consumer>
                 {authUser => (
@@ -237,7 +276,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                         <p>Enter Your App Location</p>
                                         <TextField
                                             label="Enter Your Location"
-                                            onChange={this.onChange("selectedPlace")}
+                                            onChange={this.onChangeCodeAddress("location")}
                                             margin="normal"
                                             variant="outlined"
                                             className="inputInfo"

@@ -49,7 +49,6 @@ export class MapContainer extends React.Component<IProps, IState> {
 
     render() {
         const { selectedPlace } = this.props;
-        console.log(selectedPlace);
         return (
             <div className="mapGoogle">
                 <Map google={this.props.google}
