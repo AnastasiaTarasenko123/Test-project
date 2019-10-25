@@ -6,6 +6,8 @@ import MapContainer from '../MapContainer/MapContainer'
 import Firebase from '../../firebase/Firebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import { AuthUserContext } from '../Session/SessionContext'
+import { Marker } from 'google-maps-react'
+import { LatLng } from '../MapContainer/MapContainer'
 
 interface IProps {
     modalChange: () => void,
@@ -17,7 +19,7 @@ interface IState {
     picture: string,
     color: string,
     description: string,
-    location: string,
+    selectedPlace: LatLng,
     isCategories: boolean,
     isGPS: boolean,
     blockActive: number,
@@ -33,7 +35,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             picture: "",
             color: "#000000",
             description: "",
-            location: "home",
+            selectedPlace: { lat: 0, lng: 0 },
             isCategories: false,
             isGPS: false,
             blockActive: 0,
@@ -46,14 +48,13 @@ class ModalCreateApp extends React.Component<IProps, IState> {
 
     onCreateApp = (event: React.FormEvent<HTMLFormElement>, authUser: any) => {
         this.props.modalChange();
-        const { appName, picture, color, description, location, isCategories, isGPS } = this.state
+        const { appName, picture, color, description, selectedPlace, isCategories, isGPS } = this.state
         this.props.firebase.applications().push({
             userID: authUser.uid,
             appName: appName,
             picture: picture,
             color: color,
             description: description,
-            location: location,
             isCategories: isCategories,
             isGPS: isGPS,
         })
@@ -62,7 +63,6 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             picture: "",
             color: "#000000",
             description: "",
-            location: "home",
             isCategories: false,
             isGPS: false,
             blockActive: 0,
@@ -103,6 +103,13 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             })
     }
 
+    onMapClicked = (place: LatLng) => {
+        this.setState({
+            selectedPlace: place
+        });
+        
+    }
+
     readFileASync = (file: File) => (
         new Promise((resolve: (v: string) => void, reject) => {
             const reader = new FileReader()
@@ -113,7 +120,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
     )
 
     render() {
-        const { appName, picture, color, description, location, isCategories, isGPS, blockActive, valueBtn, activeNum } = this.state;
+        const { appName, picture, color, description, selectedPlace, isCategories, isGPS, blockActive, valueBtn, activeNum } = this.state;
         return (
             <AuthUserContext.Consumer>
                 {authUser => (
@@ -230,12 +237,12 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                         <p>Enter Your App Location</p>
                                         <TextField
                                             label="Enter Your Location"
-                                            onChange={this.onChange("location")}
+                                            onChange={this.onChange("selectedPlace")}
                                             margin="normal"
                                             variant="outlined"
                                             className="inputInfo"
                                         />
-                                        <MapContainer />
+                                        <MapContainer onMapClicked={this.onMapClicked} selectedPlace={selectedPlace} />
                                     </div>
                                 </div>
                                 <div className={`blocks features ${(this.whichBlockActive() === 3) ? `active` : ``}`}>
@@ -278,10 +285,10 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                                     <TableCell>Description: </TableCell>
                                                     <TableCell>{description}</TableCell>
                                                 </TableRow>
-                                                <TableRow>
+                                                {/* <TableRow>
                                                     <TableCell>Location: </TableCell>
                                                     <TableCell>{location}</TableCell>
-                                                </TableRow>
+                                                </TableRow> */}
                                                 <TableRow>
                                                     <TableCell>Features: </TableCell>
                                                     <TableCell>{this.state.isCategories === true ? "Gategories" : ""} {this.state.isGPS === true ? "GPS" : ""}

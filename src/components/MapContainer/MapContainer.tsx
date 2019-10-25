@@ -1,28 +1,31 @@
 import React from 'react'
-import { Map, GoogleApiWrapper, MapProps, Marker, MarkerProps, InfoWindow } from 'google-maps-react'
+import { Map, GoogleApiWrapper, MapProps, Marker } from 'google-maps-react'
 import { API_KEY } from '../../constants/config'
 import './MapContainer.scss'
 
+export interface LatLng {
+    lat: number
+    lng: number
+}
+
 interface IProps extends MapProps {
+    selectedPlace: LatLng,
+    onMapClicked: (selectedPlace:LatLng) => void,
 }
 
 interface IState {
-        selectedPlace: google.maps.LatLng,
-        activeMarker: Marker
+       // selectedPlace: google.maps.LatLng,
+       activeMarker: Marker
         //showingInfoWindthis.state = {ow: true
 }
 
 export class MapContainer extends React.Component<IProps, IState> {
-    tempLng = new google.maps.LatLng({lat: 37.778519, lng: -122.405640});
     constructor(props: IProps) {
         super(props);
         this.state = {
-            selectedPlace: this.tempLng,
-            activeMarker: new Marker({
-                position: this.tempLng
-            })
-           // showingInfoWindow: activeMarker
-        }
+            activeMarker: new Marker({position: {lat: this.props.selectedPlace.lat, 
+            lng: this.props.selectedPlace.lng}})
+        };
     }
 
     onMarkerClick = (props: any, marker: any, e: any) => {
@@ -34,22 +37,24 @@ export class MapContainer extends React.Component<IProps, IState> {
     }
 
     mapClicked = (mapProps: any, map: any, clickEvent: any) => {
-        console.log(clickEvent.latLng);
-        this.setState({
-            selectedPlace: clickEvent.latLng,
-            activeMarker: new Marker ({position: clickEvent.latLng})
-        });
+        // console.log(clickEvent.latLng);
+        // this.setState({
+        //     selectedPlace: clickEvent.latLng,
+        //     activeMarker: new Marker ({position: clickEvent.latLng})
+        // });
+        const {lat, lng} = clickEvent.latLng
+        this.props.onMapClicked({lat: lat(), lng: lng()});
+        this.setState({activeMarker: new Marker({position: {lat, lng}})});
     }
 
     render() {
-        const { selectedPlace } = this.state;
+        const { selectedPlace } = this.props;
         console.log(selectedPlace);
         return (
             <div className="mapGoogle">
                 <Map google={this.props.google}
                     onClick={this.mapClicked}>
-                    <Marker onClick={this.onMarkerClick} 
-                    position={selectedPlace}></Marker>
+                    <Marker position={selectedPlace}></Marker>
                 </Map>
             </div>
         );
