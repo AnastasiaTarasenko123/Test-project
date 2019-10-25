@@ -123,9 +123,8 @@ class ModalCreateApp extends React.Component<IProps, IState> {
     }
 
     codeAddress = async (value: any) => {
-        const { results, status } = await (await fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/Geocode/json?
-        key=${API_KEY}&address=${value}`)).json()
-        if (status == 'OK') {
+        const { results, status } = await (await fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/Geocode/json?key=${API_KEY}&address=${value}`)).json()
+        if (status === 'OK') {
             this.setState({
                 selectedPlace: {
                     lat: results[0].geometry.location.lat(),
@@ -138,9 +137,8 @@ class ModalCreateApp extends React.Component<IProps, IState> {
     }
 
     codePlace = async (value: LatLng) => {
-       const { results, status } = await (await fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/Geocode/json?
-       key=${API_KEY}&lat=${value.lat}&lng=${value.lng}`)).json()
-        if (status === 'OK') {
+       const { results, status } = await (await fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/Geocode/json?key=${API_KEY}&lat=${value.lat}&lng=${value.lng}`)).json()
+       if (status === 'OK') {
             this.setState({
                 location: results[0].formatted_address
             })
@@ -277,6 +275,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                         <TextField
                                             label="Enter Your Location"
                                             onChange={this.onChangeCodeAddress("location")}
+                                            value={location}
                                             margin="normal"
                                             variant="outlined"
                                             className="inputInfo"

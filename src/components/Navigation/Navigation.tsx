@@ -4,7 +4,6 @@ import * as ROUTES from '../../constants/routs'
 import SignOut from '../SignOut/SignOut'
 import './Navigation.scss'
 import { AuthUserContext } from '../Session/SessionContext'
-import { Link } from '@material-ui/core'
 
 const Navigation: React.FC = () => (
   <div>
