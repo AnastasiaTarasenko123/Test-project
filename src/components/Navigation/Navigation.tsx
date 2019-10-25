@@ -29,7 +29,7 @@ const NavigationAuth: React.FC = () => (
   </div>
 );
 
-const NavigationNonAuth: React.FC = () => (
+export const NavigationNonAuth: React.FC = () => (
   <div className="navigaton">
     <ul>
       <li>

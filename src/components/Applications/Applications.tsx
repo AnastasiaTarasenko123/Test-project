@@ -2,27 +2,18 @@ import React from 'react'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import Firebase from '../../firebase/Firebase'
 import './Applications.scss'
+import { Application } from '../../interfaces/interfaces'
 
 interface IProps {
     firebase: Firebase,
 }
 
 interface IState {
-    applications: Array<IApplication>
+    applications: Array<Application>
 }
 
 interface IListApplications {
-    applications: Array<IApplication>
-}
-
-interface IApplication {
-    name: string
-    // image: string,
-    // color: string,
-    // description: string,
-    // location: any,
-    // isCategories: boolean,
-    // isGPSMap: boolean
+    applications: Array<Application>
 }
 
 class Applications extends React.Component<IProps, IState>{
@@ -50,13 +41,9 @@ class Applications extends React.Component<IProps, IState>{
         // });
     }
 
-    // componentWillUnmount() {
-    //     this.props.firebase.applications().off();
-    // }
-
-    onCreateApplication() { }
-
-    onChangeApplication() { }
+    componentWillUnmount() {
+        this.props.firebase.applications().off();
+    }
 
     render() {
         const { applications } = this.state;

@@ -16,28 +16,30 @@ interface IProps {
     firebase: Firebase
 }
 
-interface IState extends Application{
+interface IState extends Application {
     location: string,
     blockActive: number,
     activeNum: number
 }
 
+const updateState: IState = {
+    userID: "",
+    appName: "",
+    picture: "",
+    color: "#000000",
+    description: "",
+    location: "",
+    selectedPlace: { lat: 0, lng: 0 },
+    isCategories: false,
+    isGPS: false,
+    blockActive: 0,
+    activeNum: 0
+}
+
 class ModalCreateApp extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
-        this.state = {
-            userID: "",
-            appName: "",
-            picture: "",
-            color: "#000000",
-            description: "",
-            location: "",
-            selectedPlace: { lat: 0, lng: 0 },
-            isCategories: false,
-            isGPS: false,
-            blockActive: 0,
-            activeNum: 0
-        }
+        this.state = updateState;
     }
 
     whichBlockActive = () => (Number(this.state.blockActive));
@@ -51,21 +53,11 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             picture: picture,
             color: color,
             description: description,
+            selectedPlace: selectedPlace,
             isCategories: isCategories,
             isGPS: isGPS,
         })
-        this.setState({
-            appName: "",
-            picture: "",
-            color: "#000000",
-            description: "",
-            location: "",
-            selectedPlace: { lat: 0, lng: 0 },
-            isCategories: false,
-            isGPS: false,
-            blockActive: 0,
-            activeNum: 0
-        })
+        this.setState( updateState)
         event.preventDefault();
     }
 

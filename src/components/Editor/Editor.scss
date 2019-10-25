@@ -1,10 +1,18 @@
+@import '../../constants/style';
+
 .mainPage{
+    height: 95.2vh;
     .editorNav {
+        box-sizing: border-box;
         float: left;
-        width: 30%;
+        width: 13%;
         display: block;
+        border-right: 1px solid $useColor;
+        height: 100%;
+        padding-top: 47px;
     }
     .contentEditor {
-        width: 70%;
+        float: right;
+        width: 87%;
     }
 }
