@@ -2,11 +2,7 @@ import React from 'react'
 import { Map, GoogleApiWrapper, MapProps, Marker } from 'google-maps-react'
 import { API_KEY } from '../../constants/config'
 import './MapContainer.scss'
-
-export interface LatLng {
-    lat: number
-    lng: number
-}
+import { LatLng } from '../../interfaces/interfaces'
 
 interface IProps extends MapProps {
     selectedPlace: LatLng,
@@ -14,9 +10,7 @@ interface IProps extends MapProps {
 }
 
 interface IState {
-       // selectedPlace: google.maps.LatLng,
        activeMarker: Marker
-        //showingInfoWindthis.state = {ow: true
 }
 
 export class MapContainer extends React.Component<IProps, IState> {
@@ -28,20 +22,7 @@ export class MapContainer extends React.Component<IProps, IState> {
         };
     }
 
-    onMarkerClick = (props: any, marker: any, e: any) => {
-        this.setState({
-          //  selectedPlace: props,
-          //  activeMarker: null,
-           // showingInfoWindow: true
-        });
-    }
-
     mapClicked = (mapProps: any, map: any, clickEvent: any) => {
-        // console.log(clickEvent.latLng);
-        // this.setState({
-        //     selectedPlace: clickEvent.latLng,
-        //     activeMarker: new Marker ({position: clickEvent.latLng})
-        // });
         const {lat, lng} = clickEvent.latLng
         this.props.onMapClicked({lat: lat(), lng: lng()});
         this.setState({activeMarker: new Marker({position: {lat, lng}})});

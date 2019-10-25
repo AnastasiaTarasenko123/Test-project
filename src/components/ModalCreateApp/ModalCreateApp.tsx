@@ -6,32 +6,27 @@ import MapContainer from '../MapContainer/MapContainer'
 import Firebase from '../../firebase/Firebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import { AuthUserContext } from '../Session/SessionContext'
-import { LatLng } from '../MapContainer/MapContainer'
-import { API_KEY } from '../../constants/config'
+import { LatLng } from '../../interfaces/interfaces'
+import { readFileASync } from '../../services/readFile'
+import { codeAddress, codePlace } from '../../services/geocode'
+import { Application } from '../../interfaces/interfaces'
 
 interface IProps {
     modalChange: () => void,
     firebase: Firebase
 }
 
-interface IState {
-    appName: string,
-    picture: string,
-    color: string,
-    description: string,
+interface IState extends Application{
     location: string,
-    selectedPlace: LatLng,
-    isCategories: boolean,
-    isGPS: boolean,
     blockActive: number,
-    activeNum: number,
-    valueBtn: "Next" | "Finish"
+    activeNum: number
 }
 
 class ModalCreateApp extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
+            userID: "",
             appName: "",
             picture: "",
             color: "#000000",
@@ -41,8 +36,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             isCategories: false,
             isGPS: false,
             blockActive: 0,
-            activeNum: 0,
-            valueBtn: "Next"
+            activeNum: 0
         }
     }
 
@@ -70,8 +64,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             isCategories: false,
             isGPS: false,
             blockActive: 0,
-            activeNum: 0,
-            valueBtn: "Next"
+            activeNum: 0
         })
         event.preventDefault();
     }
@@ -83,6 +76,25 @@ class ModalCreateApp extends React.Component<IProps, IState> {
             blockActive: temp,
             activeNum: active
         });
+    }
+
+    onChangeLocation = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        this.setState({
+            location: value
+        })
+        const result = await codeAddress(value)
+        if (!('message' in result)) {
+            this.setState({
+                selectedPlace: {
+                    lat: result.lat,
+                    lng: result.lng
+                }
+            });
+        }
+        else {
+            console.log(result.message);
+        }
     }
 
     onChange = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,61 +112,26 @@ class ModalCreateApp extends React.Component<IProps, IState> {
 
     onChangeFile = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
         e.target.files &&
-            this.readFileASync(e.target.files[0]).then(v => {
+            readFileASync(e.target.files[0]).then(v => {
                 this.setState(prev => ({
                     ...prev, [key]: v
                 }))
             })
     }
 
-    onChangeCodeAddress = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target;
-        this.setState(prev => ({
-            ...prev, [key]: value
-        }));
-        this.codeAddress(value);
-    }
-
-    onMapClicked = (place: LatLng) => {
+    onMapClicked = async (place: LatLng) => {
         this.setState({
             selectedPlace: place
         });
-        this.codePlace(place);
-    }
-
-    codeAddress = async (value: any) => {
-        const { results, status } = await (await fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/Geocode/json?key=${API_KEY}&address=${value}`)).json()
-        if (status === 'OK') {
+        const result = await codePlace(place)
+        if (!('message' in result)) {
             this.setState({
-                selectedPlace: {
-                    lat: results[0].geometry.location.lat(),
-                    lng: results[0].geometry.location.lng()
-                }
+                location: result
             });
         } else {
-            alert('Geocode was not successful for the following reason: ' + status);
+            console.log(result.message);
         }
     }
-
-    codePlace = async (value: LatLng) => {
-       const { results, status } = await (await fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/Geocode/json?key=${API_KEY}&lat=${value.lat}&lng=${value.lng}`)).json()
-       if (status === 'OK') {
-            this.setState({
-                location: results[0].formatted_address
-            })
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-        }
-    }
-
-    readFileASync = (file: File) => (
-        new Promise((resolve: (v: string) => void, reject) => {
-            const reader = new FileReader()
-            reader.onload = () => resolve(reader.result as string)
-            reader.onerror = reject
-            reader.readAsDataURL(file)
-        })
-    )
 
     render() {
         const { appName, picture, color, description, location, selectedPlace, isCategories, isGPS, blockActive, activeNum } = this.state;
@@ -274,7 +251,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                         <p>Enter Your App Location</p>
                                         <TextField
                                             label="Enter Your Location"
-                                            onChange={this.onChangeCodeAddress("location")}
+                                            onChange={this.onChangeLocation}
                                             value={location}
                                             margin="normal"
                                             variant="outlined"
@@ -323,10 +300,10 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                                     <TableCell>Description: </TableCell>
                                                     <TableCell>{description}</TableCell>
                                                 </TableRow>
-                                                {/* <TableRow>
+                                                <TableRow>
                                                     <TableCell>Location: </TableCell>
                                                     <TableCell>{location}</TableCell>
-                                                </TableRow> */}
+                                                </TableRow>
                                                 <TableRow>
                                                     <TableCell>Features: </TableCell>
                                                     <TableCell>{this.state.isCategories === true ? "Gategories" : ""} {this.state.isGPS === true ? "GPS" : ""}
