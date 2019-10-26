@@ -26,7 +26,7 @@ class Editor extends React.Component<IProps, IState> {
                         </div>
                         <div className="contentEditor">
                             <Route path={ROUTES.APP_INFO} component={AppInfo} />
-                            <Route exact path={ROUTES.LISTS} component={Lists} />
+                            <Route path={ROUTES.LISTS} component={Lists} />
                             <Route path={ROUTES.FEATURES} component={Features} />
                         </div>
                 </Router>

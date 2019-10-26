@@ -1,8 +1,7 @@
-//export const LANDING = '/';
 export const SIGN_UP = '/signup'
 export const SIGN_IN = '/signin'
 export const DASHBOARD = '/dashboard'
 export const EDITOR = '/editor'
-export const APP_INFO = '/dashboard/appinfo'
-export const LISTS = '/dashboard/lists'
-export const FEATURES = '/dashboard/features'
+export const APP_INFO = '/editor/appinfo'
+export const LISTS = '/editor/lists'
+export const FEATURES = '/editor/features'

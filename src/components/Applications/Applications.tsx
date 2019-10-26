@@ -4,16 +4,20 @@ import Firebase from '../../firebase/Firebase'
 import './Applications.scss'
 import { Application } from '../../interfaces/interfaces'
 
+interface AppOn extends Application {
+    uid: string;
+}
+
 interface IProps {
     firebase: Firebase,
 }
 
 interface IState {
-    applications: Array<Application>
+    applications: AppOn[]
 }
 
 interface IListApplications {
-    applications: Array<Application>
+    applications: AppOn[]
 }
 
 class Applications extends React.Component<IProps, IState>{
@@ -25,20 +29,20 @@ class Applications extends React.Component<IProps, IState>{
     }
 
     componentDidMount() {
-        // this.props.firebase.applications().on('value', snapshot => {
-        //     const applicationObject = snapshot.val();
-        //     if (applicationObject) {
-        //         const applicationList = Object.keys(applicationObject).map(key => ({
-        //             ...applicationObject[key],
-        //             uid: key,
-        //         }));
-        //         this.setState({
-        //             applications: applicationList
-        //         });
-        //     } else {
-        //         this.setState({ applications: [] });
-        //     }
-        // });
+        this.props.firebase.applications().on('value', snapshot => {
+            const appObject = snapshot.val();
+            if (appObject) {
+                const appList: AppOn[] = Object.keys(appObject).map(key => ({
+                    ...appObject[key],
+                    uid: key,
+                }));
+                this.setState({
+                    applications: appList,
+                })
+            } else {
+                this.setState({ applications: [] });
+            }
+        });
     }
 
     componentWillUnmount() {
@@ -47,25 +51,29 @@ class Applications extends React.Component<IProps, IState>{
 
     render() {
         const { applications } = this.state;
+        console.log(applications);
         return (
             <div>
-                {applications.length > 0 ? (<div><p>Apps</p> <ApplicationList applications={this.state.applications} /></div>) : (<p>No applications yet.</p>)}
+                {applications ? (<div><p>Apps</p> <ApplicationList applications={this.state.applications} /></div>) : (<p>No applications yet.</p>)}
             </div>
         );
     }
 }
 
-const ApplicationList: React.FC<IListApplications> = ({ applications }) => (
-    <ul>
-        {applications.map(application => (
-            <ApplicationItem application={application} />
-        ))}
-    </ul>
-)
+const ApplicationList: React.FC<IListApplications> = ({ applications }) => {
+    return (
+        <ul>
+            {applications.map(application => (
+                <ApplicationItem key={application.uid} application={application} />
+            ))} 
+        </ul>
+    )
+}
 
-const ApplicationItem: React.FC<any> = (application) => (
+const ApplicationItem: React.FC<any> = ({application}) => (
     <li>
-        <p>{application}</p>
+        <p>{application.appName}</p>
+        <p>{application.description}</p>
     </li>
 )
 
