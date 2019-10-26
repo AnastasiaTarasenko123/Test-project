@@ -1,6 +1,6 @@
 import React from 'react'
 import { withAuthorization } from '../Session/WithAuthorization'
-import Applications from '../Applications/Applications'
+import { Application } from '../Applications/Applications'
 import { Button } from '@material-ui/core'
 import ModalCreateApp from '../ModalCreateApp/ModalCreateApp'
 import './Dashboard.scss'
@@ -40,7 +40,7 @@ class Dashboard extends React.Component<IProps, IState> {
                     </div>
                 </div>
                 <div className="myApps">
-                    <Applications />
+                    <Application />
                 </div>
                 <div className={`modals ${isModalActive ? `active` : ``}`}>
                     <ModalCreateApp modalChange={this.closeModal.bind(this)} />

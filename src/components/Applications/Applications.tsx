@@ -5,6 +5,10 @@ import './Applications.scss'
 import { ReadApplication } from '../../interfaces/interfaces'
 import { AuthUserContext } from '../Session/SessionContext'
 import { readApps } from '../../services/appFirebase'
+import { Button } from '@material-ui/core'
+import { Link, withRouter } from 'react-router-dom'
+import * as ROUTES from '../../constants/routs'
+import { compose } from 'recompose'
 
 interface IProps {
     firebase: Firebase,
@@ -40,8 +44,7 @@ class Applications extends React.Component<IProps, IState>{
         const { applications } = this.state;
         return (
             applications.length > 0 ? (
-                <div>
-                    <p>Apps</p>
+                <div className="appList">
                     <ApplicationList applications={applications} />
                 </div>)
                 :
@@ -70,9 +73,20 @@ const ApplicationList: React.FC<IListApplications> = ({ applications }) => {
 
 const ApplicationItem: React.FC<any> = ({ application }) => (
     <li>
-        <p>{application.appName}</p>
-        <p>{application.userID}</p>
+        <div className="appItem">
+            <div className="imgContainer">
+                <img src={application.picture} alt="App" className="imgApp" />
+            </div>
+            <div className="appNameContainer">
+                <h1 className="appName">{application.appName} </h1>
+            </div>
+            <div className="btnContainer">
+                <Button variant="contained" color="primary" className="btnEdit">
+                <Link to={ROUTES.EDITOR}>App Edit</Link>
+                </Button>
+            </div>
+        </div>
     </li>
 )
 
-export default withFirebase(Applications)
+export const Application = compose<IProps, {}>(withRouter, withFirebase)( Applications)

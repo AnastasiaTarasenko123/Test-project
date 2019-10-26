@@ -18,9 +18,6 @@ const NavigationAuth: React.FC = () => (
         <SignOut />
       </li>
       <li>
-        <RouterLink to={ROUTES.EDITOR}>Editor</RouterLink>
-      </li>
-      <li>
         <RouterLink to={ROUTES.DASHBOARD}>Dashboard</RouterLink>
       </li>
     </ul>
