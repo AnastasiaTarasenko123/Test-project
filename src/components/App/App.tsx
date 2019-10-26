@@ -12,13 +12,11 @@ import './App.scss'
 
 const App: React.FC = () => (
   <Router>
-    <div>
       <Navigation />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
       <Route path={ROUTES.DASHBOARD} component={Dashboard} />
       <Route path={ROUTES.EDITOR} component={Editor} /> 
-    </div>
   </Router>
 );
 

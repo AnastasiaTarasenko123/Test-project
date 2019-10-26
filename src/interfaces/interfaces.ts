@@ -13,3 +13,7 @@ export interface Application {
     isCategories: boolean,
     isGPS: boolean
 }
+
+export interface ReadApplication extends Application {
+    uid: string;
+}

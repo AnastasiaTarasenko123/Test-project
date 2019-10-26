@@ -6,11 +6,9 @@ import './Navigation.scss'
 import { AuthUserContext } from '../Session/SessionContext'
 
 const Navigation: React.FC = () => (
-  <div>
     <AuthUserContext.Consumer>
       {authUser => authUser ? <NavigationAuth /> : <NavigationNonAuth />}
     </AuthUserContext.Consumer>
-  </div>
 );
 
 const NavigationAuth: React.FC = () => (

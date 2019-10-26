@@ -1,4 +1,4 @@
-import app from 'firebase/app'
+import app, { auth } from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 import { config } from '../constants/config'

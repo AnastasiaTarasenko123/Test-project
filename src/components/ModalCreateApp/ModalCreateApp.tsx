@@ -10,6 +10,7 @@ import { LatLng } from '../../interfaces/interfaces'
 import { readFileASync } from '../../services/readFile'
 import { codeAddress, codePlace } from '../../services/geocode'
 import { Application } from '../../interfaces/interfaces'
+import { createApp } from '../../services/appFirebase'
 
 interface IProps {
     modalChange: () => void,
@@ -47,16 +48,8 @@ class ModalCreateApp extends React.Component<IProps, IState> {
     onCreateApp = (event: React.FormEvent<HTMLFormElement>, authUser: any) => {
         this.props.modalChange();
         const { appName, picture, color, description, selectedPlace, isCategories, isGPS } = this.state
-        this.props.firebase.applications().push({
-            userID: authUser.uid,
-            appName: appName,
-            picture: picture,
-            color: color,
-            description: description,
-            selectedPlace: selectedPlace,
-            isCategories: isCategories,
-            isGPS: isGPS,
-        })
+        const userID = authUser.uid;
+        createApp(this.props.firebase, { userID, appName, picture, color, description, selectedPlace, isCategories, isGPS});
         this.setState( updateState)
         event.preventDefault();
     }

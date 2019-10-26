@@ -12,9 +12,6 @@ interface IProps { }
 interface IState { }
 
 class Editor extends React.Component<IProps, IState> {
-    constructor(props: IProps) {
-        super(props);
-    }
     render() {
         return (
             <div className="mainPage">
