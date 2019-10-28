@@ -37,3 +37,52 @@ export const readApps = (
             }
         });
 }
+
+export const readApp = (
+    firebase: Firebase,
+    uid: string,
+    successfunction?: (result: ReadApplication) => void,
+    emptyfunction?: () => void) => {
+    firebase.db.ref().child('applications')
+    .orderByKey()
+    .equalTo(uid)
+    .on('value', snapshot => {
+            const appObject = snapshot.val();
+            if (appObject) {
+                const appList: ReadApplication[] = Object.keys(appObject).map(key => {
+                    return {
+                        ...appObject[key],
+                        uid: key,
+                    }
+                });
+                if (appList !== undefined)
+                    successfunction && successfunction(appList[0]);
+            } else {
+                emptyfunction && emptyfunction();
+            }
+        });
+}
+
+// componentDidMount() {
+//     const { uid } = this.state;
+//     console.log(uid);
+//     this.props.firebase.db.ref().child('applications')
+//         .orderByKey()
+//         .equalTo(uid)
+//         .on('value', snapshot => {
+//             const appObject = snapshot.val();
+//             if (appObject) {
+//                 const appList: ReadApplication[] = Object.keys(appObject).map(key => {
+//                     return {
+//                         ...appObject[key],
+//                         uid: key,
+//                     }
+//                 });
+//                 if (appList !== undefined) {
+//                     this.setState({
+//                         myApp: appList[0]
+//                     })
+//                 }
+//             }
+//         });
+// }

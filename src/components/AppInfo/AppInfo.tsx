@@ -4,6 +4,7 @@ import { RouteComponentProps, withRouter } from 'react-router'
 import Firebase from '../../firebase/Firebase'
 import { ReadApplication } from '../../interfaces/interfaces'
 import { withFirebase } from '../../firebase/FirebaseContext'
+import { readApp } from '../../services/appFirebase'
 
 interface RouteParams {
     uid: string
@@ -22,38 +23,22 @@ class AppInfo extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            uid: this.props.match.params.uid,
+            uid: this.props.match.params.uid.slice(1),
             myApp: null
         }
     }
-    componentDidMount() {
-        // this.props.firebase.db.ref().child('applications')
-        //     .orderByChild('uid')
-        //     .equalTo('uid')
-        //     .on('value', snapshot => {
-        //         const appObject = snapshot.val();
-        //         if (appObject) {
-        //             const appList: ReadApplication[] = Object.keys(appObject).map(key => {
-        //                 return {
-        //                     ...appObject[key],
-        //                     uid: key,
-        //                 }
-        //             });
-        //             if (appList !== undefined)
-        //                 this.setState({
-        //                     myApp: appList[0]
-        //                 })
-        //         } else {
-        //             this.setState({
-        //                 myApp: null
-        //             })
-        //         }
-        //     });
-    }
-    render() {
-        const { uid } = this.state;
-        console.log(uid);
 
+    componentDidMount() {
+        const { uid } = this.state;
+        readApp(this.props.firebase, uid, (value: ReadApplication) => { this.setState({ myApp: value }) },
+        () => { this.setState({ myApp: null }) });
+    }
+
+    componentWillUnmount() {
+        this.props.firebase.db.ref().off();
+    }
+
+    render() {
         return (
             <div className="contentAppInfo">
                 <div className="borderApp">
