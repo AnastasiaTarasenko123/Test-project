@@ -64,6 +64,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         });
     }
 
+    //не працюэ
     onChangeLocation = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         this.setState({

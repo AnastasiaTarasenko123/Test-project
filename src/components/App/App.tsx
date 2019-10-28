@@ -16,7 +16,7 @@ const App: React.FC = () => (
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
       <Route path={ROUTES.DASHBOARD} component={Dashboard} />
-      <Route path={ROUTES.EDITOR} component={Editor} /> 
+      <Route exect path={ROUTES.EDITOR + '/:uid'} component={Editor} /> 
   </Router>
 );
 

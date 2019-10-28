@@ -1,0 +1,9 @@
+@import '../../constants/style';
+
+.contentAppInfo {
+    .borderApp {
+        height: 31px;
+        border-bottom: 1px solid $useColor;
+        color: $useColor;
+    }
+}

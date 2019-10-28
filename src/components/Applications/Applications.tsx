@@ -32,7 +32,7 @@ class Applications extends React.Component<IProps, IState>{
 
     componentDidMount = () => {
         readApps(this.props.firebase, (value: ReadApplication[]) => { this.setState({ applications: value }) },
-            () => { this.setState({ applications: [] }) })
+            () => { this.setState({ applications: [] }) });
     }
 
     componentWillUnmount() {
@@ -71,6 +71,7 @@ const ApplicationList: React.FC<IListApplications> = ({ applications }) => {
     )
 }
 
+//передати значення апки
 const ApplicationItem: React.FC<any> = ({ application }) => (
     <li>
         <div className="appItem">
@@ -82,11 +83,11 @@ const ApplicationItem: React.FC<any> = ({ application }) => (
             </div>
             <div className="btnContainer">
                 <Button variant="contained" color="primary" className="btnEdit">
-                <Link to={ROUTES.EDITOR}>App Edit</Link>
+                    <Link to={ROUTES.EDITOR + '/:' + application.uid + '/'}>App Edit</Link>
                 </Button>
             </div>
         </div>
     </li>
 )
 
-export const Application = compose<IProps, {}>(withRouter, withFirebase)( Applications)
+export const Application = compose<IProps, {}>(withRouter, withFirebase)(Applications)
