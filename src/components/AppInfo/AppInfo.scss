@@ -2,29 +2,38 @@
 
 .contentAppInfo {
     background-color: $colorBgModal;
-    height: 98vh;
+    width: 85%;
+    display: inline-block;
+
     .borderApp {
-        box-sizing: border-box;
-        padding: 0px 10px;
-        height: 32px;
         border-bottom: 1px solid $useColor;
         color: $useColor;
         background-color: white;
+        height: 47px;
+
+        p {
+            margin: 0;
+            padding-top: 15px;
+        }
     }
+
     .appImgContent {
         margin: auto;
         width: 95%;
         margin-top: 30px;
         height: 700px;
         background-color: white;
+
         .imgContent {
             width: 50%;
             float: left;
+
             .appImg {
                 width: 50%;
                 margin: 10%;
             }
         }
+
         .chooseColorContent {
             width: 50%;
             float: right;

@@ -8,7 +8,7 @@ import { readApp } from '../../services/appFirebase'
 import { TextField } from '@material-ui/core'
 
 interface RouteParams {
-    uid: string
+    appId: string
 }
 
 interface IProps extends RouteComponentProps<RouteParams> {
@@ -16,7 +16,7 @@ interface IProps extends RouteComponentProps<RouteParams> {
 }
 
 interface IState {
-    uid: string,
+    appId: string,
     myApp: ReadApplication | null
 }
 
@@ -24,24 +24,23 @@ class AppInfo extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            uid: this.props.match.params.uid.slice(1),
+            appId: this.props.match.params.appId || '',
             myApp: null
         }
     }
 
     componentDidMount() {
-        const { uid } = this.state;
-        readApp(this.props.firebase, uid, (value: ReadApplication) => { this.setState({ myApp: value }) },
+        const { appId } = this.state;
+        readApp(this.props.firebase, appId, (value: ReadApplication) => { this.setState({ myApp: value }) },
             () => { this.setState({ myApp: null }) });
     }
 
-    componentWillUnmount() {
+    componentWillUnmoun() {
         this.props.firebase.db.ref().off();
     }
 
     render() {
         const { myApp } = this.state;
-        console.log(myApp);
         return (
             <div className="contentAppInfo">
                 <div className="borderApp">

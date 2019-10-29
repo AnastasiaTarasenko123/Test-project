@@ -2,47 +2,32 @@ import React from 'react'
 import { withAuthorization } from '../Session/WithAuthorization'
 import NavEditor from '../NavEditor/NavEditor'
 import './Editor.scss'
-import { BrowserRouter as Router, Route, RouteComponentProps } from 'react-router-dom'
-import * as ROUTES from '../../constants/routs'
-import AppInfo from '../AppInfo/AppInfo'
-import Lists from '../Lists/Lists'
-import Features from '../Features/Features'
+import { RouteComponentProps } from 'react-router-dom'
 
 interface RouteParams {
-    uid: string
+    appId: string
 }
 
 interface IProps extends RouteComponentProps<RouteParams> {
 }
 
 interface IState {
-    uid: string
+    appId: string
 }
 
 class Editor extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            uid: this.props.match.params.uid
+            appId: this.props.match.params.appId || ''
         }
     }
 
     render() {
-        const { uid } = this.state;
+        const { appId } = this.state;
         return (
-            <div className="mainPage">
-                <Router>
-                    <div className="editorNav">
-                        <div>
-                            <NavEditor uid={uid} />
-                        </div>
-                    </div>
-                    <div className="contentEditor">
-                        <Route path={ROUTES.APP_INFO + '/:uid'} component={AppInfo} />
-                        <Route path={ROUTES.LISTS + '/:uid'} component={Lists} />
-                        <Route path={ROUTES.FEATURES + '/:uid'} component={Features} />
-                    </div>
-                </Router>
+            <div className="editorNav">
+                <NavEditor appId={appId} />
             </div>
         );
     }
@@ -50,3 +35,4 @@ class Editor extends React.Component<IProps, IState> {
 
 const condition = (authUser: any) => !!authUser;
 export default withAuthorization(condition)(Editor)
+

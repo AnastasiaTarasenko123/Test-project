@@ -3,94 +3,114 @@
 .modalWindow {
     height: 100vh;
     width: 100vw;
-    position: fixed; 
-    z-index: 1; 
+    position: fixed;
+    z-index: 1;
     top: 0;
     left: 0;
     background-color: $colorBgModal;
+
     .modalBlock {
         position: relative;
         height: 70vh;
         width: 40vw;
         background: white;
-        margin: 7% auto; 
+        margin: 7% auto;
         border-radius: 10px;
+
         .navigationModal {
             display: flex;
             width: 100%;
             padding-top: 1.5rem;
             color: $navigationColor;
+
             .radioBtn {
                 width: 18%;
                 text-align: center;
             }
         }
+
         .buttonClose {
             position: $positionButton;
             top: 4%;
             right: 1%;
         }
+
         .buttonNext {
             display: none;
             position: $positionButton;
             bottom: 4%;
             left: 43%;
         }
-        .blocks{
+
+        .blocks {
             display: none;
-            margin: 0% auto; 
+            margin: 0% auto;
             width: 90%;
             margin-top: 2rem;
+
             .divLeft {
                 float: left;
                 width: 47%;
             }
+
             .divRight {
                 float: right;
                 width: 47%;
             }
+
             .imgBlock {
                 display: none;
             }
+
             .imgActive {
                 display: block;
             }
         }
+
         .active {
             display: block;
         }
+
         .welcome {
             width: 45%;
             height: 100%;
             padding-top: 4rem;
             text-align: center;
-            p{
+
+            p {
                 padding-bottom: 1rem;
             }
+
             .textRemember {
                 margin-top: 3rem;
             }
         }
+
         .branding {
             .colorInput {
                 width: 100%;
             }
+
             .imageInput {
                 margin-top: 2.05rem;
             }
+
             .imgModal {
                 margin-top: 3vh;
-                width: 100%;  
+                width: 100%;
             }
         }
+
         .info {
             .inputInfo {
                 width: 16vw;
             }
         }
+
         .features {
             text-align: center;
             margin-top: 3rem;
+
             div {
                 box-sizing: border-box;
                 margin: 4vh 1vw;
@@ -99,28 +119,35 @@
                 width: 43% !important;
                 height: 33vh;
                 padding: 5vh 3vw;
+
                 h1 {
                     margin-bottom: 3vh;
                 }
+
                 p {
                     margin-bottom: 4vh;
                 }
+
                 .gpsSwitch {
                     margin-top: 1.5vh;
                 }
             }
         }
+
         .preview {
             text-align: center;
+
             .imgBlock {
                 height: 20vh;
+
                 .imgPreview {
                     max-width: 50%;
                     max-height: 100%;
                 }
             }
+
             .tablePreview {
-                overflow-x:auto;
+                overflow-x: auto;
             }
         }
     }

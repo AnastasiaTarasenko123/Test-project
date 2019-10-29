@@ -3,8 +3,9 @@ import Firebase from '../../firebase/Firebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import './SignOut.scss'
 import { withAuthorization } from '../Session/WithAuthorization'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import * as ROUTES from '../../constants/routs'
+import { Link } from '@material-ui/core'
 
 interface IProps {
     firebase: Firebase
@@ -13,7 +14,9 @@ interface IProps {
 const SignOut: React.FC<IProps> = (props): React.ReactElement => (
     <ul>
         <li onClick={props.firebase.doSignOut}>
-            <Link to={ROUTES.SIGN_IN}>Sign Out</Link>
+            <Link component="button">
+                <RouterLink to={ROUTES.SIGN_IN}>Sign Out</RouterLink>
+            </Link>
         </li>
     </ul>
 )

@@ -10,7 +10,7 @@ export const registration = (
 ) => {
     firebase.doCreateUserWithEmailAndPassword(email, password)
         .then(authUser => (
-                firebase.user(authUser.user!.uid)
+            firebase.user(authUser.user!.uid)
                 .set({
                     firstName: firstName,
                     email: email

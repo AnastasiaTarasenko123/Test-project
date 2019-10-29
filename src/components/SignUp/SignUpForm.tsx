@@ -27,11 +27,11 @@ interface IProps {
 
 class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
     value: IStateSignUp = {
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confPassword: "",
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confPassword: '',
         error: null
     };
 
@@ -71,14 +71,14 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
                     value={firstName}
                     margin="normal"
                     variant="outlined"
-                    onChange={this.onChange("firstName")}
+                    onChange={this.onChange('firstName')}
                 />
                 <TextField
                     label="Last Name"
                     value={lastName}
                     margin="normal"
                     variant="outlined"
-                    onChange={this.onChange("lastName")}
+                    onChange={this.onChange('lastName')}
                 />
                 <br />
                 <TextField
@@ -89,7 +89,7 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
                     autoComplete="email"
                     margin="normal"
                     variant="outlined"
-                    onChange={this.onChange("email")}
+                    onChange={this.onChange('email')}
                 />
                 <br />
                 <TextField
@@ -99,7 +99,7 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
                     autoComplete="current-password"
                     margin="normal"
                     variant="outlined"
-                    onChange={this.onChange("password")}
+                    onChange={this.onChange('password')}
                 />
                 <TextField
                     label="Confirm Password"
@@ -108,7 +108,7 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
                     autoComplete="current-password"
                     margin="normal"
                     variant="outlined"
-                    onChange={this.onChange("confPassword")}
+                    onChange={this.onChange('confPassword')}
                 />
                 <br />
                 <br />

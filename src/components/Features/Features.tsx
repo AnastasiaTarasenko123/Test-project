@@ -2,7 +2,7 @@ import React from 'react'
 
 class Features extends React.Component {
     render() {
-        return(
+        return (
             <div>
                 <p>Features</p>
             </div>

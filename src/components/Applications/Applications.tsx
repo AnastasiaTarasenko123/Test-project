@@ -4,7 +4,7 @@ import Firebase from '../../firebase/Firebase'
 import './Applications.scss'
 import { ReadApplication } from '../../interfaces/interfaces'
 import { AuthUserContext } from '../Session/SessionContext'
-import { readApps } from '../../services/appFirebase'
+import { readApp } from '../../services/appFirebase'
 import { Button } from '@material-ui/core'
 import { Link, withRouter } from 'react-router-dom'
 import * as ROUTES from '../../constants/routs'
@@ -31,7 +31,7 @@ class Applications extends React.Component<IProps, IState>{
     }
 
     componentDidMount = () => {
-        readApps(this.props.firebase, (value: ReadApplication[]) => { this.setState({ applications: value }) },
+        readApp(this.props.firebase, '', (value: ReadApplication[]) => { this.setState({ applications: value }) },
             () => { this.setState({ applications: [] }) });
     }
 
@@ -71,7 +71,6 @@ const ApplicationList: React.FC<IListApplications> = ({ applications }) => {
     )
 }
 
-//передати значення апки
 const ApplicationItem: React.FC<any> = ({ application }) => (
     <li>
         <div className="appItem">
@@ -83,11 +82,11 @@ const ApplicationItem: React.FC<any> = ({ application }) => (
             </div>
             <div className="btnContainer">
                 <Button variant="contained" color="primary" className="btnEdit">
-                    <Link to={ROUTES.EDITOR + '/:' + application.uid + '/'}>App Edit</Link>
+                    <Link to={`${ROUTES.EDITOR}/${application.uid}${ROUTES.APP_INFO}`}>App Edit</Link>
                 </Button>
             </div>
         </div>
     </li>
 )
 
-export const Application = compose<IProps, {}>(withRouter, withFirebase)(Applications)
+export const Application = compose<IProps, {}>(withFirebase, withRouter)(Applications)

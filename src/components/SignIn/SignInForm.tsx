@@ -22,8 +22,8 @@ interface IProps {
 
 class SignInFormBase extends React.Component<IProps, IStateSignIn> {
     value: IStateSignIn = {
-        email: "",
-        password: "",
+        email: '',
+        password: '',
         error: null
     };
 
@@ -55,7 +55,7 @@ class SignInFormBase extends React.Component<IProps, IStateSignIn> {
             <form className="test-form" noValidate autoComplete="off" onSubmit={this.onSubmit}>
                 <TextField
                     label="Email"
-                    onChange={this.onChange("email")}
+                    onChange={this.onChange('email')}
                     type="email"
                     autoComplete="email"
                     margin="normal"
@@ -64,7 +64,7 @@ class SignInFormBase extends React.Component<IProps, IStateSignIn> {
                 <br />
                 <TextField
                     label="Password"
-                    onChange={this.onChange("password")}
+                    onChange={this.onChange('password')}
                     type="password"
                     autoComplete="current-password"
                     margin="normal"

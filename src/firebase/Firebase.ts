@@ -22,10 +22,10 @@ class Firebase {
   doSignOut = () => this.auth.signOut();
 
   user = (uid: any) => this.db.ref(`users/${uid}`);
-  users = () => this.db.ref("users");
+  users = () => this.db.ref('users');
 
   application = (uid: any) => this.db.ref(`applications/${uid}`);
-  applications = () => this.db.ref("applications");
+  applications = () => this.db.ref('applications');
 }
 
 export default Firebase

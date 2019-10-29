@@ -1,24 +1,28 @@
 @import '../../constants/style';
 
-.navEditor
-{
-    ul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    li {
-        a {
-            display: block;
-            color: black;
-            text-align: left;
-            padding: 16px 30px;
-            text-decoration: none;
-        }
-        a:hover {
-            background-color: $useColor;
-            color: white;
-        }
+.navEditor {
+    height: 100%;
+
+    ul {
+        width: 100%;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+
+        li {
+            a {
+                display: block;
+                color: black;
+                text-align: left;
+                padding: 16px 30px;
+                text-decoration: none;
+            }
+
+            a:hover {
+                background-color: $useColor;
+                color: white;
+            }
         }
     }
 }

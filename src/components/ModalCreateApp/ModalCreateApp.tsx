@@ -24,12 +24,12 @@ interface IState extends Application {
 }
 
 const updateState: IState = {
-    userID: "",
-    appName: "",
-    picture: "",
-    color: "#000000",
-    description: "",
-    location: "",
+    userID: '',
+    appName: '',
+    picture: '',
+    color: '#000000',
+    description: '',
+    location: '',
     selectedPlace: { lat: 0, lng: 0 },
     isCategories: false,
     isGPS: false,
@@ -50,14 +50,14 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         this.props.modalChange();
         const { appName, picture, color, description, selectedPlace, isCategories, isGPS } = this.state
         const userID = authUser.uid;
-        createApp(this.props.firebase, { userID, appName, picture, color, description, selectedPlace, isCategories, isGPS});
-        this.setState( updateState)
+        createApp(this.props.firebase, { userID, appName, picture, color, description, selectedPlace, isCategories, isGPS });
+        this.setState(updateState)
         event.preventDefault();
     }
 
     nextBlock = () => {
-        var temp: number = Number(this.state.blockActive) + 1;
-        var active: number = Number(this.state.activeNum) + 1;
+        let temp: number = Number(this.state.blockActive) + 1;
+        let active: number = Number(this.state.activeNum) + 1;
         this.setState({
             blockActive: temp,
             activeNum: active
@@ -131,7 +131,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 <div className="radioBtn">
                                     <Radio
                                         checked={this.whichBlockActive() === 0}
-                                        onChange={this.onChange("blockActive")}
+                                        onChange={this.onChange('blockActive')}
                                         value={0}
                                         color="default"
                                         disabled={!(activeNum >= 0)}
@@ -142,7 +142,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 <div className="radioBtn">
                                     <Radio
                                         checked={this.whichBlockActive() === 1}
-                                        onChange={this.onChange("blockActive")}
+                                        onChange={this.onChange('blockActive')}
                                         value={1}
                                         color="default"
                                         disabled={!(activeNum >= 1)}
@@ -153,7 +153,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 <div className="radioBtn">
                                     <Radio
                                         checked={this.whichBlockActive() === 2}
-                                        onChange={this.onChange("blockActive")}
+                                        onChange={this.onChange('blockActive')}
                                         value={2}
                                         color="default"
                                         disabled={!(activeNum >= 2)}
@@ -164,7 +164,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 <div className="radioBtn">
                                     <Radio
                                         checked={this.whichBlockActive() === 3}
-                                        onChange={this.onChange("blockActive")}
+                                        onChange={this.onChange('blockActive')}
                                         value={3}
                                         color="default"
                                         disabled={!(activeNum >= 3)}
@@ -175,7 +175,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 <div className="radioBtn">
                                     <Radio
                                         checked={this.whichBlockActive() === 4}
-                                        onChange={this.onChange("blockActive")}
+                                        onChange={this.onChange('blockActive')}
                                         value={4}
                                         color="default"
                                         disabled={!(activeNum >= 4)}
@@ -189,7 +189,8 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                     <p>Welcome! Let us help you get started!</p>
                                     <TextField
                                         label="Your App Name"
-                                        onChange={this.onChange("appName")}
+                                        onChange={this.onChange('appName')}
+                                        type="text"
                                         margin="normal"
                                         variant="outlined"
                                     />
@@ -201,10 +202,10 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                         <TextField
                                             className="imageInput"
                                             margin="normal"
-                                            onChange={this.onChangeFile("picture")}
+                                            onChange={this.onChangeFile('picture')}
                                             type="file"
                                         />
-                                        <div className={`imgBlock ${(picture !== "") ? `imgActive` : ``}`}>
+                                        <div className={`imgBlock ${(picture !== '') ? `imgActive` : ``}`}>
                                             <img src={picture} alt="app" className="imgModal" />
                                         </div>
                                     </div>
@@ -215,7 +216,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                             className="colorInput"
                                             margin="normal"
                                             value={color}
-                                            onChange={this.onChange("color")}
+                                            onChange={this.onChange('color')}
                                             type="color"
                                         />
                                     </div>
@@ -228,7 +229,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                             multiline
                                             rows="18"
                                             value={description}
-                                            onChange={this.onChange("description")}
+                                            onChange={this.onChange('description')}
                                             margin="normal"
                                             variant="outlined"
                                             className="inputInfo"
@@ -254,7 +255,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                         <p>Include more than one list of categories</p>
                                         <Switch
                                             checked={isCategories}
-                                            onChange={this.onChangeSwitch("isCategories")}
+                                            onChange={this.onChangeSwitch('isCategories')}
                                             value={!isCategories}
                                             color="primary"
                                         />
@@ -264,7 +265,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                         <p>Include a GPS map</p>
                                         <Switch
                                             checked={isGPS}
-                                            onChange={this.onChangeSwitch("isGPS")}
+                                            onChange={this.onChangeSwitch('isGPS')}
                                             value={!isGPS}
                                             color="primary"
                                             className="gpsSwitch"
@@ -273,7 +274,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 </div>
                                 <div className={`blocks preview ${(this.whichBlockActive() === 4) ? `active` : ``}`}>
                                     <h1>{appName}</h1>
-                                    <div className={`imgBlock ${(picture !== "") ? `imgActive` : ``}`}>
+                                    <div className={`imgBlock ${(picture !== '') ? `imgActive` : ``}`}>
                                         <img src={picture} alt="app" className="imgPreview" />
                                     </div>
                                     <div className="tablePreview" >
@@ -293,8 +294,8 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                                 </TableRow>
                                                 <TableRow>
                                                     <TableCell>Features: </TableCell>
-                                                    <TableCell>{this.state.isCategories === true ? "Gategories" : ""} {this.state.isGPS === true ? "GPS" : ""}
-                                                        {this.state.isCategories === false && this.state.isGPS === false ? "none" : ""} </TableCell>
+                                                    <TableCell>{this.state.isCategories === true ? 'Gategories' : ''} {isGPS === true ? 'GPS' : ''}
+                                                        {this.state.isCategories === false && isGPS === false ? 'none' : ''} </TableCell>
                                                 </TableRow>
                                             </TableBody>
                                         </Table>

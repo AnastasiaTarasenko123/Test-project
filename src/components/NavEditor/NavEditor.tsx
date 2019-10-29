@@ -1,36 +1,34 @@
 import React from 'react'
 import * as ROUTES from '../../constants/routs'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { AuthUserContext } from '../Session/SessionContext'
 import { NavigationNonAuth } from '../Navigation/Navigation'
 import './NavEditor.scss'
 
 interface IProps {
-  uid: string
+  appId: string
 }
 
 const NavEditor: React.FC<IProps> = (props) => (
-  <div>
-    <AuthUserContext.Consumer>
-      {authUser => authUser ? <NavigationEditor uid = {props.uid} /> : <NavigationNonAuth />}
-    </AuthUserContext.Consumer>
-  </div>
+  <AuthUserContext.Consumer>
+    {authUser => authUser ? <NavigationEditor appId={props.appId} /> : <NavigationNonAuth />}
+  </AuthUserContext.Consumer>
 );
 
 const NavigationEditor: React.FC<IProps> = (props) => (
   <div className="navEditor">
     <ul>
       <li>
-        <RouterLink to={ROUTES.APP_INFO + '/' + props.uid + '/'}>App Info</RouterLink>
+        <Link to={`${ROUTES.EDITOR}/${props.appId}${ROUTES.APP_INFO}`}>App Info</Link>
       </li>
       <li>
-        <RouterLink to={ROUTES.LISTS + '/' + props.uid + '/'}>Lists</RouterLink>
+        <Link to={`${ROUTES.EDITOR}/${props.appId}${ROUTES.LISTS}`}>Lists</Link>
       </li>
       <li>
-        <RouterLink to={ROUTES.FEATURES + '/' + props.uid + '/'}>Features</RouterLink>
+        <Link to={`${ROUTES.EDITOR}/${props.appId}${ROUTES.FEATURES}`}>Features</Link>
       </li>
     </ul>
   </div>
 );
 
-export default NavEditor
+export default NavEditor 

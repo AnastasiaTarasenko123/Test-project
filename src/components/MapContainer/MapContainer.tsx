@@ -6,26 +6,30 @@ import { LatLng } from '../../interfaces/interfaces'
 
 interface IProps extends MapProps {
     selectedPlace: LatLng,
-    onMapClicked: (selectedPlace:LatLng) => void,
+    onMapClicked: (selectedPlace: LatLng) => void,
 }
 
 interface IState {
-       activeMarker: Marker
+    activeMarker: Marker
 }
 
 export class MapContainer extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            activeMarker: new Marker({position: {lat: this.props.selectedPlace.lat, 
-            lng: this.props.selectedPlace.lng}})
+            activeMarker: new Marker({
+                position: {
+                    lat: this.props.selectedPlace.lat,
+                    lng: this.props.selectedPlace.lng
+                }
+            })
         };
     }
 
     mapClicked = (mapProps: any, map: any, clickEvent: any) => {
-        const {lat, lng} = clickEvent.latLng
-        this.props.onMapClicked({lat: lat(), lng: lng()});
-        this.setState({activeMarker: new Marker({position: {lat, lng}})});
+        const { lat, lng } = clickEvent.latLng
+        this.props.onMapClicked({ lat: lat(), lng: lng() });
+        this.setState({ activeMarker: new Marker({ position: { lat, lng } }) });
     }
 
     render() {

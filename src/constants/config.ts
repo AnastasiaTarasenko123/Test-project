@@ -9,3 +9,5 @@ export const config = {
 }
 
 export const API_KEY = 'AIzaSyAOaxRNcyr2A29H3Y8mS1YWQRDdEeRrycI'
+
+export const URL_MAP = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/Geocode/json?key=${API_KEY}`

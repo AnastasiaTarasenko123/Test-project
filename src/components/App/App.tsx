@@ -4,19 +4,25 @@ import Navigation from '../Navigation/Navigation'
 import { SignUpPage } from '../SignUp/SignUpPage'
 import { SignInPage } from '../SignIn/SignInPage'
 import Dashboard from '../Dashboard/Dashboard'
-import Editor from '../Editor/Editor'
 import * as ROUTES from '../../constants/routs'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import { withAuthentication } from '../Session/WithAuthentication'
 import './App.scss'
+import AppInfo from '../AppInfo/AppInfo'
+import Lists from '../Lists/Lists'
+import Features from '../Features/Features'
+import Editor from '../Editor/Editor'
 
 const App: React.FC = () => (
   <Router>
-      <Navigation />
-      <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-      <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
-      <Route path={ROUTES.DASHBOARD} component={Dashboard} />
-      <Route exect path={ROUTES.EDITOR + '/:uid'} component={Editor} /> 
+    <Navigation />
+    <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+    <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
+    <Route path={ROUTES.DASHBOARD} component={Dashboard} />
+    <Route path={`${ROUTES.EDITOR}/:appId`} component={Editor} />
+    <Route path={`${ROUTES.EDITOR}/:appId${ROUTES.APP_INFO}`} component={AppInfo} />
+    <Route path={`${ROUTES.EDITOR}/:appId${ROUTES.LISTS}`} component={Lists} />
+    <Route path={`${ROUTES.EDITOR}/:appId${ROUTES.FEATURES}`} component={Features} />
   </Router>
 );
 
