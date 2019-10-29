@@ -1,11 +1,11 @@
 @import '../../constants/style';
 
-.contentAppInfo {
+.content-app-info {
     background-color: $colorBgModal;
     width: 85%;
     display: inline-block;
 
-    .borderApp {
+    .border-app {
         border-bottom: 1px solid $useColor;
         color: $useColor;
         background-color: white;
@@ -13,30 +13,37 @@
 
         p {
             margin: 0;
-            padding-top: 15px;
+            padding: 1rem;
         }
     }
 
-    .appImgContent {
+    .content {
+        background-color: white;
+        display: flex;
         margin: auto;
         width: 95%;
-        margin-top: 30px;
-        height: 700px;
-        background-color: white;
+        margin-top: 2rem;
+    }
+    .content-app-img {
+        height: 35rem;
+        padding: 1rem 5rem;
 
-        .imgContent {
+        .img {
             width: 50%;
-            float: left;
 
-            .appImg {
+            .app-img {
                 width: 50%;
-                margin: 10%;
+
             }
         }
 
-        .chooseColorContent {
+        .choose-color {
             width: 50%;
-            float: right;
+
+            .color-input {
+                width: 50%;
+            }
+
         }
     }
 }

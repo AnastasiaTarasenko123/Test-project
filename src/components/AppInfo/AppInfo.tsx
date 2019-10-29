@@ -42,25 +42,53 @@ class AppInfo extends React.Component<IProps, IState> {
     render() {
         const { myApp } = this.state;
         return (
-            <div className="contentAppInfo">
-                <div className="borderApp">
+            <div className="content-app-info">
+                <div className="border-app">
                     <p>App Info</p>
                 </div>
-                <div className="appImgContent">
-                    <div className="imgContent">
-                        {myApp && <img src={myApp!.picture} alt="app" className="appImg" />}
+                <div className="content content-app-img">
+                    <div className="img">
+                        <p>App Image</p>
+                        {myApp && <img src={myApp!.picture} alt="app" className="app-img" />}
                     </div>
-                    <div className="chooseColorContent">
+                    <div className="choose-color">
                         <p>Accent Color</p>
+                        <div className="color">
+                            <TextField
+                                label="Choose your color"
+                                className="color-input"
+                                margin="normal"
+                                value={myApp && myApp.color}
+                                //onChange={this.onChange("color")}
+                                type="color"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="content">
+                    <div>
                         <TextField
-                            label="Choose your color"
-                            className="colorInput"
+                            //  onChange={this.onChange('appName')}
+                            type="text"
                             margin="normal"
-                            //value={color}
-                            //onChange={this.onChange("color")}
-                            type="color"
+                            variant="outlined"
+                            value={myApp && myApp.appName}
                         />
                     </div>
+                    <div>
+                        <TextField
+                            multiline
+                            rows="18"
+                            value={myApp &&   myApp.description}
+                            //  onChange={this.onChange('description')}
+                            margin="normal"
+                            variant="outlined"
+                            className="inputInfo"
+                        />
+                    </div>
+                </div>
+                <div>
+
                 </div>
             </div>
         );
