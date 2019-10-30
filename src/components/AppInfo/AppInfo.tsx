@@ -52,13 +52,17 @@ class AppInfo extends React.Component<IProps, IState> {
     }
 
     onChangeFile = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { uid } = this.state;
         e.target.files &&
             readFileASync(e.target.files[0]).then(v => {
                 this.setState(prev => ({
                     ...prev, [key]: v
                 }))
-            })
+                updateApp(this.props.firebase, uid, key, v);
+            }
+            )
     }
+
 
     onMapClicked = async (place: LatLng) => {
         // this.setState({
@@ -95,6 +99,12 @@ class AppInfo extends React.Component<IProps, IState> {
                     <div className="img in-content-app">
                         <p>App Image</p>
                         {<img src={picture} alt="app" className="field-content-img" />}
+                        <br />
+                        <input
+                            className="imageInput"
+                            onChange={this.onChangeFile('picture')}
+                            type="file"
+                        />
                     </div>
                     <div className="choose-color in-content-app">
                         <p>Accent Color</p>
@@ -128,7 +138,7 @@ class AppInfo extends React.Component<IProps, IState> {
                             multiline
                             rows="5"
                             value={description}
-                            //  onChange={this.onChange('description')}
+                            onChange={this.onChange('description')}
                             margin="normal"
                             variant="outlined"
                             className="field-content-app"
