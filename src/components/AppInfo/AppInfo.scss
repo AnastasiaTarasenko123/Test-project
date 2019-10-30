@@ -19,31 +19,42 @@
 
     .content {
         background-color: white;
+        border-radius: 1rem;
         display: flex;
         margin: auto;
         width: 95%;
         margin-top: 2rem;
-    }
-    .content-app-img {
-        height: 35rem;
         padding: 1rem 5rem;
 
-        .img {
+        .in-content-app {
             width: 50%;
 
-            .app-img {
-                width: 50%;
+            .field-content-app {
+                width: 90%;
+            }
 
+            .field-content-img {
+                width: 50%;
             }
         }
+    }
 
-        .choose-color {
-            width: 50%;
+    .content-app-img {
+        height: 30rem;
+    }
 
-            .color-input {
-                width: 50%;
-            }
+    .content-app-name {
+        height: 20rem;
+        padding-top: 3rem;
+    }
 
+    .content-location {
+        padding-top: 2.5rem;
+        height: 25rem;
+        margin-bottom: 2.5rem;
+        .field-content-latlng {
+            width: 90%;
+            //margin-right: 2rem;
         }
     }
 }
