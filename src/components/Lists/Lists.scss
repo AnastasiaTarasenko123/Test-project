@@ -1,0 +1,27 @@
+.content-lists {
+    display: inline-block;
+    width: 85%;
+
+    .border-lists {
+        display: flex;
+        height: 90px;
+        padding: 1rem;
+
+        .border-list {
+            width: 70%;
+        }
+
+        .category {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .border-item {
+            width: 10%;
+        }
+
+    }
+}
