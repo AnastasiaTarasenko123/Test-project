@@ -2,16 +2,12 @@ import React from 'react'
 import './AppInfo.scss'
 import { RouteComponentProps, withRouter } from 'react-router'
 import Firebase from '../../firebase/Firebase'
-import { ReadApplication, LatLng } from '../../interfaces/interfaces'
+import { ReadApplication, LatLng, RouteParams } from '../../interfaces/interfaces'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import { readApp, updateApp } from '../../services/appFirebase'
 import { TextField } from '@material-ui/core'
 import MapContainer from '../MapContainer/MapContainer'
 import { readFileASync } from '../../services/readFile'
-
-interface RouteParams {
-    appId: string
-}
 
 interface IProps extends RouteComponentProps<RouteParams> {
     firebase: Firebase
@@ -63,19 +59,7 @@ class AppInfo extends React.Component<IProps, IState> {
             )
     }
 
-
     onMapClicked = async (place: LatLng) => {
-        // this.setState({
-        //     selectedPlace: place
-        // });
-        // const result = await codePlace(place)
-        // if (!('message' in result)) {
-        //     this.setState({
-        //         location: result
-        //     });
-        // } else {
-        //     console.log(result.message);
-        // }
     }
 
     componentDidMount() {
@@ -89,7 +73,7 @@ class AppInfo extends React.Component<IProps, IState> {
     }
 
     render() {
-        const { appName, picture, color, description, selectedPlace, isCategories, isGPS } = this.state;
+        const { appName, picture, color, description, selectedPlace } = this.state;
         return (
             <div className="content-app-info">
                 <div className="border-app">
@@ -160,8 +144,8 @@ class AppInfo extends React.Component<IProps, IState> {
                         <div className="lat-lng">
                             <label>Lat Address</label>
                             <TextField
-                                //  onChange={this.onChange('appName')}
-                                type="text"
+                                //   onChange={this.onChange('selectedPlace')}
+                                type="number"
                                 margin="normal"
                                 variant="outlined"
                                 value={selectedPlace.lat}
@@ -170,10 +154,10 @@ class AppInfo extends React.Component<IProps, IState> {
                             <br />
                             <label>Lng Address</label>
                             <TextField
-                                //  onChange={this.onChange('appName')}
+                                //  onChange={this.onChange('selectedPlace')}
+                                type="number"
                                 margin="normal"
                                 variant="outlined"
-                                //  value={myApp && myApp.appName}
                                 className="field-content-latlng"
                                 value={selectedPlace.lng}
                             />

@@ -17,3 +17,7 @@ export interface Application {
 export interface ReadApplication extends Application {
     uid: string;
 }
+
+export interface RouteParams {
+    appId: string
+}

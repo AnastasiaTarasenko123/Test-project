@@ -4,9 +4,9 @@
     background-color: $colorBgModal;
     width: 85%;
     display: inline-block;
+    border-left: 1px solid $useColor;
 
     .border-app {
-        border-bottom: 1px solid $useColor;
         color: $useColor;
         background-color: white;
         height: 47px;
@@ -52,6 +52,7 @@
         padding-top: 2.5rem;
         height: 25rem;
         margin-bottom: 2.5rem;
+
         .field-content-latlng {
             width: 90%;
             //margin-right: 2rem;

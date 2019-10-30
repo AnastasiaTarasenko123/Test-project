@@ -1,0 +1,44 @@
+@import '../../constants/style';
+
+.content-features {
+    background-color: $colorBgModal;
+    width: 85%;
+    height: 35rem;
+    display: inline-block;
+    border-left: 1px solid $useColor;
+    border-bottom: 1px solid $useColor;
+
+    .border-app {
+        color: $useColor;
+        background-color: white;
+        height: 47px;
+
+        p {
+            margin: 0;
+            padding: 1rem;
+        }
+    }
+
+    .main-features {
+        background-color: white;
+        border-radius: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: auto;
+        width: 95%;
+        margin-top: 2rem;
+        padding: 1rem 5rem;
+        height: 28rem;
+
+        .choose-features {
+            width: 80%;
+        }
+
+        .features-active {
+            width: 20%;
+        }
+
+    }
+}
