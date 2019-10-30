@@ -4,9 +4,10 @@ import { RouteComponentProps, withRouter } from 'react-router'
 import Firebase from '../../firebase/Firebase'
 import { ReadApplication, LatLng } from '../../interfaces/interfaces'
 import { withFirebase } from '../../firebase/FirebaseContext'
-import { readApp } from '../../services/appFirebase'
+import { readApp, updateApp } from '../../services/appFirebase'
 import { TextField } from '@material-ui/core'
 import MapContainer from '../MapContainer/MapContainer'
+import { readFileASync } from '../../services/readFile'
 
 interface RouteParams {
     appId: string
@@ -16,18 +17,47 @@ interface IProps extends RouteComponentProps<RouteParams> {
     firebase: Firebase
 }
 
-interface IState {
-    appId: string,
-    myApp: ReadApplication | null
+interface IState extends ReadApplication {
 }
 
 class AppInfo extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            appId: this.props.match.params.appId || '',
-            myApp: null
+            uid: this.props.match.params.appId || '',
+            appName: '',
+            picture: '',
+            color: '#000000',
+            description: '',
+            selectedPlace: { lat: 0, lng: 0 },
+            isCategories: false,
+            isGPS: false,
+            userID: ''
         }
+    }
+
+    onChange = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        const { uid } = this.state;
+        this.setState(prev => ({
+            ...prev, [key]: value
+        }));
+        updateApp(this.props.firebase, uid, key, value);
+    }
+
+    onChangeSwitch = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState(prev => ({
+            ...prev, [key]: !this.state[key]
+        }))
+    }
+
+    onChangeFile = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.target.files &&
+            readFileASync(e.target.files[0]).then(v => {
+                this.setState(prev => ({
+                    ...prev, [key]: v
+                }))
+            })
     }
 
     onMapClicked = async (place: LatLng) => {
@@ -45,9 +75,9 @@ class AppInfo extends React.Component<IProps, IState> {
     }
 
     componentDidMount() {
-        const { appId } = this.state;
-        readApp(this.props.firebase, appId, (value: ReadApplication) => { this.setState({ myApp: value }) },
-            () => { this.setState({ myApp: null }) });
+        const { uid } = this.state;
+        readApp(this.props.firebase, uid, (value: ReadApplication) => { this.setState({ ...value }) },
+            () => { });
     }
 
     componentWillUnmoun() {
@@ -55,8 +85,7 @@ class AppInfo extends React.Component<IProps, IState> {
     }
 
     render() {
-        const { myApp } = this.state;
-        const temp: LatLng = { lat: 4, lng: 5 };
+        const { appName, picture, color, description, selectedPlace, isCategories, isGPS } = this.state;
         return (
             <div className="content-app-info">
                 <div className="border-app">
@@ -65,7 +94,7 @@ class AppInfo extends React.Component<IProps, IState> {
                 <div className="content content-app-img">
                     <div className="img in-content-app">
                         <p>App Image</p>
-                        {myApp && <img src={myApp!.picture} alt="app" className="field-content-img" />}
+                        {<img src={picture} alt="app" className="field-content-img" />}
                     </div>
                     <div className="choose-color in-content-app">
                         <p>Accent Color</p>
@@ -74,8 +103,8 @@ class AppInfo extends React.Component<IProps, IState> {
                                 label="Choose your color"
                                 className="field-content-img"
                                 margin="normal"
-                                value={myApp && myApp.color}
-                                //onChange={this.onChange("color")}
+                                value={color}
+                                onChange={this.onChange("color")}
                                 type="color"
                             />
                         </div>
@@ -85,11 +114,11 @@ class AppInfo extends React.Component<IProps, IState> {
                     <div className="in-content-app">
                         <label>App Name</label>
                         <TextField
-                            //  onChange={this.onChange('appName')}
+                            onChange={this.onChange('appName')}
                             type="text"
                             margin="normal"
                             variant="outlined"
-                            value={myApp && myApp.appName}
+                            value={appName}
                             className="field-content-app"
                         />
                     </div>
@@ -98,7 +127,7 @@ class AppInfo extends React.Component<IProps, IState> {
                         <TextField
                             multiline
                             rows="5"
-                            value={myApp && myApp.description}
+                            value={description}
                             //  onChange={this.onChange('description')}
                             margin="normal"
                             variant="outlined"
@@ -125,10 +154,10 @@ class AppInfo extends React.Component<IProps, IState> {
                                 type="text"
                                 margin="normal"
                                 variant="outlined"
-                                value={myApp && myApp.selectedPlace.lat}
+                                value={selectedPlace.lat}
                                 className="field-content-latlng"
                             />
-                            <br/>
+                            <br />
                             <label>Lng Address</label>
                             <TextField
                                 //  onChange={this.onChange('appName')}
@@ -136,12 +165,12 @@ class AppInfo extends React.Component<IProps, IState> {
                                 variant="outlined"
                                 //  value={myApp && myApp.appName}
                                 className="field-content-latlng"
-                                value={myApp && myApp.selectedPlace.lng}
+                                value={selectedPlace.lng}
                             />
                         </div>
                     </div>
                     <div className="in-content-app">
-                        <MapContainer onMapClicked={this.onMapClicked} selectedPlace={temp} />
+                        <MapContainer onMapClicked={this.onMapClicked} selectedPlace={selectedPlace} />
                     </div>
                 </div >
                 <div>

@@ -35,4 +35,15 @@ export const readApp = (
     });
 }
 
+export const updateApp = (
+    firebase: Firebase,
+    uid: string,
+    key: any,
+    value: any
+) => {
+    firebase.application(uid).update(
+        { [key]: value }
+    );
+};
+
 
