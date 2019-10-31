@@ -1,0 +1,24 @@
+.content-stop {
+    width: 100%;
+
+    .stop-information {
+        display: flex;
+
+        .img-picture {
+            width: 50%;
+            padding: 1rem;
+
+            .input-field-stop {
+                width: 100%;
+            }
+        }
+
+        .stop-description {
+            width: 50%;
+        }
+    }
+
+    .stop-map {
+        width: 100%;
+    }
+}

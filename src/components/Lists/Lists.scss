@@ -1,27 +1,33 @@
+@import '../../constants/style';
+
 .content-lists {
     display: inline-block;
     width: 85%;
 
     .border-lists {
         display: flex;
-        height: 90px;
-        padding: 1rem;
+        height: 60px;
+        padding: 0.5rem;
+        color: $useColor;
 
         .border-list {
-            width: 70%;
+            width: 80%;
         }
 
         .category {
             display: none;
         }
 
-        .active {
-            display: block;
-        }
-
         .border-item {
             width: 10%;
         }
+    }
 
+    .modals {
+        display: none;
+    }
+
+    .active {
+        display: block;
     }
 }

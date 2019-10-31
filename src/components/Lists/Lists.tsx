@@ -1,17 +1,19 @@
 import React from 'react'
 import './Lists.scss'
-import { Button } from '@material-ui/core'
+import { Button, Modal } from '@material-ui/core'
 import { RouteComponentProps, withRouter } from 'react-router'
 import { RouteParams, ReadApplication } from '../../interfaces/interfaces'
 import Firebase from '../../firebase/Firebase'
 import { readApp } from '../../services/appFirebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
+import ModalStops from '../ModalStops/ModalStops'
 
 interface IProps extends RouteComponentProps<RouteParams> {
     firebase: Firebase
 }
 
 interface IState extends ReadApplication {
+    openModal: boolean,
 }
 
 class Lists extends React.Component<IProps, IState> {
@@ -26,7 +28,8 @@ class Lists extends React.Component<IProps, IState> {
             selectedPlace: { lat: 0, lng: 0 },
             isCategories: false,
             isGPS: false,
-            userID: ''
+            userID: '',
+            openModal: false
         }
     }
 
@@ -39,9 +42,17 @@ class Lists extends React.Component<IProps, IState> {
     componentWillUnmoun() {
         this.props.firebase.db.ref().off();
     }
-    
+
+    handleOpen = () => {
+        this.setState({ openModal: true });
+    };
+
+    handleClose = () => {
+        this.setState({ openModal: false });
+    };
+
     render() {
-        const { isCategories } = this.state;
+        const { openModal, uid } = this.state;
         return (
             <div className="content-lists">
                 <div className="border-lists">
@@ -52,11 +63,22 @@ class Lists extends React.Component<IProps, IState> {
                         <ul></ul>
                     </div>
                     <div className="border-item">
-                        <Button variant="contained" color="primary" type="submit">+ New Stop</Button>
+                        <Button variant="contained" color="primary" onClick={this.handleOpen}>+ New Stop</Button>
                     </div>
-                    <div className={`border-item category ${isCategories ? `active` : ``}`} >
-                        <Button variant="contained" color="primary" type="submit">+ New Category</Button>
-                    </div>
+                </div>
+                {/* чомусь стилі добре не підключаються, потім ще подивлюсь
+                    <Modal
+                        open={this.state.openModal}
+                        onClose={this.handleClose}
+                        className="paper"
+                    >
+                        <div>
+                            <h2>Text in a modal</h2>
+                            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+                        </div>
+                    </Modal> */}
+                <div className={`modals ${openModal ? `active` : ``}`}>
+                    <ModalStops modalChange={this.handleClose.bind(this)} appID={uid} />
                 </div>
             </div>
         );

@@ -21,3 +21,14 @@ export interface ReadApplication extends Application {
 export interface RouteParams {
     appId: string
 }
+
+export interface IStop {
+    uid?: string,
+    appID: string,
+    categoryID?: string,
+    title: string,
+    description: string,
+    picture: string,
+    videoURL: string,
+    place?: LatLng
+}

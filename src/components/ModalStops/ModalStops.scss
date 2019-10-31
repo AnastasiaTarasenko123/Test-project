@@ -1,0 +1,35 @@
+@import '../../constants/style';
+
+.modal-window {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: $colorBgModal;
+
+    .modal-block {
+        position: relative;
+        height: 90vh;
+        width: 80vw;
+        background: white;
+        margin: 3% auto;
+        border-radius: 10px;
+        .btn-close {
+            position: $positionButton;
+            top: 2%;
+            right: 1%;
+        }
+        .modal-content {
+            width: 100%;
+            display: flex;
+            .navigation-stops {
+                width: 20%;
+            }
+            .details {
+                width: 80%;
+            }
+        }
+    }
+}
