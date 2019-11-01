@@ -25,31 +25,64 @@
             color: white;
         }
 
-        .border-modal {
-            background-color: white;
-            margin: 4rem 3rem;
-            height: 4rem;
-            border: 1px solid $useColor;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
+        .content-stop {
+            width: 100%;
+            text-align: center;
 
-            .border-block {
-                width: 50%;
+            h2 {
+                color: white;
+            }
+
+            .stop-information {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 3rem;
                 padding: 3rem;
+                border: 1px solid $useColor;
+                border-radius: 10px;
+                background-color: white;
 
-                p {
-                    color: $useColor;
+                .stop-block {
+                    width: 50%;
+                    text-align: center;
+                    margin-right: 3rem;
+                }
+
+                .img-picture {
+                    .input-field-stop {
+                        width: 85%;
+                    }
+
+                    .img-block {
+                        display: none;
+                    }
+
+                    .img-active {
+                        display: block;
+                    }
+
+                    .img-modal {
+                        margin-top: 3vh;
+                        width: 50%;
+                    }
+                }
+
+                .stop-description {
+                    .description-modal {
+                        width: 85%;
+                    }
+                }
+
+                .stop-map {
+                    width: 95%;
                 }
             }
 
-            .btn-block {
-                text-align: right;
+            .send-stop {
+                text-align: center;
+                margin: 3rem;
             }
-        }
-
-        .modal-content {
-            width: 100%;
         }
     }
 }

@@ -1,4 +1,3 @@
-
 @import '../../constants/style';
 
 .modal-window-category {
@@ -22,6 +21,20 @@
             position: $positionButton;
             top: 2%;
             right: 1%;
+        }
+
+        .category {
+            text-align: center;
+            padding: 1rem;
+            color: $useColor;
+
+            .input-field {
+                width: 80%;
+            }
+
+            .btn-add-category {
+                margin-top: 2rem;
+            }
         }
     }
 }

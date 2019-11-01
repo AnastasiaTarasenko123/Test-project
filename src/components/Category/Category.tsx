@@ -44,7 +44,7 @@ class Category extends React.Component<IProps, IState> {
         const { categoryName, description } = this.state;
         return (
             <div className="category">
-                <h2>New Category</h2>
+                <h2>Category</h2>
                 <form onSubmit={event => this.addCategory(event)}>
                     <TextField
                         margin="normal"
