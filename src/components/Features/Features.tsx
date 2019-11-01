@@ -4,7 +4,7 @@ import { Switch } from '@material-ui/core'
 import { RouteParams, ReadApplication } from '../../interfaces/interfaces'
 import Firebase from '../../firebase/Firebase'
 import { RouteComponentProps, withRouter } from 'react-router'
-import { readApp, updateApp } from '../../services/appFirebase'
+import { readApp, updateApp } from '../../services/itemFirebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 
 interface IProps extends RouteComponentProps<RouteParams> {

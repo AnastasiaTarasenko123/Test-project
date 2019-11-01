@@ -2,10 +2,17 @@ import Firebase from '../firebase/Firebase'
 import { Application, ReadApplication } from '../interfaces/interfaces'
 
 
-export const createApp = (firebase: Firebase, app: Application) => {
-    firebase.applications().push({
-        ...app
-    })
+export const createItem = (nameItem: string, firebase: Firebase, item: any) => {
+    let ref = null;
+    switch (nameItem) {
+        case 'applications': ref = firebase.applications(); break;
+        case 'stops': ref = firebase.stops(); break;
+    }
+
+    if (ref !== null)
+        ref.push({
+            ...item
+        })
 }
 
 export const readApp = (

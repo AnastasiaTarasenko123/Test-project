@@ -14,13 +14,14 @@
         height: 55rem;
         overflow-y: auto;
         width: 80vw;
-        background: white;
+        background: $modalStops;
         margin: 3% auto;
         border-radius: 10px;
         .btn-close {
             position: $positionButton;
             top: 2%;
             right: 1%;
+            color: white;
         }
         .modal-content {
             width: 100%;

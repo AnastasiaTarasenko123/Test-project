@@ -1,20 +1,27 @@
+@import '../../constants/style';
+
 .content-stop {
     width: 100%;
 
     .stop-information {
         display: flex;
-        padding: 1rem;
         align-items: center;
         justify-content: center;
+        margin: 3rem;
+        padding: 3rem;
+        border: 1px solid $useColor;
+        border-radius: 10px;
+        background-color: white;
 
         .stop-block {
             width: 50%;
             text-align: center;
+            margin-right: 3rem;
         }
 
         .img-picture {
             .input-field-stop {
-                width: 90%;
+                width: 85%;
             }
 
             .img-block {
@@ -38,7 +45,12 @@
         }
 
         .stop-map {
-            width: 90%;
+            width: 95%;
         }
+    }
+
+    .send-stop {
+        text-align: center;
+        margin: 3rem;
     }
 }

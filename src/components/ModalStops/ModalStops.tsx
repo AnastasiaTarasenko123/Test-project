@@ -3,6 +3,7 @@ import './ModalStops.scss'
 import { Button } from '@material-ui/core'
 import Stop from '../Stop/Stop'
 import InputMap from '../input-components/InputMap/InputMap';
+import { IStop } from '../../interfaces/interfaces';
 
 interface IProps {
     modalChange: () => void,
@@ -31,10 +32,10 @@ class ModalStops extends React.Component<IProps, IState> {
                                 <p>Category</p>
                             </div>
                             <div className="stops-details">
-                                <Stop appID={appID} />
+                                <Stop appID={appID} modalChange={this.props.modalChange}/>
                             </div>
                     </div>
-                    <Button color="primary" className="btn btn-close" onClick={this.props.modalChange}>X</Button>
+                    <Button className="btn btn-close" onClick={this.props.modalChange}>X</Button>
                 </div>
             </div>
         );

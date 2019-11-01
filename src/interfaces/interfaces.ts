@@ -23,12 +23,12 @@ export interface RouteParams {
 }
 
 export interface IStop {
-    uid?: string,
     appID: string,
-    categoryID?: string,
+    categoryID: string,
     title: string,
     description: string,
     picture: string,
     videoURL: string,
     place: LatLng
 }
+

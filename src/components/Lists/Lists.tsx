@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core'
 import { RouteComponentProps, withRouter } from 'react-router'
 import { RouteParams, ReadApplication } from '../../interfaces/interfaces'
 import Firebase from '../../firebase/Firebase'
-import { readApp } from '../../services/appFirebase'
+import { readApp } from '../../services/itemFirebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import ModalStops from '../ModalStops/ModalStops'
 

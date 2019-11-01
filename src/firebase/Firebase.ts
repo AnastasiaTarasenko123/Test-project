@@ -26,6 +26,9 @@ class Firebase {
 
   application = (uid: any) => this.db.ref(`applications/${uid}`);
   applications = () => this.db.ref('applications');
+
+  stop = (uid: any) => this.db.ref(`stop/${uid}`);
+  stops = () => this.db.ref('stops');
 }
 
 export default Firebase
