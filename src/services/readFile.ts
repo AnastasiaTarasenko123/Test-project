@@ -7,3 +7,4 @@ export const readFileASync = (file: File) => (
         reader.readAsDataURL(file)
     })
 )
+

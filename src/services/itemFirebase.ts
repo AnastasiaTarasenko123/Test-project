@@ -16,6 +16,7 @@ export const createItem = (nameItem: string, firebase: Firebase, item: any) => {
         })
 }
 
+//додати, щоб читало категорії
 export const readItem = (
     firebase: Firebase,
     appId: string,
@@ -23,11 +24,7 @@ export const readItem = (
     successfunction?: (result: any) => void,
     emptyfunction?: () => void) => {
     let ref: firebase.database.Reference = firebase.db.ref().child(child);
-    let ordered: firebase.database.Query = ref.orderByKey();
-    switch (child) {
-        case 'applications': ordered = appId === '' ? ref.orderByChild('userID') : ref.orderByKey().equalTo(appId);
-        case 'categories': ordered = ref.orderByChild('appID').equalTo(appId);
-    }
+    let ordered = appId === '' ? ref.orderByChild('userID') : ref.orderByKey().equalTo(appId);
     ordered.on('value', snapshot => {
         const appObject = snapshot.val();
         if (appObject) {
@@ -61,3 +58,8 @@ export const updateApp = (
 };
 
 
+// let ordered: firebase.database.Query = ref.orderByKey();
+// switch (child) {
+//     case 'applications': ordered = appId === '' ? ref.orderByChild('userID') : ref.orderByKey().equalTo(appId);
+//     case 'categories': ordered = ref.orderByChild('appID').equalTo(appId);
+// }
