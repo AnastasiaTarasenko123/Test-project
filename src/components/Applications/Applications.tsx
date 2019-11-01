@@ -4,7 +4,7 @@ import Firebase from '../../firebase/Firebase'
 import './Applications.scss'
 import { ReadApplication } from '../../interfaces/interfaces'
 import { AuthUserContext } from '../Session/SessionContext'
-import { readApp } from '../../services/itemFirebase'
+import { readItem } from '../../services/itemFirebase'
 import { Button } from '@material-ui/core'
 import { Link, withRouter } from 'react-router-dom'
 import * as ROUTES from '../../constants/routs'
@@ -31,7 +31,7 @@ class Applications extends React.Component<IProps, IState>{
     }
 
     componentDidMount = () => {
-        readApp(this.props.firebase, '', (value: ReadApplication[]) => { this.setState({ applications: value }) },
+        readItem(this.props.firebase, '', 'applications', (value: ReadApplication[]) => { this.setState({ applications: value }) },
             () => { this.setState({ applications: [] }) });
     }
 

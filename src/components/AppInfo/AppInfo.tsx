@@ -4,7 +4,7 @@ import { RouteComponentProps, withRouter } from 'react-router'
 import Firebase from '../../firebase/Firebase'
 import { ReadApplication, LatLng, RouteParams } from '../../interfaces/interfaces'
 import { withFirebase } from '../../firebase/FirebaseContext'
-import { readApp, updateApp } from '../../services/itemFirebase'
+import { readItem, updateApp } from '../../services/itemFirebase'
 import { TextField } from '@material-ui/core'
 import { readFileASync } from '../../services/readFile'
 import InputMap from '../input-components/InputMap/InputMap'
@@ -69,7 +69,7 @@ class AppInfo extends React.Component<IProps, IState> {
     
     componentDidMount() {
         const { uid } = this.state;
-        readApp(this.props.firebase, uid, (value: ReadApplication) => { this.setState({ ...value }) },
+        readItem(this.props.firebase, uid, 'applications', (value: ReadApplication) => { this.setState({ ...value }) },
             () => { });
     }
 

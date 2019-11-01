@@ -16,13 +16,18 @@ export const createItem = (nameItem: string, firebase: Firebase, item: any) => {
         })
 }
 
-export const readApp = (
+export const readItem = (
     firebase: Firebase,
     appId: string,
+    child: string,
     successfunction?: (result: any) => void,
     emptyfunction?: () => void) => {
-    let ref: firebase.database.Reference = firebase.db.ref().child('applications');
-    let ordered = appId === '' ? ref.orderByChild('userID') : ref.orderByKey().equalTo(appId);
+    let ref: firebase.database.Reference = firebase.db.ref().child(child);
+    let ordered: firebase.database.Query = ref.orderByKey();
+    switch (child) {
+        case 'applications': ordered = appId === '' ? ref.orderByChild('userID') : ref.orderByKey().equalTo(appId);
+        case 'categories': ordered = ref.orderByChild('appID').equalTo(appId);
+    }
     ordered.on('value', snapshot => {
         const appObject = snapshot.val();
         if (appObject) {
@@ -31,6 +36,7 @@ export const readApp = (
                 uid: key,
             }
             ));
+            console.log(appList);
             if (appList !== undefined) {
                 if (appList.length === 1)
                     successfunction && successfunction(appList[0]);

@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core'
 import { RouteComponentProps, withRouter } from 'react-router'
 import { RouteParams, ReadApplication } from '../../interfaces/interfaces'
 import Firebase from '../../firebase/Firebase'
-import { readApp } from '../../services/itemFirebase'
+import { readItem } from '../../services/itemFirebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import ModalStops from '../ModalStops/ModalStops'
 import ModalCategory from '../ModalCategory/ModalCategory'
@@ -38,7 +38,7 @@ class Lists extends React.Component<IProps, IState> {
 
     componentDidMount() {
         const { uid } = this.state;
-        readApp(this.props.firebase, uid, (value: ReadApplication) => { this.setState({ ...value }) },
+        readItem(this.props.firebase, uid, 'applications', (value: ReadApplication) => { this.setState({ ...value }) },
             () => { });
     }
 

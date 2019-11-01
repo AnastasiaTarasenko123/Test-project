@@ -1,11 +1,11 @@
 import React from 'react'
 import './ModalStops.scss'
-import { Button, TextField } from '@material-ui/core'
+import { Button, TextField, FormControl, Select, InputLabel, MenuItem } from '@material-ui/core'
 import InputMap from '../input-components/InputMap/InputMap'
-import { IStop, LatLng } from '../../interfaces/interfaces'
+import { IStop, LatLng, IReadCategory } from '../../interfaces/interfaces'
 import Firebase from '../../firebase/Firebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
-import { createItem } from '../../services/itemFirebase'
+import { createItem, readItem } from '../../services/itemFirebase'
 import { readFileASync } from '../../services/readFile'
 
 interface IProps {
@@ -15,7 +15,9 @@ interface IProps {
 }
 
 interface IState extends IStop {
-
+    categoryName: string,
+    categoryDescription: string,
+    categories: IReadCategory[]
 }
 
 class ModalStops extends React.Component<IProps, IState> {
@@ -28,8 +30,18 @@ class ModalStops extends React.Component<IProps, IState> {
             picture: '',
             videoURL: '',
             categoryID: '',
-            place: { lat: 0, lng: 0 }
+            place: { lat: 0, lng: 0 },
+            categoryName: 'Uncategorized',
+            categoryDescription: '',
+            categories: []
         }
+    }
+
+    componentDidMount() {
+        const { appID } = this.props;
+        readItem(this.props.firebase, appID, 'categories', (value: IReadCategory[]) => { this.setState({ categories: value }) },
+            () => { });
+        console.log(this.state.categories);
     }
 
     onChange = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,13 +74,49 @@ class ModalStops extends React.Component<IProps, IState> {
     }
 
     render() {
-        const { title, picture, videoURL, description, place } = this.state;
+        const { title, picture, videoURL, description, place, categoryName, categoryDescription} = this.state;
         return (
             <div className="modal-window">
                 <div className="modal-block">
                     <div className="content-stop">
                         <form onSubmit={event => this.addStop(event)}>
                             <h2>Stop</h2>
+                            <div className="stop-information">
+                                <div className="details-category">
+                                    <TextField
+                                        margin="normal"
+                                        type="text"
+                                        className="input-field-name"
+                                        value={categoryName}
+                                        label="Category Name"
+                                    />
+                                    <br />
+                                    <TextField
+                                        label="Stop Description"
+                                        multiline
+                                        rows="2"
+                                        value={categoryDescription}
+                                        margin="normal"
+                                        className="input-field"
+                                    />
+                                </div>
+                                <div className="choose-category">
+                                    <FormControl className="select-category">
+                                        <InputLabel htmlFor="age-helper">Category</InputLabel>
+                                        <Select
+                                            value={categoryName}
+                                           // onChange={handleChange}
+                                        >
+                                            <MenuItem value="">
+                                                <em>None</em>
+                                            </MenuItem>
+                                            <MenuItem value={10}>Ten</MenuItem>
+                                            <MenuItem value={20}>Twenty</MenuItem>
+                                            <MenuItem value={30}>Thirty</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </div>
+                            </div>
                             <div className="stop-information">
                                 <div className="stop-block img-picture">
                                     <TextField

@@ -37,3 +37,11 @@ export interface ICategory {
     categoryName: string,
     description: string
 }
+
+export interface IReadStop extends IStop {
+    uid: string
+}
+
+export interface IReadCategory extends ICategory {
+    uid: string
+}
