@@ -2,6 +2,7 @@ import React from 'react'
 import './ModalStops.scss'
 import { Button } from '@material-ui/core'
 import Stop from '../Stop/Stop'
+import InputMap from '../input-components/InputMap/InputMap';
 
 interface IProps {
     modalChange: () => void,

@@ -30,5 +30,5 @@ export interface IStop {
     description: string,
     picture: string,
     videoURL: string,
-    place?: LatLng
+    place: LatLng
 }

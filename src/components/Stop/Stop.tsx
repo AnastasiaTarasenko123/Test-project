@@ -1,8 +1,9 @@
 import React from 'react'
 import './Stop.scss'
-import { IStop } from '../../interfaces/interfaces'
+import { IStop, LatLng } from '../../interfaces/interfaces'
 import { TextField } from '@material-ui/core';
 import { readFileASync } from '../../services/readFile';
+import InputMap from '../input-components/InputMap/InputMap';
 
 interface IProps {
     appID: string;
@@ -20,7 +21,8 @@ class Stop extends React.Component<IProps, IState> {
             title: '',
             description: '',
             picture: '',
-            videoURL: ''
+            videoURL: '',
+            place: { lat: 0, lng: 0 }
         }
     }
 
@@ -40,8 +42,14 @@ class Stop extends React.Component<IProps, IState> {
             })
     }
 
+    onChangePlace = (selectedPlace: LatLng) => {
+        this.setState({
+            place: selectedPlace
+        })
+    }
+
     render() {
-        const { title, picture, videoURL, description } = this.state;
+        const { title, picture, videoURL, description, place } = this.state;
         return (
             <div className="content-stop">
                 <div className="stop-information">
@@ -85,8 +93,10 @@ class Stop extends React.Component<IProps, IState> {
                         />
                     </div>
                 </div>
-                <div className="stop-map">
-
+                <div className="stop-information">
+                    <div className="stop-map">
+                        <InputMap onChangePlace={this.onChangePlace} selectedPlace={place} />
+                    </div>
                 </div>
             </div>
         );
