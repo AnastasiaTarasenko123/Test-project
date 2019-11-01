@@ -7,6 +7,7 @@ export const createItem = (nameItem: string, firebase: Firebase, item: any) => {
     switch (nameItem) {
         case 'applications': ref = firebase.applications(); break;
         case 'stops': ref = firebase.stops(); break;
+        case 'categories': ref = firebase.categories(); break;
     }
 
     if (ref !== null)

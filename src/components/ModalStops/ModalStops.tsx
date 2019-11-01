@@ -24,16 +24,13 @@ class ModalStops extends React.Component<IProps, IState> {
         return (
             <div className="modal-window">
                 <div className="modal-block">
-                    <div className="border-modal">
-                        <p>Lists</p>
-                    </div>
                     <div className="modal-content">
-                            <div className="category-details">
-                                <p>Category</p>
-                            </div>
-                            <div className="stops-details">
-                                <Stop appID={appID} modalChange={this.props.modalChange}/>
-                            </div>
+                        <div className="category-details">
+                            <p>Category</p>
+                        </div>
+                        <div className="stops-details">
+                            <Stop appID={appID} modalChange={this.props.modalChange} />
+                        </div>
                     </div>
                     <Button className="btn btn-close" onClick={this.props.modalChange}>X</Button>
                 </div>

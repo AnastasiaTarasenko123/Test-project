@@ -7,13 +7,15 @@ import Firebase from '../../firebase/Firebase'
 import { readApp } from '../../services/itemFirebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import ModalStops from '../ModalStops/ModalStops'
+import ModalCategory from '../ModalCategory/ModalCategory'
 
 interface IProps extends RouteComponentProps<RouteParams> {
     firebase: Firebase
 }
 
 interface IState extends ReadApplication {
-    openModal: boolean,
+    openModal1: boolean,
+    openModal2: boolean
 }
 
 class Lists extends React.Component<IProps, IState> {
@@ -29,7 +31,8 @@ class Lists extends React.Component<IProps, IState> {
             isCategories: false,
             isGPS: false,
             userID: '',
-            openModal: false
+            openModal1: false,
+            openModal2: false
         }
     }
 
@@ -43,16 +46,25 @@ class Lists extends React.Component<IProps, IState> {
         this.props.firebase.db.ref().off();
     }
 
-    handleOpen = () => {
-        this.setState({ openModal: true });
+    //перероблю з норм модальним
+    handleOpen1 = () => {
+        this.setState({ openModal1: true });
     };
 
-    handleClose = () => {
-        this.setState({ openModal: false });
+    handleClose1 = () => {
+        this.setState({ openModal1: false });
+    };
+
+    handleOpen2 = () => {
+        this.setState({ openModal2: true });
+    };
+
+    handleClose2 = () => {
+        this.setState({ openModal2: false });
     };
 
     render() {
-        const { openModal, uid } = this.state;
+        const { openModal1, openModal2, uid } = this.state;
         return (
             <div className="content-lists">
                 <div className="border-lists">
@@ -63,7 +75,10 @@ class Lists extends React.Component<IProps, IState> {
                         <ul></ul>
                     </div>
                     <div className="border-item">
-                        <Button variant="contained" color="primary" onClick={this.handleOpen}>+ New Stop</Button>
+                        <Button variant="contained" color="primary" onClick={this.handleOpen1}>+ New Stop</Button>
+                    </div>
+                    <div className="border-item">
+                        <Button variant="contained" color="primary" className="btn-category" onClick={this.handleOpen2}>+ New Category</Button>
                     </div>
                 </div>
                 {/* чомусь стилі добре не підключаються, потім ще подивлюсь
@@ -77,8 +92,11 @@ class Lists extends React.Component<IProps, IState> {
                             <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
                         </div>
                     </Modal> */}
-                <div className={`modals ${openModal ? `active` : ``}`}>
-                    <ModalStops modalChange={this.handleClose.bind(this)} appID={uid} />
+                <div className={`modals ${openModal1 ? `active` : ``}`}>
+                    <ModalStops modalChange={this.handleClose1.bind(this)} appID={uid} />
+                </div>
+                <div className={`modals ${openModal2 ? `active` : ``}`}>
+                    <ModalCategory modalChange={this.handleClose2.bind(this)} appID={uid} />
                 </div>
             </div>
         );

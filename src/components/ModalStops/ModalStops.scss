@@ -17,12 +17,37 @@
         background: $modalStops;
         margin: 3% auto;
         border-radius: 10px;
+
         .btn-close {
             position: $positionButton;
             top: 2%;
             right: 1%;
             color: white;
         }
+
+        .border-modal {
+            background-color: white;
+            margin: 4rem 3rem;
+            height: 4rem;
+            border: 1px solid $useColor;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+
+            .border-block {
+                width: 50%;
+                padding: 3rem;
+
+                p {
+                    color: $useColor;
+                }
+            }
+
+            .btn-block {
+                text-align: right;
+            }
+        }
+
         .modal-content {
             width: 100%;
         }

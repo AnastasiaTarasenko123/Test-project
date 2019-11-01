@@ -29,6 +29,9 @@ class Firebase {
 
   stop = (uid: any) => this.db.ref(`stop/${uid}`);
   stops = () => this.db.ref('stops');
+
+  category = (uid: any) => this.db.ref(`category/${uid}`);
+  categories = () => this.db.ref('categories');
 }
 
 export default Firebase

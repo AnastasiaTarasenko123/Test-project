@@ -32,3 +32,8 @@ export interface IStop {
     place: LatLng
 }
 
+export interface ICategory {
+    appID: string,
+    categoryName: string,
+    description: string
+}
