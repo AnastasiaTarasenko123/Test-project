@@ -1,6 +1,6 @@
 import React from 'react'
 import './Lists.scss'
-import { Button, Modal } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import { RouteComponentProps, withRouter } from 'react-router'
 import { RouteParams, ReadApplication } from '../../interfaces/interfaces'
 import Firebase from '../../firebase/Firebase'

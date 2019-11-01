@@ -45,7 +45,7 @@ class Stop extends React.Component<IProps, IState> {
         return (
             <div className="content-stop">
                 <div className="stop-information">
-                    <div className="img-picture">
+                    <div className="stop-block img-picture">
                         <TextField
                             margin="normal"
                             onChange={this.onChange('title')}
@@ -54,9 +54,9 @@ class Stop extends React.Component<IProps, IState> {
                             className="input-field-stop"
                             value={title}
                         />
-                        {/* <div className={`imgBlock ${(picture !== '') ? `imgActive` : ``}`}>
-                            <img src={picture} alt="app" className="imgModal" />
-                        </div> */}
+                        <div className={`img-block ${(picture !== '') ? `img-active` : ``}`}>
+                            <img src={picture} alt="app" className="img-modal" />
+                        </div>
                         <TextField
                             margin="normal"
                             onChange={this.onChangeFile('picture')}
@@ -72,7 +72,7 @@ class Stop extends React.Component<IProps, IState> {
                             value={videoURL}
                         />
                     </div>
-                    <div className="stop-description">
+                    <div className="stop-block stop-description">
                         <TextField
                             label="Stop Description"
                             multiline
@@ -80,6 +80,7 @@ class Stop extends React.Component<IProps, IState> {
                             value={description}
                             onChange={this.onChange('description')}
                             margin="normal"
+                            className="description-modal"
                             variant="outlined"
                         />
                     </div>

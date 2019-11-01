@@ -6,8 +6,8 @@ import { ReadApplication, LatLng, RouteParams } from '../../interfaces/interface
 import { withFirebase } from '../../firebase/FirebaseContext'
 import { readApp, updateApp } from '../../services/appFirebase'
 import { TextField } from '@material-ui/core'
-import MapContainer from '../MapContainer/MapContainer'
 import { readFileASync } from '../../services/readFile'
+import InputMap from '../input-components/InputMap/InputMap'
 
 interface IProps extends RouteComponentProps<RouteParams> {
     firebase: Firebase
@@ -59,9 +59,14 @@ class AppInfo extends React.Component<IProps, IState> {
             )
     }
 
-    onMapClicked = async (place: LatLng) => {
+    onChangePlace = (selectedPlace: LatLng) => {
+        const { uid } = this.state;
+        this.setState({
+            selectedPlace: selectedPlace
+        })
+        updateApp(this.props.firebase, uid, 'selectedPlace', selectedPlace);
     }
-
+    
     componentDidMount() {
         const { uid } = this.state;
         readApp(this.props.firebase, uid, (value: ReadApplication) => { this.setState({ ...value }) },
@@ -130,42 +135,7 @@ class AppInfo extends React.Component<IProps, IState> {
                     </div>
                 </div>
                 <div className="content content-location">
-                    <div className="in-content-app">
-                        <div className="location">
-                            <label>App Address</label>
-                            <TextField
-                                //  onChange={this.onChange('appName')}
-                                margin="normal"
-                                variant="outlined"
-                                //  value={myApp && myApp.appName}
-                                className="field-content-app"
-                            />
-                        </div>
-                        <div className="lat-lng">
-                            <label>Lat Address</label>
-                            <TextField
-                                //   onChange={this.onChange('selectedPlace')}
-                                type="number"
-                                margin="normal"
-                                variant="outlined"
-                                value={selectedPlace.lat}
-                                className="field-content-latlng"
-                            />
-                            <br />
-                            <label>Lng Address</label>
-                            <TextField
-                                //  onChange={this.onChange('selectedPlace')}
-                                type="number"
-                                margin="normal"
-                                variant="outlined"
-                                className="field-content-latlng"
-                                value={selectedPlace.lng}
-                            />
-                        </div>
-                    </div>
-                    <div className="in-content-app">
-                        <MapContainer onMapClicked={this.onMapClicked} selectedPlace={selectedPlace} />
-                    </div>
+                    <InputMap onChangePlace={this.onChangePlace} selectedPlace={selectedPlace} />
                 </div >
                 <div>
                 </div>

@@ -1,0 +1,17 @@
+.input-map {
+    display: flex;
+    width: 100%;
+
+    .in-content {
+        width: 50%;
+
+        .field-content {
+            width: 90%;
+        }
+
+        .field-content-latlng {
+            width: 90%;
+        }
+
+    }
+}
