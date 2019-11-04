@@ -61,9 +61,6 @@ class Lists extends React.Component<IProps, IState> {
         });
     };
 
-    handleOpen = this.handleModal(true)
-    handleClose = this.handleModal(false)
-
     handleCategories = () => (i: number) => () => {
         let temp: IReadCategory | null = null;
         const { categories } = this.state;
@@ -75,11 +72,20 @@ class Lists extends React.Component<IProps, IState> {
         }))
     }
 
-    handleCategory = this.handleCategories();
-
-    handleAllStops = () => {
-
+    deleteCategory = () => {
+        const { selectCategory, uid } = this.state;
+        if (selectCategory !== null)
+            this.props.firebase.category(selectCategory.uid).remove();
+        readItems(this.props.firebase, uid, 'categories', (value: IReadCategory[]) => { this.setState({ categories: value }) },
+            () => { });
+        this.setState({ selectCategory: null })
+        //message(uid).remove();
     }
+
+
+    handleOpen = this.handleModal(true);
+    handleClose = this.handleModal(false);
+    handleCategory = this.handleCategories();
 
     render() {
         const { uid, modals, application, categories, selectCategory, stops } = this.state;
@@ -117,6 +123,9 @@ class Lists extends React.Component<IProps, IState> {
                     <div className="categories">
                         <p>Category</p>
                         <Category uid={selectCategory.uid} />
+                        <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteCategory}>
+                            Delete
+                        </Button>
                     </div>
                     :
                     (

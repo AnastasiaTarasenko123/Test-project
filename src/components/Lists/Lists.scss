@@ -58,17 +58,22 @@
     .categories {
         background-color: white;
         border-radius: 1rem;
-        height: 25rem;
+        height: 22rem;
         width: 95%;
         padding: 1rem 5rem;
         margin: 2rem auto;
+        text-align: right;
         p {
             color: $useColor;
+            text-align: left;
         }
         div {
             .input-field {
                 width: 100%;
             }
+        }
+        .btn-delete {
+            margin: 1rem;
         }
     }
 
