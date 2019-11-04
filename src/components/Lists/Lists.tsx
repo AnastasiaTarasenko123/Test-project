@@ -14,8 +14,7 @@ interface IProps extends RouteComponentProps<RouteParams> {
 }
 
 interface IState {
-    openModal1: boolean,
-    openModal2: boolean,
+    modals: boolean[]
     uid: string,
     application: ReadApplication | null,
     categories: IReadCategory[],
@@ -27,8 +26,7 @@ class Lists extends React.Component<IProps, IState> {
         super(props);
         this.state = {
             uid: this.props.match.params.appId || '',
-            openModal1: false,
-            openModal2: false,
+            modals: [false, false],
             application: null,
             categories: [],
             stops: []
@@ -49,25 +47,22 @@ class Lists extends React.Component<IProps, IState> {
         this.props.firebase.db.ref().off();
     }
 
-    //перероблю з норм модальним
-    handleOpen1 = () => {
-        this.setState({ openModal1: true });
+    handleModal = (value: boolean) => (i: number) => () => {
+        this.setState(prevState => {
+            const modals = [...prevState.modals]
+            modals[i] = value
+            return {
+                ...prevState,
+                modals
+            }
+        });
     };
 
-    handleClose1 = () => {
-        this.setState({ openModal1: false });
-    };
-
-    handleOpen2 = () => {
-        this.setState({ openModal2: true });
-    };
-
-    handleClose2 = () => {
-        this.setState({ openModal2: false });
-    };
+    handleOpen = this.handleModal(true)
+    handleClose = this.handleModal(false)
 
     render() {
-        const { openModal1, openModal2, uid, application, categories, stops } = this.state;
+        const { uid, modals, application, categories, stops } = this.state;
         console.log(application, categories, stops);
         return (
             <div className="content-lists">
@@ -85,10 +80,10 @@ class Lists extends React.Component<IProps, IState> {
                         </ul>
                     </div>
                     <div className="border-item border-stop">
-                        <Button variant="contained" color="primary" onClick={this.handleOpen1}>+ New Stop</Button>
+                        <Button variant="contained" color="primary" onClick={this.handleOpen(0)}>+ New Stop</Button>
                     </div>
                     <div className={`border-item border-category ${application && application.isCategories ? `active` : ``}`}>
-                        <Button variant="contained" color="primary" className="btn-category" onClick={this.handleOpen2}>+ New Category</Button>
+                        <Button variant="contained" color="primary" className="btn-category" onClick={this.handleOpen(1)}>+ New Category</Button>
                     </div>
                 </div>
                 {/* чомусь стилі добре не підключаються, потім ще подивлюсь
@@ -102,11 +97,11 @@ class Lists extends React.Component<IProps, IState> {
                             <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
                         </div>
                     </Modal> */}
-                <div className={`modals ${openModal1 ? `active` : ``}`}>
-                    <ModalStops modalChange={this.handleClose1.bind(this)} appID={uid} />
+                <div className={`modals ${modals[0] ? `active` : ``}`}>
+                    <ModalStops modalChange={this.handleClose(0)} appID={uid} />
                 </div>
-                <div className={`modals ${openModal2 ? `active` : ``}`}>
-                    <ModalCategory modalChange={this.handleClose2.bind(this)} appID={uid} />
+                <div className={`modals ${modals[1] ? `active` : ``}`}>
+                    <ModalCategory modalChange={this.handleClose(1)} appID={uid} />
                 </div>
             </div>
         );
