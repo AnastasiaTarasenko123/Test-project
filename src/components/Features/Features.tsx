@@ -4,7 +4,7 @@ import { Switch } from '@material-ui/core'
 import { RouteParams, ReadApplication } from '../../interfaces/interfaces'
 import Firebase from '../../firebase/Firebase'
 import { RouteComponentProps, withRouter } from 'react-router'
-import { readItem, updateApp } from '../../services/itemFirebase'
+import { readItem, update } from '../../services/itemFirebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 
 interface IProps extends RouteComponentProps<RouteParams> {
@@ -35,7 +35,7 @@ class Features extends React.Component<IProps, IState> {
         this.setState(prev => ({
             ...prev, [key]: !this.state[key]
         }))
-        updateApp(this.props.firebase, uid, key, !this.state[key]);
+        update('application', this.props.firebase, uid, key, !this.state[key]);
     }
 
     componentDidMount() {

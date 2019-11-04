@@ -71,13 +71,16 @@ export const readItems = (
     });
 }
 
-export const updateApp = (
+export const update = (
+    nameItem: string,
     firebase: Firebase,
     uid: string,
     key: any,
     value: any
 ) => {
-    firebase.application(uid).update(
-        { [key]: value }
-    );
+    switch(nameItem) {
+        case 'application': firebase.application(uid).update({ [key]: value } ); break;
+        case 'category': firebase.category(uid).update({ [key]: value } ); break;
+        case 'stop': firebase.stop(uid).update({ [key]: value } ); break;
+    }
 };

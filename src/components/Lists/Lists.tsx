@@ -1,6 +1,6 @@
 import React from 'react'
 import './Lists.scss'
-import { Button, TextField } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import { RouteComponentProps, withRouter } from 'react-router'
 import { RouteParams, ReadApplication, IReadCategory, IReadStop } from '../../interfaces/interfaces'
 import Firebase from '../../firebase/Firebase'
@@ -8,6 +8,7 @@ import { readItem, readItems } from '../../services/itemFirebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import ModalStops from '../ModalStops/ModalStops'
 import ModalCategory from '../ModalCategory/ModalCategory'
+import Category from '../Category/Category'
 
 interface IProps extends RouteComponentProps<RouteParams> {
     firebase: Firebase
@@ -18,6 +19,7 @@ interface IState {
     uid: string,
     application: ReadApplication | null,
     categories: IReadCategory[],
+    selectCategory: IReadCategory | null,
     stops: IReadStop[]
 }
 
@@ -29,6 +31,7 @@ class Lists extends React.Component<IProps, IState> {
             modals: [false, false],
             application: null,
             categories: [],
+            selectCategory: null,
             stops: []
         }
     }
@@ -61,9 +64,25 @@ class Lists extends React.Component<IProps, IState> {
     handleOpen = this.handleModal(true)
     handleClose = this.handleModal(false)
 
+    handleCategories = () => (i: number) => () => {
+        let temp: IReadCategory | null = null;
+        const { categories } = this.state;
+        if (i !== categories.length && i !== -1)
+            temp = categories[i];
+        this.setState(prev => ({
+            ...prev,
+            selectCategory: temp
+        }))
+    }
+
+    handleCategory = this.handleCategories();
+
+    handleAllStops = () => {
+
+    }
+
     render() {
-        const { uid, modals, application, categories, stops } = this.state;
-        console.log(application, categories, stops);
+        const { uid, modals, application, categories, selectCategory, stops } = this.state;
         return (
             <div className="content-lists">
                 <div className="border-lists">
@@ -73,10 +92,18 @@ class Lists extends React.Component<IProps, IState> {
                     <div className={`border-list border-category ${application && application.isCategories ? `active` : ``}`}>
                         <ul>
                             {
-                                categories.map(category => (
-                                    <li>{category.categoryName}</li>
+                                categories.map((category, index) => (
+                                    <li key={index}> <Button variant="outlined" color="primary" onClick={this.handleCategory(index)}>
+                                        {category.categoryName}
+                                    </Button> </li>
                                 ))
                             }
+                            <li key={-1}><Button variant="outlined" color="primary" onClick={this.handleCategory(-1)}>
+                                Uncategorized
+                            </Button></li>
+                            <li key={categories.length}><Button variant="outlined" color="primary" onClick={this.handleCategory(categories.length)}>
+                                All stops
+                            </Button></li>
                         </ul>
                     </div>
                     <div className="border-item border-stop">
@@ -86,17 +113,16 @@ class Lists extends React.Component<IProps, IState> {
                         <Button variant="contained" color="primary" className="btn-category" onClick={this.handleOpen(1)}>+ New Category</Button>
                     </div>
                 </div>
-                {/* чомусь стилі добре не підключаються, потім ще подивлюсь
-                    <Modal
-                        open={this.state.openModal}
-                        onClose={this.handleClose}
-                        className="paper"
-                    >
-                        <div>
-                            <h2>Text in a modal</h2>
-                            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-                        </div>
-                    </Modal> */}
+                {selectCategory !== null ?
+                    <div className="categories">
+                        <p>Category</p>
+                        <Category uid={selectCategory.uid} />
+                    </div>
+                    :
+                    (
+                        <div></div>
+                    )
+                }
                 <div className={`modals ${modals[0] ? `active` : ``}`}>
                     <ModalStops modalChange={this.handleClose(0)} appID={uid} />
                 </div>
@@ -108,26 +134,27 @@ class Lists extends React.Component<IProps, IState> {
     }
 }
 
-const CategoryItem: React.FC<IReadCategory> = (category) => (
-    <div>
-        <TextField
-            margin="normal"
-            type="text"
-            className="input-field"
-            value={category.categoryName}
-            label="Category Name"
-        />
-        <br />
-        <TextField
-            label="Stop Description"
-            multiline
-            rows="8"
-            value={category.description}
-            margin="normal"
-            className="input-field"
-            variant="outlined"
-        />
-    </div>
-);
+// const CategoryItem: React.FC<any> = ({ name, description }) => (
+//     <div>
+//         {console.log(name, description)}
+//         <TextField
+//             margin="normal"
+//             type="text"
+//             className="input-field"
+//             value={name}
+//             label="Category Name"
+//         />
+//         <br />
+//         <TextField
+//             label="Stop Description"
+//             multiline
+//             rows="4"
+//             value={description}
+//             margin="normal"
+//             className="input-field"
+//             variant="outlined"
+//         />
+//     </div>
+// );
 
 export default withFirebase(withRouter(Lists))
