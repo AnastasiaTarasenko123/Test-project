@@ -10,7 +10,7 @@
         padding: 0.5rem;
         color: $useColor;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
 
         .border-list {
             width: 70%;
@@ -22,6 +22,18 @@
 
         .border-item {
             width: 10%;
+        }
+
+        .border-stop {
+            margin-left: auto;
+        }
+
+        .border-category {
+            display: none;
+        }
+
+        .active {
+            display: block;
         }
     }
 

@@ -75,7 +75,7 @@ class Lists extends React.Component<IProps, IState> {
                     <div className="border-item">
                         <p>Lists</p>
                     </div>
-                    <div className="border-list">
+                    <div className={`border-list border-category ${application && application.isCategories ? `active` : ``}`}>
                         <ul>
                             {
                                 categories.map(category => (
@@ -84,10 +84,10 @@ class Lists extends React.Component<IProps, IState> {
                             }
                         </ul>
                     </div>
-                    <div className="border-item">
+                    <div className="border-item border-stop">
                         <Button variant="contained" color="primary" onClick={this.handleOpen1}>+ New Stop</Button>
                     </div>
-                    <div className="border-item">
+                    <div className={`border-item border-category ${application && application.isCategories ? `active` : ``}`}>
                         <Button variant="contained" color="primary" className="btn-category" onClick={this.handleOpen2}>+ New Category</Button>
                     </div>
                 </div>
