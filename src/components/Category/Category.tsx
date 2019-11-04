@@ -12,26 +12,37 @@ interface IProps {
 
 interface IState extends IReadCategory { }
 
+const emptyState: IState = {
+    uid: '',
+    appID: '',
+    categoryName: '',
+    description: ''
+}
+
 class Category extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
-        this.state = {
-            uid: this.props.uid,
-            appID: '',
-            categoryName: '',
-            description: ''
-        }
+        this.state = { ...emptyState }
     }
 
     componentDidMount() {
-        const { uid } = this.state;
+        const { uid } = this.props;
         readItem(this.props.firebase, uid, 'categories', (value: IReadCategory) => { this.setState({ ...value }) },
             () => { });
+    }
+
+    componentDidUpdate(prevProps: IProps, prevState: IState) {
+        if (prevProps.uid !== this.props.uid) {
+            const { uid } = this.props;
+            readItem(this.props.firebase, uid, 'categories', (value: IReadCategory) => { this.setState({ ...value }) },
+                () => { });
+        }
     }
 
     componentWillUnmount() {
         this.props.firebase.db.ref().off();
     }
+
 
     onChange = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
@@ -39,7 +50,7 @@ class Category extends React.Component<IProps, IState> {
         this.setState(prev => ({
             ...prev, [key]: value
         }));
-        update(uid, this.props.firebase, uid, key, value);
+        update('category', this.props.firebase, uid, key, value);
     }
 
     render() {
@@ -52,6 +63,7 @@ class Category extends React.Component<IProps, IState> {
                     className="input-field"
                     value={categoryName}
                     label="Category Name"
+                    onChange={this.onChange('categoryName')}
                 />
                 <br />
                 <TextField
@@ -62,6 +74,7 @@ class Category extends React.Component<IProps, IState> {
                     margin="normal"
                     className="input-field"
                     variant="outlined"
+                    onChange={this.onChange('description')}
                 />
             </div>
         )

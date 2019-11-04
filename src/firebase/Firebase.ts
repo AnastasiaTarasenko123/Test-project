@@ -27,10 +27,10 @@ class Firebase {
   application = (uid: any) => this.db.ref(`applications/${uid}`);
   applications = () => this.db.ref('applications');
 
-  stop = (uid: any) => this.db.ref(`stop/${uid}`);
+  stop = (uid: any) => this.db.ref(`stops/${uid}`);
   stops = () => this.db.ref('stops');
 
-  category = (uid: any) => this.db.ref(`category/${uid}`);
+  category = (uid: any) => this.db.ref(`categories/${uid}`);
   categories = () => this.db.ref('categories');
 }
 

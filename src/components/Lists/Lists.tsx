@@ -134,27 +134,4 @@ class Lists extends React.Component<IProps, IState> {
     }
 }
 
-// const CategoryItem: React.FC<any> = ({ name, description }) => (
-//     <div>
-//         {console.log(name, description)}
-//         <TextField
-//             margin="normal"
-//             type="text"
-//             className="input-field"
-//             value={name}
-//             label="Category Name"
-//         />
-//         <br />
-//         <TextField
-//             label="Stop Description"
-//             multiline
-//             rows="4"
-//             value={description}
-//             margin="normal"
-//             className="input-field"
-//             variant="outlined"
-//         />
-//     </div>
-// );
-
 export default withFirebase(withRouter(Lists))
