@@ -15,9 +15,8 @@ interface IProps {
 }
 
 interface IState extends IStop {
-    categoryName: string,
-    categoryDescription: string,
-    categories: IReadCategory[]
+    categories: IReadCategory[],
+    selectCategory: IReadCategory | null
 }
 
 class ModalStops extends React.Component<IProps, IState> {
@@ -31,9 +30,8 @@ class ModalStops extends React.Component<IProps, IState> {
             videoURL: '',
             categoryID: '',
             place: { lat: 0, lng: 0 },
-            categoryName: 'Uncategorized',
-            categoryDescription: '',
-            categories: []
+            categories: [],
+            selectCategory: null
         }
     }
 
@@ -41,7 +39,6 @@ class ModalStops extends React.Component<IProps, IState> {
         const { appID } = this.props;
         readItem(this.props.firebase, appID, 'categories', (value: IReadCategory[]) => { this.setState({ categories: value }) },
             () => { });
-        console.log(this.state.categories);
     }
 
     onChange = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +71,7 @@ class ModalStops extends React.Component<IProps, IState> {
     }
 
     render() {
-        const { title, picture, videoURL, description, place, categoryName, categoryDescription} = this.state;
+        const { title, picture, videoURL, description, place, categories } = this.state;
         return (
             <div className="modal-window">
                 <div className="modal-block">
@@ -87,7 +84,7 @@ class ModalStops extends React.Component<IProps, IState> {
                                         margin="normal"
                                         type="text"
                                         className="input-field-name"
-                                        value={categoryName}
+                                        //value={selectCategory && selectCategory.categoryName}
                                         label="Category Name"
                                     />
                                     <br />
@@ -95,7 +92,7 @@ class ModalStops extends React.Component<IProps, IState> {
                                         label="Stop Description"
                                         multiline
                                         rows="2"
-                                        value={categoryDescription}
+                                        // value={selectCategory && selectCategory.description}
                                         margin="normal"
                                         className="input-field"
                                     />
@@ -104,15 +101,14 @@ class ModalStops extends React.Component<IProps, IState> {
                                     <FormControl className="select-category">
                                         <InputLabel htmlFor="age-helper">Category</InputLabel>
                                         <Select
-                                            value={categoryName}
-                                           // onChange={handleChange}
+                                        //  value={categories[0]}
+                                        // onChange={this.onChange('selectCategory')}
                                         >
-                                            <MenuItem value="">
-                                                <em>None</em>
-                                            </MenuItem>
-                                            <MenuItem value={10}>Ten</MenuItem>
-                                            <MenuItem value={20}>Twenty</MenuItem>
-                                            <MenuItem value={30}>Thirty</MenuItem>
+                                            {/* {
+                                                categories.map(category => (
+                                                    <MenuItem value={category.uid}>{category.categoryName}</MenuItem>
+                                                ))
+                                            } */}
                                         </Select>
                                     </FormControl>
                                 </div>

@@ -1,5 +1,5 @@
 import Firebase from '../firebase/Firebase'
-import { Application, ReadApplication } from '../interfaces/interfaces'
+import { ReadApplication } from '../interfaces/interfaces'
 
 
 export const createItem = (nameItem: string, firebase: Firebase, item: any) => {
@@ -16,15 +16,44 @@ export const createItem = (nameItem: string, firebase: Firebase, item: any) => {
         })
 }
 
-//додати, щоб читало категорії
 export const readItem = (
+    firebase: Firebase,
+    id: string,
+    child: string,
+    successfunction?: (result: any) => void,
+    emptyfunction?: () => void) => {
+    firebase.db.ref().child(child)
+        .orderByKey()
+        .equalTo(id)
+        .on('value', snapshot => {
+            const appObject = snapshot.val();
+            if (appObject) {
+                const appList: ReadApplication[] = Object.keys(appObject).map(key => ({
+                    ...appObject[key],
+                    uid: key,
+                }
+                ));
+                if (appList !== undefined) {
+                    successfunction && successfunction(appList[0]);
+                }
+            } else {
+                emptyfunction && emptyfunction();
+            }
+        });
+}
+
+export const readItems = (
     firebase: Firebase,
     appId: string,
     child: string,
     successfunction?: (result: any) => void,
     emptyfunction?: () => void) => {
     let ref: firebase.database.Reference = firebase.db.ref().child(child);
-    let ordered = appId === '' ? ref.orderByChild('userID') : ref.orderByKey().equalTo(appId);
+    let ordered: firebase.database.Query = ref;
+    if (child === 'applications')
+        ordered = appId === '' ? ordered.orderByChild('userID') : ordered.orderByKey().equalTo(appId);
+    else
+        ordered = ordered.orderByChild('appID').equalTo(appId);
     ordered.on('value', snapshot => {
         const appObject = snapshot.val();
         if (appObject) {
@@ -33,12 +62,8 @@ export const readItem = (
                 uid: key,
             }
             ));
-            console.log(appList);
             if (appList !== undefined) {
-                if (appList.length === 1)
-                    successfunction && successfunction(appList[0]);
-                else
-                    successfunction && successfunction(appList);
+                successfunction && successfunction(appList);
             }
         } else {
             emptyfunction && emptyfunction();
@@ -56,10 +81,3 @@ export const updateApp = (
         { [key]: value }
     );
 };
-
-
-// let ordered: firebase.database.Query = ref.orderByKey();
-// switch (child) {
-//     case 'applications': ordered = appId === '' ? ref.orderByChild('userID') : ref.orderByKey().equalTo(appId);
-//     case 'categories': ordered = ref.orderByChild('appID').equalTo(appId);
-// }

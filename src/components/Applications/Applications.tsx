@@ -4,7 +4,7 @@ import Firebase from '../../firebase/Firebase'
 import './Applications.scss'
 import { ReadApplication } from '../../interfaces/interfaces'
 import { AuthUserContext } from '../Session/SessionContext'
-import { readItem } from '../../services/itemFirebase'
+import { readItems } from '../../services/itemFirebase'
 import { Button } from '@material-ui/core'
 import { Link, withRouter } from 'react-router-dom'
 import * as ROUTES from '../../constants/routs'
@@ -31,7 +31,7 @@ class Applications extends React.Component<IProps, IState>{
     }
 
     componentDidMount = () => {
-        readItem(this.props.firebase, '', 'applications', (value: ReadApplication[]) => { this.setState({ applications: value }) },
+        readItems(this.props.firebase, '', 'applications', (value: ReadApplication[]) => { this.setState({ applications: value }) },
             () => { this.setState({ applications: [] }) });
     }
 
@@ -39,7 +39,6 @@ class Applications extends React.Component<IProps, IState>{
         this.props.firebase.applications().off();
     }
 
-    //виправити: no applications тільки тоді, коли вся база пуста
     render() {
         const { applications } = this.state;
         return (

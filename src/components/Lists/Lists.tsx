@@ -1,10 +1,10 @@
 import React from 'react'
 import './Lists.scss'
-import { Button } from '@material-ui/core'
+import { Button, TextField } from '@material-ui/core'
 import { RouteComponentProps, withRouter } from 'react-router'
-import { RouteParams, ReadApplication } from '../../interfaces/interfaces'
+import { RouteParams, ReadApplication, IReadCategory, IReadStop } from '../../interfaces/interfaces'
 import Firebase from '../../firebase/Firebase'
-import { readItem } from '../../services/itemFirebase'
+import { readItem, readItems } from '../../services/itemFirebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import ModalStops from '../ModalStops/ModalStops'
 import ModalCategory from '../ModalCategory/ModalCategory'
@@ -13,9 +13,13 @@ interface IProps extends RouteComponentProps<RouteParams> {
     firebase: Firebase
 }
 
-interface IState extends ReadApplication {
+interface IState {
     openModal1: boolean,
-    openModal2: boolean
+    openModal2: boolean,
+    uid: string,
+    application: ReadApplication | null,
+    categories: IReadCategory[],
+    stops: IReadStop[]
 }
 
 class Lists extends React.Component<IProps, IState> {
@@ -23,22 +27,21 @@ class Lists extends React.Component<IProps, IState> {
         super(props);
         this.state = {
             uid: this.props.match.params.appId || '',
-            appName: '',
-            picture: '',
-            color: '#000000',
-            description: '',
-            selectedPlace: { lat: 0, lng: 0 },
-            isCategories: false,
-            isGPS: false,
-            userID: '',
             openModal1: false,
-            openModal2: false
+            openModal2: false,
+            application: null,
+            categories: [],
+            stops: []
         }
     }
 
     componentDidMount() {
         const { uid } = this.state;
-        readItem(this.props.firebase, uid, 'applications', (value: ReadApplication) => { this.setState({ ...value }) },
+        readItem(this.props.firebase, uid, 'applications', (value: ReadApplication) => { this.setState({ application: value }) },
+            () => { });
+        readItems(this.props.firebase, uid, 'categories', (value: IReadCategory[]) => { this.setState({ categories: value }) },
+            () => { });
+        readItems(this.props.firebase, uid, 'stops', (value: IReadStop[]) => { this.setState({ stops: value }) },
             () => { });
     }
 
@@ -64,7 +67,8 @@ class Lists extends React.Component<IProps, IState> {
     };
 
     render() {
-        const { openModal1, openModal2, uid } = this.state;
+        const { openModal1, openModal2, uid, application, categories, stops } = this.state;
+        console.log(application, categories, stops);
         return (
             <div className="content-lists">
                 <div className="border-lists">
@@ -72,7 +76,13 @@ class Lists extends React.Component<IProps, IState> {
                         <p>Lists</p>
                     </div>
                     <div className="border-list">
-                        <ul></ul>
+                        <ul>
+                            {
+                                categories.map(category => (
+                                    <li>{category.categoryName}</li>
+                                ))
+                            }
+                        </ul>
                     </div>
                     <div className="border-item">
                         <Button variant="contained" color="primary" onClick={this.handleOpen1}>+ New Stop</Button>
@@ -102,5 +112,27 @@ class Lists extends React.Component<IProps, IState> {
         );
     }
 }
+
+const CategoryItem: React.FC<IReadCategory> = (category) => (
+    <div>
+        <TextField
+            margin="normal"
+            type="text"
+            className="input-field"
+            value={category.categoryName}
+            label="Category Name"
+        />
+        <br />
+        <TextField
+            label="Stop Description"
+            multiline
+            rows="8"
+            value={category.description}
+            margin="normal"
+            className="input-field"
+            variant="outlined"
+        />
+    </div>
+);
 
 export default withFirebase(withRouter(Lists))

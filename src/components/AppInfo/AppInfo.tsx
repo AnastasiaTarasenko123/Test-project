@@ -66,7 +66,7 @@ class AppInfo extends React.Component<IProps, IState> {
         })
         updateApp(this.props.firebase, uid, 'selectedPlace', selectedPlace);
     }
-    
+
     componentDidMount() {
         const { uid } = this.state;
         readItem(this.props.firebase, uid, 'applications', (value: ReadApplication) => { this.setState({ ...value }) },
