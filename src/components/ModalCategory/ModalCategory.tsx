@@ -9,10 +9,7 @@ interface IProps {
 }
 
 class ModalStops extends React.Component<IProps> {
-    constructor(props: IProps) {
-        super(props);
-    }
-
+    
     render() {
         const { appID } = this.props;
         return (

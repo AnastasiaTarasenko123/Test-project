@@ -41,12 +41,14 @@ class Lists extends React.Component<IProps, IState> {
 
     componentDidMount() {
         const { uid } = this.state;
+        if( uid !== '') {
         readItem(this.props.firebase, uid, 'applications', (value: ReadApplication) => { this.setState({ application: value }) },
             () => { });
         readItems(this.props.firebase, uid, 'categories', (value: IReadCategory[]) => { this.setState({ categories: value }) },
             () => { });
         readItems(this.props.firebase, uid, 'stops', (value: IReadStop[]) => { this.setState({ stops: value }) },
             () => { });
+        }
     }
 
     componentWillUnmoun() {

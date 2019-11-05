@@ -1,8 +1,7 @@
 import React from 'react'
 import { IReadCategory } from '../../../interfaces/interfaces'
-import { TextField, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core'
+import { TextField, FormControl, Select, MenuItem } from '@material-ui/core'
 import './SelectCategory.scss'
-import { placeholder } from '@babel/types';
 
 interface IProps {
     selectCategory: IReadCategory | null,
@@ -11,14 +10,9 @@ interface IProps {
 }
 
 class SelectCategory extends React.Component<IProps> {
-    constructor(props: IProps) {
-        super(props);
-    }
-
     componentDidMount() {
         this.setState({})
     }
-
 
     handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         const { value } = event.target;
@@ -62,7 +56,7 @@ class SelectCategory extends React.Component<IProps> {
                             >
                                 {
                                     categories.map((category) => (
-                                        <MenuItem value={category.uid}>{category.categoryName}</MenuItem>
+                                        <MenuItem key={category.uid} value={category.uid}>{category.categoryName}</MenuItem>
                                     ))
                                 }
                             </Select>

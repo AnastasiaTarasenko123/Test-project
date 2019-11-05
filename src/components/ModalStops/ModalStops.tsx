@@ -1,8 +1,6 @@
 import React from 'react'
 import './ModalStops.scss'
 import { Button } from '@material-ui/core'
-import Firebase from '../../firebase/Firebase'
-import { withFirebase } from '../../firebase/FirebaseContext'
 import StopItem from '../StopItem/StopItem'
 import { IReadCategory, ReadApplication } from '../../interfaces/interfaces'
 
@@ -13,9 +11,6 @@ interface IProps {
 }
 
 class ModalStops extends React.Component<IProps> {
-    constructor(props: IProps) {
-        super(props);
-    }
 
     render() {
         const { application, categories } = this.props;
@@ -32,4 +27,4 @@ class ModalStops extends React.Component<IProps> {
     }
 }
 
-export default withFirebase(ModalStops)
+export default ModalStops
