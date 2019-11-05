@@ -83,4 +83,16 @@ export const update = (
         case 'category': firebase.category(uid).update({ [key]: value } ); break;
         case 'stop': firebase.stop(uid).update({ [key]: value } ); break;
     }
-};
+}
+
+export const deleteItem = (
+    firebase: Firebase,
+    name: string,
+    uid: string
+) => {
+    switch(name) {
+        case 'application': firebase.application(uid).remove(); break;
+        case 'category': firebase.category(uid).remove(); break;
+        case 'stop': firebase.stop(uid).remove(); break;
+    }
+}

@@ -4,11 +4,12 @@ import { Button } from '@material-ui/core'
 import { RouteComponentProps, withRouter } from 'react-router'
 import { RouteParams, ReadApplication, IReadCategory, IReadStop } from '../../interfaces/interfaces'
 import Firebase from '../../firebase/Firebase'
-import { readItem, readItems } from '../../services/itemFirebase'
+import { readItem, readItems, deleteItem } from '../../services/itemFirebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import ModalStops from '../ModalStops/ModalStops'
 import ModalCategory from '../ModalCategory/ModalCategory'
 import Category from '../Category/Category'
+import StopItem from '../StopItem/StopItem'
 
 interface IProps extends RouteComponentProps<RouteParams> {
     firebase: Firebase
@@ -74,14 +75,13 @@ class Lists extends React.Component<IProps, IState> {
 
     deleteCategory = () => {
         const { selectCategory, uid } = this.state;
-        if (selectCategory !== null)
-            this.props.firebase.category(selectCategory.uid).remove();
-        readItems(this.props.firebase, uid, 'categories', (value: IReadCategory[]) => { this.setState({ categories: value }) },
-            () => { });
-        this.setState({ selectCategory: null })
-        //message(uid).remove();
+        if (selectCategory !== null) {
+            deleteItem(this.props.firebase, 'category', selectCategory.uid);
+            readItems(this.props.firebase, uid, 'categories', (value: IReadCategory[]) => { this.setState({ categories: value }) },
+                () => { });
+            this.setState({ selectCategory: null })
+        }
     }
-
 
     handleOpen = this.handleModal(true);
     handleClose = this.handleModal(false);
@@ -89,6 +89,7 @@ class Lists extends React.Component<IProps, IState> {
 
     render() {
         const { uid, modals, application, categories, selectCategory, stops } = this.state;
+        console.log(application);
         return (
             <div className="content-lists">
                 <div className="border-lists">
@@ -120,7 +121,7 @@ class Lists extends React.Component<IProps, IState> {
                     </div>
                 </div>
                 {selectCategory !== null ?
-                    <div className="categories">
+                    <div className="list-item category">
                         <p>Category</p>
                         <Category uid={selectCategory.uid} />
                         <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteCategory}>
@@ -132,6 +133,18 @@ class Lists extends React.Component<IProps, IState> {
                         <div></div>
                     )
                 }
+                <div className="list-item stop">
+                    <p>Stop</p>
+                    {application !== null ? 
+                        stops.map(stop => (
+                        selectCategory !== null ?
+                            stop.categoryID === selectCategory.uid ? <StopItem uid={stop.uid} isGPS={application.isGPS} isCategory={application.isCategories}/> : ''
+                            :
+                            <StopItem uid={stop.uid} isGPS={application.isGPS} isCategory={application.isCategories}/>
+                    ))
+                    :
+                    ''}
+                </div>
                 <div className={`modals ${modals[0] ? `active` : ``}`}>
                     <ModalStops modalChange={this.handleClose(0)} appID={uid} />
                 </div>

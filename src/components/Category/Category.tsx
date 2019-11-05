@@ -4,6 +4,7 @@ import { TextField } from '@material-ui/core'
 import { readItem, update } from '../../services/itemFirebase'
 import Firebase from '../../firebase/Firebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
+import './Category.scss'
 
 interface IProps {
     firebase: Firebase,
@@ -42,7 +43,6 @@ class Category extends React.Component<IProps, IState> {
     componentWillUnmount() {
         this.props.firebase.db.ref().off();
     }
-
 
     onChange = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
