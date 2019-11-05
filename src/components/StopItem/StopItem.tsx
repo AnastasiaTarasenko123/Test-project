@@ -114,8 +114,8 @@ class StopItem extends React.Component<IProps, IState> {
         const { title, description, picture, videoURL, categoryID, place } = this.state;
         const { application } = this.props;
         if (application !== null) {
-            let appId: string = application.uid;
-            createItem('stops', this.props.firebase, { appId, title, description, picture, videoURL, categoryID, place });
+            let appID: string = application.uid;
+            createItem('stops', this.props.firebase, { appID, title, description, picture, videoURL, categoryID, place });
         }
         this.props.modalChange();
         event.preventDefault();
@@ -127,7 +127,7 @@ class StopItem extends React.Component<IProps, IState> {
         return (
             <div className="content-stop">
                 <form onSubmit={event => this.addStop(event)}>
-                    {uid === '' && (application && application.isCategories) ?
+                    {(application && application.isCategories) ?
                         <SelectCategory selectCategory={this.getCategory(categoryID)} categories={categories} onChangeCategory={this.onChangeCategory} />
                         :
                         ''}
@@ -173,10 +173,12 @@ class StopItem extends React.Component<IProps, IState> {
                             />
                         </div>
                     </div>
-                    <h2 className="title">Coogle Map</h2>
-                    {(application && application.isCategories) ?
-                        <div className="stop-map">
-                            <InputMap onChangePlace={this.onChangePlace} selectedPlace={place} />
+                    {(application && application.isGPS) ?
+                        <div>
+                            <h2 className="title">Coogle Map</h2>
+                            <div className="stop-map">
+                                <InputMap onChangePlace={this.onChangePlace} selectedPlace={place} />
+                            </div>
                         </div>
                         : ''}
                     {uid === '' ?

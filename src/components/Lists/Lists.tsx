@@ -172,7 +172,7 @@ class Lists extends React.Component<IProps, IState> {
                     stops.map(stop => (stop.categoryID === ''
                         ?
                         <div className="list-item stop">
-                           <StopItem uid={stop.uid} application={application} categories={categories} />
+                            <StopItem uid={stop.uid} application={application} categories={categories} />
                             <div className="btn-stop"> <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteStop(stop.uid)}>
                                 Delete
                                 </Button> </div>
@@ -191,7 +191,7 @@ class Lists extends React.Component<IProps, IState> {
                     :
                     ''}
                 <div className={`modals ${modals[0] ? `active` : ``}`}>
-                    <ModalStops modalChange={this.handleClose(0)} application={application} categories={categories}/>
+                    <ModalStops modalChange={this.handleClose(0)} application={application} categories={categories} />
                 </div>
                 <div className={`modals ${modals[1] ? `active` : ``}`}>
                     <ModalCategory modalChange={this.handleClose(1)} appID={uid} />

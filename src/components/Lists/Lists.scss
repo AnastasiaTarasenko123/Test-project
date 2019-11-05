@@ -60,14 +60,16 @@
         border-radius: 1rem;
         margin: 2rem auto;
         width: 95%;
+
         p {
             color: $useColor;
             text-align: left;
         }
+
         .btn-delete {
             margin: 1rem;
         }
-    } 
+    }
 
     .category {
         height: 25rem;
@@ -76,13 +78,9 @@
     }
 
     .stop {
-        p {
-            padding-left: 4rem;
-            padding-top: 3rem; 
-        }
         .btn-stop {
             text-align: right;
-            margin-right: 10rem;
+            margin-right: 5rem;
             padding-bottom: 3rem;
         }
     }

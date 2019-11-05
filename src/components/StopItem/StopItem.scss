@@ -2,11 +2,10 @@
 
 .content-stop {
     width: 100%;
-    padding-left: 3rem;
     padding-top: 1rem;
 
     .title {
-        padding: 1rem;
+        padding: 1rem 5rem;
         color: $useColor !important;
         text-align: left !important;
     }
@@ -21,7 +20,7 @@
         align-items: center;
         justify-content: center;
         color: $useColor;
-        text-align: left;
+        text-align: center;
 
         .stop-block {
             width: 50%;
