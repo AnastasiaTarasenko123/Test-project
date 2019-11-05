@@ -83,9 +83,17 @@ class Lists extends React.Component<IProps, IState> {
         }
     }
 
+    handleStop = () => (uidStop: string) => () => {
+        const { uid } = this.state;
+        deleteItem(this.props.firebase, 'stop', uidStop);
+        readItems(this.props.firebase, uid, 'stops', (value: IReadStop[]) => { this.setState({ stops: value }) },
+                () => { });
+    }
+
     handleOpen = this.handleModal(true);
     handleClose = this.handleModal(false);
     handleCategory = this.handleCategories();
+    deleteStop = this.handleStop();
 
     render() {
         const { uid, modals, application, categories, selectCategory, stops } = this.state;
@@ -135,13 +143,13 @@ class Lists extends React.Component<IProps, IState> {
                 }
                 {application !== null ?
                     stops.map(stop => (
-                        selectCategory !== null ?
-                            stop.categoryID === selectCategory.uid ? <div className="list-item stop">
-                                <p>Stop</p><StopItem uid={stop.uid} isGPS={application.isGPS} isCategory={application.isCategories} /></div> : ''
-                            :
-                            <div className="list-item stop">
-                                <p>Stop</p>
-                                <StopItem uid={stop.uid} isGPS={application.isGPS} isCategory={application.isCategories} /></div>
+                        (selectCategory !== null && stop.categoryID === selectCategory.uid) || selectCategory === null
+                            ? <div className="list-item stop">
+                                <p>Stop</p><StopItem uid={stop.uid} isGPS={application.isGPS} isCategory={application.isCategories} />
+                                <div className="btn-stop"> <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteStop(stop.uid)}>
+                                    Delete
+                                </Button> </div>
+                            </div> : ''
                     ))
                     :
                     ''}
