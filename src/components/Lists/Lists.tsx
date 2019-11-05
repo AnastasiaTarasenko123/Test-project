@@ -145,7 +145,7 @@ class Lists extends React.Component<IProps, IState> {
                     stops.map(stop => (
                         (selectCategory !== null && stop.categoryID === selectCategory.uid) || selectCategory === null
                             ? <div className="list-item stop">
-                                <p>Stop</p><StopItem uid={stop.uid} isGPS={application.isGPS} isCategory={application.isCategories} />
+                                <p>Stop</p><StopItem uid={stop.uid} isGPS={application.isGPS} isCategory={application.isCategories} categories={categories} />
                                 <div className="btn-stop"> <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteStop(stop.uid)}>
                                     Delete
                                 </Button> </div>
@@ -154,7 +154,8 @@ class Lists extends React.Component<IProps, IState> {
                     :
                     ''}
                 <div className={`modals ${modals[0] ? `active` : ``}`}>
-                    <ModalStops modalChange={this.handleClose(0)} appID={uid} />
+                    <ModalStops modalChange={this.handleClose(0)} appID={uid} isGPS={application && application.isGPS} 
+                    isCategory={application && application.isCategories}/>
                 </div>
                 <div className={`modals ${modals[1] ? `active` : ``}`}>
                     <ModalCategory modalChange={this.handleClose(1)} appID={uid} />

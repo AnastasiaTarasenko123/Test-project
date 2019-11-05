@@ -5,13 +5,16 @@ import InputMap from '../input-components/InputMap/InputMap'
 import { IStop, LatLng, IReadCategory } from '../../interfaces/interfaces'
 import Firebase from '../../firebase/Firebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
-import { createItem, readItem } from '../../services/itemFirebase'
+import { createItem, readItems } from '../../services/itemFirebase'
 import { readFileASync } from '../../services/readFile'
+import SelectCategory from '../input-components/SelectCategory/SelectCategory'
 
 interface IProps {
     modalChange: () => void,
     firebase: Firebase,
-    appID: string
+    appID: string,
+    isGPS: boolean,
+    isCategory: boolean
 }
 
 interface IState extends IStop {
@@ -37,7 +40,7 @@ class ModalStops extends React.Component<IProps, IState> {
 
     componentDidMount() {
         const { appID } = this.props;
-        readItem(this.props.firebase, appID, 'categories', (value: IReadCategory[]) => { this.setState({ categories: value }) },
+        readItems(this.props.firebase, appID, 'categories', (value: IReadCategory[]) => { this.setState({ categories: value }) },
             () => { });
     }
 
@@ -70,48 +73,21 @@ class ModalStops extends React.Component<IProps, IState> {
         event.preventDefault();
     }
 
+    onChangeCategory = (category: IReadCategory) => {
+        this.setState({ selectCategory: category, categoryID: category.uid });
+    }
+
     render() {
-        const { title, picture, videoURL, description, place, categories } = this.state;
+        const { title, picture, videoURL, description, place, categories, selectCategory } = this.state;
+        const { isGPS, isCategory } = this.props;
         return (
             <div className="modal-window">
                 <div className="modal-block">
                     <div className="content-stop">
                         <form onSubmit={event => this.addStop(event)}>
                             <h2>Stop</h2>
-                            <div className="stop-information">
-                                <div className="details-category">
-                                    <TextField
-                                        margin="normal"
-                                        type="text"
-                                        className="input-field-name"
-                                        //value={selectCategory && selectCategory.categoryName}
-                                        label="Category Name"
-                                    />
-                                    <br />
-                                    <TextField
-                                        label="Stop Description"
-                                        multiline
-                                        rows="2"
-                                        // value={selectCategory && selectCategory.description}
-                                        margin="normal"
-                                        className="input-field"
-                                    />
-                                </div>
-                                <div className="choose-category">
-                                    <FormControl className="select-category">
-                                        <InputLabel htmlFor="age-helper">Category</InputLabel>
-                                        <Select
-                                        //  value={categories[0]}
-                                        // onChange={this.onChange('selectCategory')}
-                                        >
-                                            {/* {
-                                                categories.map(category => (
-                                                    <MenuItem value={category.uid}>{category.categoryName}</MenuItem>
-                                                ))
-                                            } */}
-                                        </Select>
-                                    </FormControl>
-                                </div>
+                            <div className={`stop-information no-active ${isCategory ? `active` : ``}`}>
+                                <SelectCategory selectCategory={selectCategory} categories={categories} onChangeCategory={this.onChangeCategory} />
                             </div>
                             <div className="stop-information">
                                 <div className="stop-block img-picture">
@@ -154,7 +130,7 @@ class ModalStops extends React.Component<IProps, IState> {
                                     />
                                 </div>
                             </div>
-                            <div className="stop-information">
+                            <div className={`stop-information no-active ${isGPS ? `active` : ``}`}>
                                 <div className="stop-map">
                                     <InputMap onChangePlace={this.onChangePlace} selectedPlace={place} />
                                 </div>

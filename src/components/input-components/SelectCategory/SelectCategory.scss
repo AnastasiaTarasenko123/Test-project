@@ -1,0 +1,32 @@
+@import '../../../constants/style';
+
+.select {
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    .stop-block {
+        width: 50%;
+        text-align: center;
+    }
+
+    .details-category {
+        width: 70%;
+
+        .input-field-name {
+            width: 40%;
+        }
+
+        .input-field {
+            width: 80%;
+        }
+    }
+
+    .choose-category {
+        width: 30%;
+
+        .select-category {
+            width: 90%;
+        }
+    }
+}

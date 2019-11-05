@@ -1,5 +1,5 @@
 import React from 'react'
-import { IReadStop, LatLng } from '../../interfaces/interfaces'
+import { IReadStop, LatLng, IReadCategory } from '../../interfaces/interfaces'
 import Firebase from '../../firebase/Firebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import { readItem, update } from '../../services/itemFirebase'
@@ -7,12 +7,14 @@ import { readFileASync } from '../../services/readFile'
 import { TextField, FormControl, Select, InputLabel } from '@material-ui/core'
 import InputMap from '../input-components/InputMap/InputMap'
 import './StopItem.scss'
+import SelectCategory from '../input-components/SelectCategory/SelectCategory'
 
 interface IProps {
     uid: string,
     isGPS: boolean,
-    isCategory: boolean
+    isCategory: boolean,
     firebase: Firebase,
+    categories: IReadCategory[]
 }
 
 interface IState extends IReadStop { }
@@ -73,7 +75,7 @@ class StopItem extends React.Component<IProps, IState> {
                 update('stop', this.props.firebase, uid, key, v)
             })
     }
-    
+
     onChangePlace = (selectedPlace: LatLng) => {
         const { uid } = this.state;
         this.setState({
@@ -82,27 +84,27 @@ class StopItem extends React.Component<IProps, IState> {
         update('stop', this.props.firebase, uid, 'selectedPlace', selectedPlace);
     }
 
+    getCategory = (uid: string) => {
+        const { categories } = this.props;
+        categories.forEach(category => {
+            if (category.uid === uid)
+                return category;
+        })
+        return null;
+    }
+
+    onChangeCategory = (category: IReadCategory) => {
+        this.setState({ categoryID: category.uid });
+    }
+
     render() {
-        const { title, picture, videoURL, description, place } = this.state;
-        const { isGPS, isCategory } = this.props;
-        {console.log(isCategory, isGPS) }
+        const { title, picture, videoURL, description, place, categoryID } = this.state;
+        const { isGPS, isCategory, categories } = this.props;
         return (
             <div className="content-stop">
-                <div className={`stop-information no-active ${isCategory ? `active` : `` }`}>
+                <div className={`stop-information no-active ${isCategory ? `active` : ``}`}>
                     <div className="choose-category">
-                        <FormControl className="select-category">
-                            <InputLabel htmlFor="age-helper">Category</InputLabel>
-                            <Select
-                            //  value={categories[0]}
-                            // onChange={this.onChange('selectCategory')}
-                            >
-                                {/* {
-                                                categories.map(category => (
-                                                    <MenuItem value={category.uid}>{category.categoryName}</MenuItem>
-                                                ))
-                                            } */}
-                            </Select>
-                        </FormControl>
+                        <SelectCategory selectCategory={this.getCategory(categoryID)} categories={categories} onChangeCategory={this.onChangeCategory} />
                     </div>
                 </div>
                 <div className="stop-information">

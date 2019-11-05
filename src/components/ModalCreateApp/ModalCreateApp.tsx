@@ -44,8 +44,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
     }
 
     whichBlockActive = () => (Number(this.state.blockActive));
-
-    //не стирається ((
+    
     onCreateApp = (event: React.FormEvent<HTMLFormElement>, authUser: any) => {
         this.props.modalChange();
         const { appName, picture, color, description, selectedPlace, isCategories, isGPS } = this.state

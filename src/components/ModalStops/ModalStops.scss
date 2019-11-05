@@ -26,7 +26,8 @@
         }
 
         .content-stop {
-            width: 100%;
+            width: 95%;
+            margin: 0;
 
             h2 {
                 color: white;
@@ -46,23 +47,17 @@
                 .stop-block {
                     width: 50%;
                     text-align: center;
-                    margin-right: 3rem;
                 }
 
                 .details-category {
                     width: 70%;
+
                     .input-field-name {
                         width: 40%;
                     }
+
                     .input-field {
                         width: 80%;
-                    }
-                }
-
-                .choose-category {
-                    width: 30%;
-                    .select-category {
-                        width: 90%;
                     }
                 }
 
@@ -94,6 +89,14 @@
                 .stop-map {
                     width: 95%;
                 }
+            }
+
+            .no-active {
+                display: none;
+            }
+
+            .active {
+                display: flex;
             }
 
             .send-stop {
