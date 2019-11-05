@@ -4,14 +4,14 @@
 
     .in-content {
         width: 50%;
+        padding: 1rem;
+
+        .content-map {
+            width: 80%;
+        }
 
         .field-content {
-            width: 90%;
+            width: 80%;
         }
-
-        .field-content-latlng {
-            width: 90%;
-        }
-
     }
 }

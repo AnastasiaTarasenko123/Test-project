@@ -2,76 +2,45 @@
 
 .content-stop {
     width: 100%;
-    margin: auto;
-    padding: 1rem;
+    padding-left: 3rem;
+    padding-top: 1rem;
 
-    .stop-category {
-        width: 90%;
-        margin: auto;
+    .title {
+        padding: 1rem;
+        color: $useColor !important;
+        text-align: left !important;
     }
 
-    .stop-information {
+    .btn-add-stop {
+        text-align: center;
+        margin: 3rem;
+    }
+
+    .stop-information{
         display: flex;
         align-items: center;
-        width: 100%;
-        margin: 3rem;
-       
+        justify-content: center;
+        color: $useColor;
+        text-align: left;
+
         .stop-block {
             width: 50%;
-        }
-
-        .details-category {
-            width: 100%;
-            .input-field-name {
-                width: 100%;
-            }
-            .input-field {
-                width: 100%;
-            }
-        }
-
-        .choose-category {
-            width: 50%;
-            
-            .select-category {
-                width: 85%;
-            }
-        }
-
-        .img-picture {
-            .input-field-stop {
-                width: 85%;
-            }
+            padding: 1rem;
 
             .img-block {
                 display: none;
+                .img-modal {
+                    width: 50%;
+                }
             }
 
-            .img-active {
+            .active {
                 display: block;
             }
 
-            .img-modal {
-                width: 50%;
+            .input-field {
+                width: 80%;
             }
         }
-
-        .stop-description {
-            .description-modal {
-                width: 85%;
-            }
-        }
-
-        .stop-map {
-            width: 95%;
-        }
-    }
-
-    .no-active {
-        display: none;
-    }
-
-    .active {
-        display: block;
     }
 }

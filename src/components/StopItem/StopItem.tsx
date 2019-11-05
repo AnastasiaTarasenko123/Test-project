@@ -1,33 +1,38 @@
 import React from 'react'
-import { IReadStop, LatLng, IReadCategory } from '../../interfaces/interfaces'
+import { IReadStop, LatLng, IReadCategory, ReadApplication } from '../../interfaces/interfaces'
 import Firebase from '../../firebase/Firebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
-import { readItem, update } from '../../services/itemFirebase'
+import { readItem, update, createItem } from '../../services/itemFirebase'
 import { readFileASync } from '../../services/readFile'
-import { TextField } from '@material-ui/core'
+import { TextField, Button } from '@material-ui/core'
 import InputMap from '../input-components/InputMap/InputMap'
 import './StopItem.scss'
 import SelectCategory from '../input-components/SelectCategory/SelectCategory'
 
 interface IProps {
     uid: string,
-    isGPS: boolean,
-    isCategory: boolean,
+    categories: IReadCategory[],
+    application: ReadApplication | null,
     firebase: Firebase,
-    categories: IReadCategory[]
+    modalChange: () => void
 }
 
-interface IState extends IReadStop { }
+interface IState extends IReadStop {
+    categories: IReadCategory[],
+    selectCategory: IReadCategory | null
+}
 
 const emptyState: IState = {
     uid: '',
     appID: '',
     categoryID: '',
-    title: '',
+    title: 'New Stop',
     description: '',
     picture: '',
     videoURL: '',
-    place: { lat: 0, lng: 0 }
+    place: { lat: 0, lng: 0 },
+    categories: [],
+    selectCategory: null
 }
 
 class StopItem extends React.Component<IProps, IState> {
@@ -40,13 +45,14 @@ class StopItem extends React.Component<IProps, IState> {
 
     componentDidMount() {
         const { uid } = this.props;
-        readItem(this.props.firebase, uid, 'stops', (value: IReadStop) => { this.setState({ ...value }) },
-            () => { });
+        if (uid !== '')
+            readItem(this.props.firebase, uid, 'stops', (value: IReadStop) => { this.setState({ ...value }) },
+                () => { });
     }
 
     componentDidUpdate(prevProps: IProps, prevState: IState) {
-        if (prevProps.uid !== this.props.uid) {
-            const { uid } = this.props;
+        const { uid } = this.props;
+        if (uid !== '' && prevProps.uid !== this.props.uid) {
             readItem(this.props.firebase, uid, 'stops', (value: IReadStop) => { this.setState({ ...value }) },
                 () => { });
         }
@@ -62,7 +68,8 @@ class StopItem extends React.Component<IProps, IState> {
         this.setState(prev => ({
             ...prev, [key]: value
         }));
-        update('stop', this.props.firebase, uid, key, value);
+        if (uid !== '')
+            update('stop', this.props.firebase, uid, key, value);
     }
 
     onChangeFile = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +79,8 @@ class StopItem extends React.Component<IProps, IState> {
                 this.setState(prev => ({
                     ...prev, [key]: v
                 }))
-                update('stop', this.props.firebase, uid, key, v)
+                if (uid !== '')
+                    update('stop', this.props.firebase, uid, key, v)
             })
     }
 
@@ -81,7 +89,8 @@ class StopItem extends React.Component<IProps, IState> {
         this.setState({
             place: selectedPlace
         });
-        update('stop', this.props.firebase, uid, 'selectedPlace', selectedPlace);
+        if (uid !== '')
+            update('stop', this.props.firebase, uid, 'selectedPlace', selectedPlace);
     }
 
     getCategory = (uid: string): IReadCategory | null => {
@@ -97,65 +106,85 @@ class StopItem extends React.Component<IProps, IState> {
     onChangeCategory = (category: IReadCategory) => {
         const { uid } = this.state;
         this.setState({ categoryID: category.uid });
-        update('stop', this.props.firebase, uid, 'categoryID', category.uid);
+        if (uid !== '')
+            update('stop', this.props.firebase, uid, 'categoryID', category.uid);
+    }
+
+    addStop = (event: React.FormEvent<HTMLFormElement>) => {
+        const { title, description, picture, videoURL, categoryID, place } = this.state;
+        const { application } = this.props;
+        if (application !== null) {
+            let appId: string = application.uid;
+            createItem('stops', this.props.firebase, { appId, title, description, picture, videoURL, categoryID, place });
+        }
+        this.props.modalChange();
+        event.preventDefault();
     }
 
     render() {
         const { title, picture, videoURL, description, place, categoryID } = this.state;
-        const { isGPS, isCategory, categories } = this.props;
+        const { application, categories, uid } = this.props;
         return (
             <div className="content-stop">
-                <div className={`stop-category no-active ${isCategory ? `active` : ``}`}>
-                    <div className="choose-category">
+                <form onSubmit={event => this.addStop(event)}>
+                    {uid === '' && (application && application.isCategories) ?
                         <SelectCategory selectCategory={this.getCategory(categoryID)} categories={categories} onChangeCategory={this.onChangeCategory} />
-                    </div>
-                </div>
-                <div className="stop-information">
-                    <div className="stop-block img-picture">
-                        <TextField
-                            margin="normal"
-                            onChange={this.onChange('title')}
-                            type="text"
-                            label="Title Stop"
-                            className="input-field-stop"
-                            value={title}
-                        />
-                        <div className={`img-block ${(picture !== '') ? `img-active` : ``}`}>
-                            <img src={picture} alt="app" className="img-modal" />
+                        :
+                        ''}
+                    <h2 className="title">Stop</h2>
+                    <div className="stop-information">
+                        <div className="stop-block">
+                            <TextField
+                                margin="normal"
+                                onChange={this.onChange('title')}
+                                type="text"
+                                label="Title Stop"
+                                className="input-field"
+                                value={title}
+                            />
+                            <div className={`img-block ${(picture !== '') ? `active` : ``}`}>
+                                <img src={picture} alt="app" className="img-modal" />
+                            </div>
+                            <TextField
+                                margin="normal"
+                                onChange={this.onChangeFile('picture')}
+                                type="file"
+                                className="input-field"
+                            />
+                            <br />
+                            <TextField
+                                margin="normal"
+                                onChange={this.onChange('videoURL')}
+                                type="text"
+                                label="Video URL"
+                                className="input-field"
+                                value={videoURL}
+                            />
                         </div>
-                        <TextField
-                            margin="normal"
-                            onChange={this.onChangeFile('picture')}
-                            type="file"
-                            className="input-field-stop"
-                        />
-                        <TextField
-                            margin="normal"
-                            onChange={this.onChange('videoURL')}
-                            type="text"
-                            label="Video URL"
-                            className="input-field-stop"
-                            value={videoURL}
-                        />
+                        <div className="stop-block">
+                            <TextField
+                                label="Stop Description"
+                                multiline
+                                rows="10"
+                                value={description}
+                                onChange={this.onChange('description')}
+                                margin="normal"
+                                className="input-field"
+                            />
+                        </div>
                     </div>
-                    <div className="stop-block stop-description">
-                        <TextField
-                            label="Stop Description"
-                            multiline
-                            rows="18"
-                            value={description}
-                            onChange={this.onChange('description')}
-                            margin="normal"
-                            className="description-modal"
-                            variant="outlined"
-                        />
-                    </div>
-                </div>
-                <div className={`stop-information no-active ${isGPS ? `active` : ``}`}>
-                    <div className="stop-map">
-                        <InputMap onChangePlace={this.onChangePlace} selectedPlace={place} />
-                    </div>
-                </div>
+                    <h2 className="title">Coogle Map</h2>
+                    {(application && application.isCategories) ?
+                        <div className="stop-map">
+                            <InputMap onChangePlace={this.onChangePlace} selectedPlace={place} />
+                        </div>
+                        : ''}
+                    {uid === '' ?
+                        <div className="btn-add-stop">
+                            <Button variant="contained" color="primary" type="submit">ADD</Button>
+                        </div>
+                        : ''}
+                </form>
             </div>
         )
     }

@@ -30,13 +30,14 @@ class Category extends React.Component<IProps, IState> {
 
     componentDidMount() {
         const { uid } = this.props;
-        readItem(this.props.firebase, uid, 'categories', (value: IReadCategory) => { this.setState({ ...value }) },
-            () => { });
+        if(uid !== '')
+            readItem(this.props.firebase, uid, 'categories', (value: IReadCategory) => { this.setState({ ...value }) },
+                () => { });
     }
 
     componentDidUpdate(prevProps: IProps, prevState: IState) {
-        if (prevProps.uid !== this.props.uid) {
-            const { uid } = this.props;
+        const { uid } = this.props;
+        if (uid !== '' && prevProps.uid !== this.props.uid) {
             readItem(this.props.firebase, uid, 'categories', (value: IReadCategory) => { this.setState({ ...value }) },
                 () => { });
         }

@@ -76,39 +76,41 @@ class InputMap extends React.Component<IProps, IState> {
             <div className="input-map">
                 <div className="in-content">
                     <div className="location">
-                        <label>App Address</label>
                         <TextField
                             onChange={this.onChangeLocation}
                             margin="normal"
                             variant="outlined"
                             value={location}
                             className="field-content"
+                            placeholder="App Address"
                         />
                     </div>
                     <div className="lat-lng">
-                        <label>Lat Address</label>
                         <TextField
                             onChange={this.onChange('lat')}
                             type="number"
                             margin="normal"
                             variant="outlined"
                             value={lat}
-                            className="field-content-latlng"
+                            className="field-content"
+                            placeholder="Lat Address"
                         />
                         <br />
-                        <label>Lng Address</label>
                         <TextField
                             onChange={this.onChange('lng')}
                             type="number"
                             margin="normal"
                             variant="outlined"
-                            className="field-content-latlng"
+                            className="field-content"
                             value={lng}
+                            placeholder="Lng Address"
                         />
                     </div>
                 </div>
                 <div className="in-content">
-                    <MapContainer onMapClicked={this.onMapClicked} selectedPlace={{ lat, lng }} />
+                    <div className="content-map">
+                        <MapContainer onMapClicked={this.onMapClicked} selectedPlace={{ lat, lng }} />
+                    </div>
                 </div>
             </div>
         );

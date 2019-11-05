@@ -14,7 +14,7 @@
         height: 55rem;
         overflow-y: auto;
         width: 80vw;
-        background: $modalStops;
+        background-color: white;
         margin: 3% auto;
         border-radius: 10px;
 
@@ -22,79 +22,11 @@
             position: $positionButton;
             top: 2%;
             right: 1%;
-            color: white;
+            color: $useColor;
         }
 
         .content-stop {
-            width: 95%;
-            margin: 0;
-
-            h2 {
-                color: white;
-                text-align: center;
-            }
-
-            .stop-select {
-                width: 100%;
-                margin: 3rem;
-                padding: 3rem;
-                border: 1px solid $useColor;
-                border-radius: 10px;
-                background-color: white;
-            }
-
-            .stop-information {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin: 3rem;
-                padding: 3rem;
-                border: 1px solid $useColor;
-                border-radius: 10px;
-                background-color: white;
-
-                .img-picture {
-                    .input-field-stop {
-                        width: 85%;
-                    }
-
-                    .img-block {
-                        display: none;
-                    }
-
-                    .img-active {
-                        display: block;
-                    }
-
-                    .img-modal {
-                        margin-top: 3vh;
-                        width: 50%;
-                    }
-                }
-
-                .stop-description {
-                    .description-modal {
-                        width: 85%;
-                    }
-                }
-
-                .stop-map {
-                    width: 95%;
-                }
-            }
-
-            .no-active {
-                display: none;
-            }
-
-            .active {
-                display: block;
-            }
-
-            .send-stop {
-                text-align: center;
-                margin: 3rem;
-            }
+            width: 100%;
         }
     }
 }
