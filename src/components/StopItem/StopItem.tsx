@@ -4,7 +4,7 @@ import Firebase from '../../firebase/Firebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import { readItem, update } from '../../services/itemFirebase'
 import { readFileASync } from '../../services/readFile'
-import { TextField, FormControl, Select, InputLabel } from '@material-ui/core'
+import { TextField } from '@material-ui/core'
 import InputMap from '../input-components/InputMap/InputMap'
 import './StopItem.scss'
 import SelectCategory from '../input-components/SelectCategory/SelectCategory'
@@ -27,7 +27,7 @@ const emptyState: IState = {
     description: '',
     picture: '',
     videoURL: '',
-    place: { lat: 0, lng: 0 },
+    place: { lat: 0, lng: 0 }
 }
 
 class StopItem extends React.Component<IProps, IState> {
@@ -84,17 +84,20 @@ class StopItem extends React.Component<IProps, IState> {
         update('stop', this.props.firebase, uid, 'selectedPlace', selectedPlace);
     }
 
-    getCategory = (uid: string) => {
+    getCategory = (uid: string): IReadCategory | null => {
         const { categories } = this.props;
+        let result = null;
         categories.forEach(category => {
             if (category.uid === uid)
-                return category;
+                result = category;
         })
-        return null;
+        return result;
     }
 
     onChangeCategory = (category: IReadCategory) => {
+        const { uid } = this.state;
         this.setState({ categoryID: category.uid });
+        update('stop', this.props.firebase, uid, 'categoryID', category.uid);
     }
 
     render() {
@@ -102,7 +105,7 @@ class StopItem extends React.Component<IProps, IState> {
         const { isGPS, isCategory, categories } = this.props;
         return (
             <div className="content-stop">
-                <div className={`stop-information no-active ${isCategory ? `active` : ``}`}>
+                <div className={`stop-category no-active ${isCategory ? `active` : ``}`}>
                     <div className="choose-category">
                         <SelectCategory selectCategory={this.getCategory(categoryID)} categories={categories} onChangeCategory={this.onChangeCategory} />
                     </div>

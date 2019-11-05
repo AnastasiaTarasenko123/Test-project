@@ -24,7 +24,6 @@ class SelectCategory extends React.Component<IProps> {
          })
     }
 
-
     render() {
         const { selectCategory, categories } = this.props;
         return (
@@ -47,7 +46,7 @@ class SelectCategory extends React.Component<IProps> {
                 </div>
                 <div className="choose-category">
                     <FormControl className="select-category">
-                        <InputLabel htmlFor="age-helper">Category</InputLabel>
+                        <InputLabel>Category</InputLabel>
                         <Select
                             value={selectCategory && selectCategory.uid}
                             onChange={this.handleChange}

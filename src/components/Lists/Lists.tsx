@@ -97,7 +97,6 @@ class Lists extends React.Component<IProps, IState> {
 
     render() {
         const { uid, modals, application, categories, selectCategory, stops } = this.state;
-        console.log(application);
         return (
             <div className="content-lists">
                 <div className="border-lists">
