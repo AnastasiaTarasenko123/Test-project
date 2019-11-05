@@ -21,7 +21,8 @@ interface IState {
     application: ReadApplication | null,
     categories: IReadCategory[],
     selectCategory: IReadCategory | null,
-    stops: IReadStop[]
+    stops: IReadStop[],
+    uncategorized: boolean
 }
 
 class Lists extends React.Component<IProps, IState> {
@@ -33,7 +34,8 @@ class Lists extends React.Component<IProps, IState> {
             application: null,
             categories: [],
             selectCategory: null,
-            stops: []
+            stops: [],
+            uncategorized: false
         }
     }
 
@@ -65,12 +67,26 @@ class Lists extends React.Component<IProps, IState> {
     handleCategories = () => (i: number) => () => {
         let temp: IReadCategory | null = null;
         const { categories } = this.state;
-        if (i !== categories.length && i !== -1)
+        if (i === -1) {
+            this.setState({
+                uncategorized: true,
+                selectCategory: null
+            });
+        }
+        else if (i === categories.length) {
+            this.setState({
+                uncategorized: false,
+                selectCategory: null
+            });
+        }
+        else {
             temp = categories[i];
-        this.setState(prev => ({
-            ...prev,
-            selectCategory: temp
-        }))
+            this.setState(prev => ({
+                ...prev,
+                selectCategory: temp,
+                uncategorized: false
+            }))
+        }
     }
 
     deleteCategory = () => {
@@ -87,7 +103,7 @@ class Lists extends React.Component<IProps, IState> {
         const { uid } = this.state;
         deleteItem(this.props.firebase, 'stop', uidStop);
         readItems(this.props.firebase, uid, 'stops', (value: IReadStop[]) => { this.setState({ stops: value }) },
-                () => { });
+            () => { });
     }
 
     handleOpen = this.handleModal(true);
@@ -96,7 +112,7 @@ class Lists extends React.Component<IProps, IState> {
     deleteStop = this.handleStop();
 
     render() {
-        const { uid, modals, application, categories, selectCategory, stops } = this.state;
+        const { uid, modals, application, categories, selectCategory, stops, uncategorized } = this.state;
         return (
             <div className="content-lists">
                 <div className="border-lists">
@@ -140,21 +156,44 @@ class Lists extends React.Component<IProps, IState> {
                         <div></div>
                     )
                 }
-                {application !== null ?
-                    stops.map(stop => (
-                        (selectCategory !== null && stop.categoryID === selectCategory.uid) || selectCategory === null
-                            ? <div className="list-item stop">
-                                <p>Stop</p><StopItem uid={stop.uid} isGPS={application.isGPS} isCategory={application.isCategories} categories={categories} />
-                                <div className="btn-stop"> <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteStop(stop.uid)}>
-                                    Delete
+                {application !== null && selectCategory !== null
+                    ?
+                    stops.map(stop => (stop.categoryID === selectCategory.uid
+                        ?
+                        <div className="list-item stop">
+                            <p>Stop</p><StopItem uid={stop.uid} isGPS={application.isGPS} isCategory={application.isCategories} categories={categories} />
+                            <div className="btn-stop"> <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteStop(stop.uid)}>
+                                Delete
                                 </Button> </div>
-                            </div> : ''
-                    ))
+                        </div> : ''))
+                    :
+                    ''}
+                {application !== null && selectCategory === null && uncategorized
+                    ?
+                    stops.map(stop => (stop.categoryID === ''
+                        ?
+                        <div className="list-item stop">
+                            <p>Stop</p><StopItem uid={stop.uid} isGPS={application.isGPS} isCategory={application.isCategories} categories={categories} />
+                            <div className="btn-stop"> <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteStop(stop.uid)}>
+                                Delete
+                                </Button> </div>
+                        </div> : ''))
+                    :
+                    ''}
+                {application !== null && selectCategory === null && !uncategorized
+                    ?
+                    stops.map(stop => (
+                        <div className="list-item stop">
+                            <p>Stop</p><StopItem uid={stop.uid} isGPS={application.isGPS} isCategory={application.isCategories} categories={categories} />
+                            <div className="btn-stop"> <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteStop(stop.uid)}>
+                                Delete
+                                </Button> </div>
+                        </div>))
                     :
                     ''}
                 <div className={`modals ${modals[0] ? `active` : ``}`}>
-                    <ModalStops modalChange={this.handleClose(0)} appID={uid} isGPS={application && application.isGPS} 
-                    isCategory={application && application.isCategories}/>
+                    <ModalStops modalChange={this.handleClose(0)} appID={uid} isGPS={application && application.isGPS}
+                        isCategory={application && application.isCategories} />
                 </div>
                 <div className={`modals ${modals[1] ? `active` : ``}`}>
                     <ModalCategory modalChange={this.handleClose(1)} appID={uid} />
