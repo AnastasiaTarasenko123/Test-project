@@ -86,7 +86,7 @@ class ModalStops extends React.Component<IProps, IState> {
                     <div className="content-stop">
                         <form onSubmit={event => this.addStop(event)}>
                             <h2>Stop</h2>
-                            <div className={`stop-information no-active ${isCategory ? `active` : ``}`}>
+                            <div className={`stop-select no-active ${isCategory ? `active` : ``}`}>
                                 <SelectCategory selectCategory={selectCategory} categories={categories} onChangeCategory={this.onChangeCategory} />
                             </div>
                             <div className="stop-information">

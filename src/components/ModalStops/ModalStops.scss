@@ -34,6 +34,15 @@
                 text-align: center;
             }
 
+            .stop-select {
+                width: 100%;
+                margin: 3rem;
+                padding: 3rem;
+                border: 1px solid $useColor;
+                border-radius: 10px;
+                background-color: white;
+            }
+
             .stop-information {
                 display: flex;
                 align-items: center;
@@ -43,23 +52,6 @@
                 border: 1px solid $useColor;
                 border-radius: 10px;
                 background-color: white;
-
-                .stop-block {
-                    width: 50%;
-                    text-align: center;
-                }
-
-                .details-category {
-                    width: 70%;
-
-                    .input-field-name {
-                        width: 40%;
-                    }
-
-                    .input-field {
-                        width: 80%;
-                    }
-                }
 
                 .img-picture {
                     .input-field-stop {
@@ -96,7 +88,7 @@
             }
 
             .active {
-                display: flex;
+                display: block;
             }
 
             .send-stop {

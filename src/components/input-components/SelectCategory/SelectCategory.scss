@@ -1,32 +1,28 @@
 @import '../../../constants/style';
 
-.select {
-    width: 100%;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    .stop-block {
-        width: 50%;
-        text-align: center;
+.select-category-block {
+
+    .select-category-title {
+        padding: 1rem;
+        color: $useColor !important;
+        text-align: left !important;
     }
 
-    .details-category {
-        width: 70%;
+    .my-select-category {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $useColor;
+        text-align: left;
 
-        .input-field-name {
-            width: 40%;
-        }
+        .block-category {
+            width: 50%;
+            padding: 1rem;
 
-        .input-field {
-            width: 80%;
-        }
-    }
-
-    .choose-category {
-        width: 30%;
-
-        .select-category {
-            width: 90%;
+            .input-field {
+                width: 80%;
+            }
         }
     }
 }
