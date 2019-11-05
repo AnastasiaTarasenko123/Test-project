@@ -1,14 +1,16 @@
 import React from 'react'
 import { IReadCategory } from '../../interfaces/interfaces'
-import { TextField } from '@material-ui/core'
-import { readItem, update } from '../../services/itemFirebase'
+import { TextField, Button } from '@material-ui/core'
+import { readItem, update, createItem } from '../../services/itemFirebase'
 import Firebase from '../../firebase/Firebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import './Category.scss'
 
 interface IProps {
     firebase: Firebase,
-    uid: string
+    uid: string,
+    appID: string,
+    modalChange: () => void
 }
 
 interface IState extends IReadCategory { }
@@ -50,32 +52,51 @@ class Category extends React.Component<IProps, IState> {
         this.setState(prev => ({
             ...prev, [key]: value
         }));
-        update('category', this.props.firebase, uid, key, value);
+        if (uid !== '') {
+            update('category', this.props.firebase, uid, key, value);
+        }
+    }
+
+    addCategory = (event: React.FormEvent<HTMLFormElement>) => {
+        const { categoryName, description } = this.state;
+        const { appID } = this.props;
+        createItem('categories', this.props.firebase, { appID, categoryName, description });
+        this.props.modalChange();
+        event.preventDefault();
     }
 
     render() {
-        const { categoryName, description } = this.state;
+        const { categoryName, description, uid } = this.state;
         return (
-            <div>
-                <TextField
-                    margin="normal"
-                    type="text"
-                    className="input-field"
-                    value={categoryName}
-                    label="Category Name"
-                    onChange={this.onChange('categoryName')}
-                />
-                <br />
-                <TextField
-                    label="Stop Description"
-                    multiline
-                    rows="4"
-                    value={description}
-                    margin="normal"
-                    className="input-field"
-                    variant="outlined"
-                    onChange={this.onChange('description')}
-                />
+            <div className="my-category">
+                <h2 className={`${uid === '' ? `title-add` : ``}`}>Category</h2>
+                <form onSubmit={event => this.addCategory(event)}>
+                    <TextField
+                        margin="normal"
+                        type="text"
+                        className="input-field"
+                        value={categoryName}
+                        label="Category Name"
+                        onChange={this.onChange('categoryName')}
+                    />
+                    <br />
+                    <TextField
+                        label="Stop Description"
+                        multiline
+                        rows="3"
+                        value={description}
+                        margin="normal"
+                        className="input-field"
+                        onChange={this.onChange('description')}
+                    />
+                    <br />
+
+                    {uid === '' ?
+                        <div className="my-category-add">
+                            <Button variant="contained" color="primary" className="btn-add-category" type="submit">ADD</Button>
+                        </div>
+                        : ''}
+                </form>
             </div>
         )
     }

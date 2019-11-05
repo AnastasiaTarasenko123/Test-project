@@ -145,7 +145,6 @@ class Lists extends React.Component<IProps, IState> {
                 </div>
                 {selectCategory !== null ?
                     <div className="list-item category">
-                        <p>Category</p>
                         <Category uid={selectCategory.uid} />
                         <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteCategory}>
                             Delete

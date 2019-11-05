@@ -11,30 +11,22 @@
 
     .modal-block-category {
         position: relative;
-        height: 30rem;
-        width: 40vw;
+        height: 25rem;
+        width: 40%;
         margin: 15% auto;
         border-radius: 10px;
         background-color: white;
+
+        .content {
+            width: 80%;
+            margin: auto;
+        }
 
         .btn-close {
             position: $positionButton;
             top: 2%;
             right: 1%;
-        }
-
-        .category {
-            text-align: center;
-            padding: 1rem;
             color: $useColor;
-
-            .input-field {
-                width: 80%;
-            }
-
-            .btn-add-category {
-                margin-top: 2rem;
-            }
         }
     }
 }
