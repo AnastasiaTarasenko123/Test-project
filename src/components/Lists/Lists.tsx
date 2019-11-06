@@ -162,37 +162,37 @@ class Lists extends React.Component<IProps, IState> {
                     ?
                     stops.map(stop => (stop.categoryID === selectCategory.uid
                         ?
-                        <div className="list-item stop">
+                        <div className="list-item stop" key={stop.uid}>
                             <StopItem uid={stop.uid} application={application} categories={categories} />
                             <div className="btn-stop"> <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteStop(stop.uid)}>
                                 Delete
                                 </Button> </div>
-                        </div> : ''))
+                        </div> : null))
                     :
                     ''}
                 {application !== null && selectCategory === null && uncategorized
                     ?
                     stops.map(stop => (stop.categoryID === ''
                         ?
-                        <div className="list-item stop">
+                        <div className="list-item stop" key={stop.uid}>
                             <StopItem uid={stop.uid} application={application} categories={categories} />
                             <div className="btn-stop"> <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteStop(stop.uid)}>
                                 Delete
                                 </Button> </div>
-                        </div> : ''))
+                        </div> : null))
                     :
                     ''}
                 {application !== null && selectCategory === null && !uncategorized
                     ?
                     stops.map(stop => (
-                        <div className="list-item stop">
+                        <div className="list-item stop" key={stop.uid}>
                             <StopItem uid={stop.uid} application={application} categories={categories} />
                             <div className="btn-stop"> <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteStop(stop.uid)}>
                                 Delete
                                 </Button> </div>
                         </div>))
                     :
-                    ''}
+                    null}
                 <div className={`modals ${modals[0] ? `active` : ``}`}>
                     <ModalStops modalChange={this.handleClose(0)} application={application} categories={categories} />
                 </div>

@@ -9,6 +9,13 @@ interface IProps {
     onChangeCategory: (selectCategory: IReadCategory) => void
 }
 
+const emptyCategory: IReadCategory = {
+    appID: '',
+    categoryName: '',
+    description: '',
+    uid: ''
+}
+
 class SelectCategory extends React.Component<IProps> {
 
     handleChange = (event: React.ChangeEvent<{ value: any }>) => {
@@ -22,7 +29,8 @@ class SelectCategory extends React.Component<IProps> {
     }
 
     render() {
-        const { selectCategory, categories } = this.props;
+        const { selectCategory: selCat, categories } = this.props;
+        const selectCategory = selCat || {...emptyCategory}
         return (
             <div className="select-category-block">
                 <h2 className="select-category-title">Selected Category</h2>
