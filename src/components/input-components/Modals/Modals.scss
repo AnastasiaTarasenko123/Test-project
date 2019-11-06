@@ -1,4 +1,4 @@
-@import '../../constants/style';
+@import '../../../constants/style';
 
 .modal-window {
     height: 100vh;
@@ -9,24 +9,34 @@
     left: 0;
     background-color: $colorBgModal;
 
-    .modal-block {
-        position: relative;
+    .modal-block-category {
+        height: 25rem;
+        width: 40%;
+        margin: 15% auto;
+    }
+
+    .modal-block-stop {
         height: 55rem;
         overflow-y: auto;
         width: 80vw;
-        background-color: white;
         margin: 3% auto;
+    }
+
+    .modal-block {
+        position: relative;
+        background-color: white;
         border-radius: 10px;
+
+        .content {
+            width: 80%;
+            margin: auto;
+        }
 
         .btn-close {
             position: $positionButton;
             top: 2%;
             right: 1%;
             color: $useColor;
-        }
-
-        .content-stop {
-            width: 100%;
         }
     }
 }

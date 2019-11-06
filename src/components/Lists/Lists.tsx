@@ -6,8 +6,7 @@ import { RouteParams, ReadApplication, IReadCategory, IReadStop } from '../../in
 import Firebase from '../../firebase/Firebase'
 import { readItem, readItems, deleteItem } from '../../services/itemFirebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
-import ModalStops from '../ModalStops/ModalStops'
-import ModalCategory from '../ModalCategory/ModalCategory'
+import { ModalCategory, ModalStops } from '../input-components/Modals/Modals'
 import Category from '../Category/Category'
 import StopItem from '../StopItem/StopItem'
 
@@ -41,13 +40,13 @@ class Lists extends React.Component<IProps, IState> {
 
     componentDidMount() {
         const { uid } = this.state;
-        if( uid !== '') {
-        readItem(this.props.firebase, uid, 'applications', (value: ReadApplication) => { this.setState({ application: value }) },
-            () => { });
-        readItems(this.props.firebase, uid, 'categories', (value: IReadCategory[]) => { this.setState({ categories: value }) },
-            () => { });
-        readItems(this.props.firebase, uid, 'stops', (value: IReadStop[]) => { this.setState({ stops: value }) },
-            () => { });
+        if (uid !== '') {
+            readItem(this.props.firebase, uid, 'applications', (value: ReadApplication) => { this.setState({ application: value }) },
+                () => { });
+            readItems(this.props.firebase, uid, 'categories', (value: IReadCategory[]) => { this.setState({ categories: value }) },
+                () => { });
+            readItems(this.props.firebase, uid, 'stops', (value: IReadStop[]) => { this.setState({ stops: value }) },
+                () => { });
         }
     }
 
