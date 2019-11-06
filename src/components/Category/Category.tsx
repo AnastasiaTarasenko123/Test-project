@@ -63,6 +63,7 @@ class Category extends React.Component<IProps, IState> {
         const { appID } = this.props;
         createItem('categories', this.props.firebase, { appID, categoryName, description });
         this.props.modalChange();
+        this.setState({...emptyState});
         event.preventDefault();
     }
 

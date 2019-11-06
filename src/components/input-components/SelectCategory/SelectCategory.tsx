@@ -10,9 +10,6 @@ interface IProps {
 }
 
 class SelectCategory extends React.Component<IProps> {
-    componentDidMount() {
-        this.setState({})
-    }
 
     handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         const { value } = event.target;

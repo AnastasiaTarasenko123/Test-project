@@ -116,6 +116,7 @@ class StopItem extends React.Component<IProps, IState> {
         if (application !== null) {
             let appID: string = application.uid;
             createItem('stops', this.props.firebase, { appID, title, description, picture, videoURL, categoryID, place });
+            this.setState({...emptyState});
         }
         this.props.modalChange();
         event.preventDefault();
