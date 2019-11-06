@@ -16,22 +16,18 @@ class Picture extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            myPicture: this.props.picture
+            myPicture: ''
         }
     }
 
     onChangeFile = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
         e.target.files &&
             readFileASync(e.target.files[0]).then(v => {
-                this.setState(prev => ({
-                    ...prev, [key]: v
-                }))
                 this.props.onChangeFile(v);
             })
     }
 
     render() {
-        const { myPicture } = this.state;
         const { picture } = this.props;
         return (
             <div className="my-picture">
