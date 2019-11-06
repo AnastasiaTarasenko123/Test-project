@@ -7,10 +7,10 @@ import Firebase from '../../firebase/Firebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import { AuthUserContext } from '../Session/SessionContext'
 import { LatLng } from '../../interfaces/interfaces'
-import { readFileASync } from '../../services/readFile'
 import { codeAddress, codePlace } from '../../services/geocode'
 import { Application } from '../../interfaces/interfaces'
 import { createItem } from '../../services/itemFirebase'
+import Picture from '../input-components/Picture/Picture'
 
 interface IProps {
     modalChange: () => void,
@@ -95,13 +95,8 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         }))
     }
 
-    onChangeFile = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.target.files &&
-            readFileASync(e.target.files[0]).then(v => {
-                this.setState(prev => ({
-                    ...prev, [key]: v
-                }))
-            })
+    onChangeFile = (picture: string) => {
+        this.setState({ picture: picture });
     }
 
     onMapClicked = async (place: LatLng) => {
@@ -197,15 +192,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 <div className={`blocks branding ${(this.whichBlockActive() === 1) ? `active` : ``}`}>
                                     <div className="uploadImg divLeft">
                                         <p>Upload Your App Image</p>
-                                        <TextField
-                                            className="imageInput"
-                                            margin="normal"
-                                            onChange={this.onChangeFile('picture')}
-                                            type="file"
-                                        />
-                                        <div className={`imgBlock ${(picture !== '') ? `imgActive` : ``}`}>
-                                            <img src={picture} alt="app" className="imgModal" />
-                                        </div>
+                                        <Picture picture={picture} onChangeFile={this.onChangeFile} />
                                     </div>
                                     <div className="chooseColor divRight">
                                         <p>Choose Your Accent</p>

@@ -1,0 +1,13 @@
+.my-picture {
+    .img-block {
+        display: none;
+
+        .img-modal {
+            width: 50%;
+        }
+    }
+
+    .active {
+        display: block;
+    }
+}

@@ -3,11 +3,11 @@ import { IReadStop, LatLng, IReadCategory, ReadApplication } from '../../interfa
 import Firebase from '../../firebase/Firebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import { readItem, update, createItem } from '../../services/itemFirebase'
-import { readFileASync } from '../../services/readFile'
 import { TextField, Button } from '@material-ui/core'
 import InputMap from '../input-components/InputMap/InputMap'
 import './StopItem.scss'
 import SelectCategory from '../input-components/SelectCategory/SelectCategory'
+import Picture from '../input-components/Picture/Picture'
 
 interface IProps {
     uid: string,
@@ -72,16 +72,11 @@ class StopItem extends React.Component<IProps, IState> {
             update('stop', this.props.firebase, uid, key, value);
     }
 
-    onChangeFile = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChangeFile = (picture: string) => {
         const { uid } = this.state;
-        e.target.files &&
-            readFileASync(e.target.files[0]).then(v => {
-                this.setState(prev => ({
-                    ...prev, [key]: v
-                }))
-                if (uid !== '')
-                    update('stop', this.props.firebase, uid, key, v)
-            })
+        this.setState({ picture: picture });
+        if (uid !== '')
+            update('stop', this.props.firebase, uid, 'picture', picture);
     }
 
     onChangePlace = (selectedPlace: LatLng) => {
@@ -116,7 +111,7 @@ class StopItem extends React.Component<IProps, IState> {
         if (application !== null) {
             let appID: string = application.uid;
             createItem('stops', this.props.firebase, { appID, title, description, picture, videoURL, categoryID, place });
-            this.setState({...emptyState});
+            this.setState({ ...emptyState });
         }
         this.props.modalChange();
         event.preventDefault();
@@ -143,16 +138,7 @@ class StopItem extends React.Component<IProps, IState> {
                                 className="input-field"
                                 value={title}
                             />
-                            <div className={`img-block ${(picture !== '') ? `active` : ``}`}>
-                                <img src={picture} alt="app" className="img-modal" />
-                            </div>
-                            <TextField
-                                margin="normal"
-                                onChange={this.onChangeFile('picture')}
-                                type="file"
-                                className="input-field"
-                            />
-                            <br />
+                            <Picture picture={picture} onChangeFile={this.onChangeFile} />
                             <TextField
                                 margin="normal"
                                 onChange={this.onChange('videoURL')}
