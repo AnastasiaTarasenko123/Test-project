@@ -9,14 +9,14 @@ interface IProps {
 }
 
 interface IState {
-    picture: string
+    myPicture: string
 }
 
 class Picture extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            picture: ''
+            myPicture: this.props.picture
         }
     }
 
@@ -31,7 +31,8 @@ class Picture extends React.Component<IProps, IState> {
     }
 
     render() {
-        const { picture } = this.state;
+        const { myPicture } = this.state;
+        const { picture } = this.props;
         return (
             <div className="my-picture">
                 <div className={`img-block ${(picture !== '') ? `active` : ``}`}>
@@ -39,7 +40,7 @@ class Picture extends React.Component<IProps, IState> {
                 </div>
                 <TextField
                     margin="normal"
-                    onChange={this.onChangeFile('picture')}
+                    onChange={this.onChangeFile('myPicture')}
                     type="file"
                     className="input-field"
                 />
