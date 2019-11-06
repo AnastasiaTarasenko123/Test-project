@@ -6,8 +6,8 @@ import { ReadApplication, LatLng, RouteParams } from '../../interfaces/interface
 import { withFirebase } from '../../firebase/FirebaseContext'
 import { readItem, update } from '../../services/itemFirebase'
 import { TextField } from '@material-ui/core'
-import { readFileASync } from '../../services/readFile'
 import InputMap from '../input-components/InputMap/InputMap'
+import Picture from '../input-components/Picture/Picture'
 
 interface IProps extends RouteComponentProps<RouteParams> {
     firebase: Firebase
@@ -47,16 +47,10 @@ class AppInfo extends React.Component<IProps, IState> {
         }))
     }
 
-    onChangeFile = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChangeFile = (picture: string) => {
         const { uid } = this.state;
-        e.target.files &&
-            readFileASync(e.target.files[0]).then(v => {
-                this.setState(prev => ({
-                    ...prev, [key]: v
-                }))
-                update('application', this.props.firebase, uid, key, v);
-            }
-            )
+        this.setState({picture: picture});
+        update('application', this.props.firebase, uid, 'picture', picture);
     }
 
     onChangePlace = (selectedPlace: LatLng) => {
@@ -87,13 +81,7 @@ class AppInfo extends React.Component<IProps, IState> {
                 <div className="content content-app-img">
                     <div className="img in-content-app">
                         <p>App Image</p>
-                        {<img src={picture} alt="app" className="field-content-img" />}
-                        <br />
-                        <input
-                            className="imageInput"
-                            onChange={this.onChangeFile('picture')}
-                            type="file"
-                        />
+                        <Picture picture={picture} onChangeFile={this.onChangeFile} />
                     </div>
                     <div className="choose-color in-content-app">
                         <p>Accent Color</p>
