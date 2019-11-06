@@ -11,7 +11,7 @@ interface IProps {
 
 class SelectCategory extends React.Component<IProps> {
 
-    handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    handleChange = (event: React.ChangeEvent<{ value: any }>) => {
         const { value } = event.target;
         const { categories } = this.props;
         categories.forEach(category => {

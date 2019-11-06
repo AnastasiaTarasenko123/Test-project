@@ -69,16 +69,18 @@ class Lists extends React.Component<IProps, IState> {
         let temp: IReadCategory | null = null;
         const { categories } = this.state;
         if (i === -1) {
-            this.setState({
+            this.setState(prev => ({
+                ...prev,
                 uncategorized: true,
                 selectCategory: null
-            });
+            }));
         }
         else if (i === categories.length) {
-            this.setState({
+            this.setState(prev => ({
+                ...prev,
                 uncategorized: false,
                 selectCategory: null
-            });
+            }));
         }
         else {
             temp = categories[i];

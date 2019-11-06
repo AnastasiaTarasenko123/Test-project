@@ -4,7 +4,7 @@ import * as ROUTES from '../../constants/routs'
 import SignOut from '../SignOut/SignOut'
 import './Navigation.scss'
 import { AuthUserContext } from '../Session/SessionContext'
-import Link from '@material-ui/core/Link'
+import { Link } from '@material-ui/core'
 
 const Navigation: React.FC = () => (
   <AuthUserContext.Consumer>
@@ -16,9 +16,7 @@ const NavigationAuth: React.FC = () => (
   <div className="navigaton">
     <ul>
       <li>
-        <Link component="button">
-          <SignOut />
-        </Link>
+        <SignOut />
       </li>
       <li>
         <Link component="button">
