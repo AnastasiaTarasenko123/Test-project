@@ -185,7 +185,6 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                         onChange={this.onChange('appName')}
                                         type="text"
                                         margin="normal"
-                                        variant="outlined"
                                     />
                                     <p className="textRemember">Remember, you can always change your options in our App Configuration screens.</p>
                                 </div>
@@ -216,7 +215,6 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                             value={description}
                                             onChange={this.onChange('description')}
                                             margin="normal"
-                                            variant="outlined"
                                             className="inputInfo"
                                         />
                                     </div>
@@ -227,7 +225,6 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                             onChange={this.onChangeLocation}
                                             value={location}
                                             margin="normal"
-                                            variant="outlined"
                                             className="inputInfo"
                                         />
                                         <MapContainer onMapClicked={this.onMapClicked} selectedPlace={selectedPlace} />
