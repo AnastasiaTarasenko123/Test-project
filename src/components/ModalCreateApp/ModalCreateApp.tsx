@@ -40,17 +40,17 @@ const updateState: IState = {
 class ModalCreateApp extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
-        this.state = updateState;
+        this.state = { ...updateState };
     }
 
     whichBlockActive = () => (Number(this.state.blockActive));
-    
+
     onCreateApp = (event: React.FormEvent<HTMLFormElement>, authUser: any) => {
-        this.props.modalChange();
         const { appName, picture, color, description, selectedPlace, isCategories, isGPS } = this.state
         const userID = authUser.uid;
         createItem('applications', this.props.firebase, { userID, appName, picture, color, description, selectedPlace, isCategories, isGPS });
-        this.setState(updateState)
+        this.setState({ ...updateState });
+        this.props.modalChange();
         event.preventDefault();
     }
 
@@ -63,7 +63,6 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         });
     }
 
-    //не працюэ
     onChangeLocation = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         this.setState({
