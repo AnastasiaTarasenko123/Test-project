@@ -49,7 +49,7 @@ class AppInfo extends React.Component<IProps, IState> {
 
     onChangeFile = (picture: string) => {
         const { uid } = this.state;
-        this.setState({picture: picture});
+        this.setState({picture});
         update('application', this.props.firebase, uid, 'picture', picture);
     }
 
@@ -60,6 +60,14 @@ class AppInfo extends React.Component<IProps, IState> {
         })
         update('application', this.props.firebase, uid, 'selectedPlace', selectedPlace);
     }
+
+    // onChangeKey = (key: keyof IState, value: any) => {
+    //     const { uid } = this.state;
+    //     // this.setState({
+    //     //     key: value
+    //     // })
+    //     update('application', this.props.firebase, uid, key, value);
+    // }
 
     componentDidMount() {
         const { uid } = this.state;
@@ -123,7 +131,7 @@ class AppInfo extends React.Component<IProps, IState> {
                     </div>
                 </div>
                 <div className="content content-location">
-                    <InputMap onChangePlace={this.onChangePlace} selectedPlace={selectedPlace} displayLatLng={true}/>
+                    <InputMap onChangePlace={this.onChangePlace} selectedPlace={selectedPlace} displayLatLng={true} />
                 </div >
                 <div>
                 </div>
