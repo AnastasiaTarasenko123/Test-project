@@ -164,7 +164,7 @@ class StopItem extends React.Component<IProps, IState> {
                         <div>
                             <h2 className="title">Coogle Map</h2>
                             <div className="stop-map">
-                                <InputMap onChangePlace={this.onChangePlace} selectedPlace={place} />
+                                <InputMap onChangePlace={this.onChangePlace} selectedPlace={place}  displayLatLng={true}/>
                             </div>
                         </div>
                         : ''}

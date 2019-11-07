@@ -123,7 +123,7 @@ class AppInfo extends React.Component<IProps, IState> {
                     </div>
                 </div>
                 <div className="content content-location">
-                    <InputMap onChangePlace={this.onChangePlace} selectedPlace={selectedPlace} />
+                    <InputMap onChangePlace={this.onChangePlace} selectedPlace={selectedPlace} displayLatLng={true}/>
                 </div >
                 <div>
                 </div>

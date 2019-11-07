@@ -1,19 +1,29 @@
 .input-map {
     display: flex;
     width: 100%;
+}
+
+.input-map-block {
+    display: block;
+    width: 100%;
+}
+
+div {
+    .content {
+        width: 100%;
+    }
 
     .in-content {
         width: 50%;
         padding: 1rem;
         text-align: center;
+    }
 
-        .content-map {
-            width: 80%;
-            margin: auto;
-        }
+    .content-map {
+        width: 90%;
+    }
 
-        .field-content {
-            width: 80%;
-        }
+    .field-content {
+        width: 90%;
     }
 }

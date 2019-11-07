@@ -1,115 +1,119 @@
 import React from 'react'
 import { TextField } from '@material-ui/core'
-import { LatLng } from '../../../interfaces/interfaces'
+import { LatLng, IAddress } from '../../../interfaces/interfaces'
 import MapContainer from '../../MapContainer/MapContainer'
 import { codeAddress, codePlace } from '../../../services/geocode'
 import './InputMap.scss'
 
 interface IProps {
     selectedPlace: LatLng,
-    onChangePlace: (selectedPlace: LatLng) => void
+    onChangePlace?: (selectedPlace: LatLng) => void
+    displayLatLng?: boolean
 }
 
 interface IState {
-    location: string,
-    lat: number,
-    lng: number
+    currentAddress: IAddress
+    suggestions: IAddress[]
+}
+
+const emptyAddress: IAddress = {
+    location: '',
+    pos: {
+        lat: 0,
+        lng: 0
+    }
 }
 
 class InputMap extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            location: "",
-            lat: this.props.selectedPlace.lat,
-            lng: this.props.selectedPlace.lng
+            currentAddress: { ...emptyAddress },
+            suggestions: []
         }
     }
 
-    onChange = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target;
-        this.setState(prev => ({
-            ...prev, [key]: value
-        }));
-        const { lat, lng } = this.state;
-        this.props.onChangePlace({ lat: lat, lng: lng });
-        this.onMapClicked({ lat: lat, lng: lng });
-    }
-
-    onMapClicked = async (place: LatLng) => {
-        this.setState({
-            lat: place.lat,
-            lng: place.lng
-        });
-        const result = await codePlace(place)
-        if (!('message' in result)) {
+    onMapClicked = async (pos: LatLng) => {
+        const result = await codePlace(pos)
+        const { onChangePlace } = this.props
+        if ((typeof result) === 'string') {
+            onChangePlace && onChangePlace(pos)
             this.setState({
-                location: result
-            });
+                currentAddress: { pos, location: result },
+            })
         } else {
-            console.log(result.message);
+            console.error(result.message);
         }
-        const { lat, lng } = this.state;
-        this.props.onChangePlace({ lat: lat, lng: lng });
     }
 
     onChangeLocation = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
-        this.setState({
-            location: value
-        })
+        this.setState(prev => ({
+            ...prev, 
+            currentAddress: {
+                ...prev.currentAddress, 
+                location: value
+            }
+        }))
         const result = await codeAddress(value)
-        if (!('message' in result)) {
-            this.setState({
-                lat: result.lat,
-                lng: result.lng
-            });
+        if (Array.isArray(result)) {
+            this.setState({ suggestions: result })
         }
         else {
+            this.setState({ suggestions: [] })
             console.log(result.message);
         }
     }
 
     render() {
-        const { lat, lng, location } = this.state;
+        const { displayLatLng, selectedPlace } = this.props
+        const { currentAddress, suggestions } = this.state
         return (
-            <div className="input-map">
-                <div className="in-content">
+            <div className={`${displayLatLng ? `input-map` : `input-map-block`}`}>
+                <div className={`${displayLatLng ? `in-content` : `content`}`}>
                     <div className="location">
                         <TextField
                             onChange={this.onChangeLocation}
                             margin="normal"
                             variant="outlined"
-                            value={location}
+                            value={currentAddress.location}
                             className="field-content"
                             placeholder="App Address"
                         />
+                        {suggestions.length > 0 && 
+                            <div className="suggestions">
+                                {suggestions.map(s => (
+                                    <div className="suggestion">
+                                        <p>{s.location}</p>
+                                    </div>
+                                ))}
+                            </div>}
                     </div>
-                    <div className="lat-lng">
-                        <TextField
-                            onChange={this.onChange('lat')}
-                            type="number"
-                            margin="normal"
-                            variant="outlined"
-                            value={lat}
-                            className="field-content"
-                            placeholder="Lat Address"
-                        />
-                        <br />
-                        <TextField
-                            onChange={this.onChange('lng')}
-                            type="number"
-                            margin="normal"
-                            variant="outlined"
-                            className="field-content"
-                            value={lng}
-                            placeholder="Lng Address"
-                        />
-                    </div>
+                    {displayLatLng &&
+                        <div className="lat-lng">
+                            <TextField
+                                type="number"
+                                margin="normal"
+                                variant="outlined"
+                                value={currentAddress.pos.lat}
+                                className="field-content"
+                                placeholder="Lat Address"
+                            />
+                            <br />
+                            <TextField
+                                type="number"
+                                margin="normal"
+                                variant="outlined"
+                                className="field-content"
+                                value={currentAddress.pos.lng}
+                                placeholder="Lng Address"
+                            />
+                        </div>
+                    }
                 </div>
-                <div className="in-content">
+                <div className={`${displayLatLng ? `in-content` : `content`}`}>
                     <div className="content-map">
-                        <MapContainer onMapClicked={this.onMapClicked} selectedPlace={{ lat, lng }} />
+                        <MapContainer onMapClicked={this.onMapClicked} selectedPlace={{ ...selectedPlace }} />
                     </div>
                 </div>
             </div>

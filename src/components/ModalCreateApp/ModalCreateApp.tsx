@@ -2,15 +2,13 @@ import React from 'react'
 import "./ModalCreateApp.scss"
 import { Button, TextField, Radio, Switch, Table, TableCell, TableRow, TableBody } from '@material-ui/core'
 import { isModalsValid } from '../../services/isDataValid'
-import MapContainer from '../MapContainer/MapContainer'
 import Firebase from '../../firebase/Firebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 import { AuthUserContext } from '../Session/SessionContext'
-import { LatLng } from '../../interfaces/interfaces'
-import { codeAddress, codePlace } from '../../services/geocode'
 import { Application } from '../../interfaces/interfaces'
 import { createItem } from '../../services/itemFirebase'
 import Picture from '../input-components/Picture/Picture'
+import InputMap from '../input-components/InputMap/InputMap'
 
 interface IProps {
     modalChange: () => void,
@@ -63,25 +61,6 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         });
     }
 
-    onChangeLocation = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target;
-        this.setState({
-            location: value
-        })
-        const result = await codeAddress(value)
-        if (!('message' in result)) {
-            this.setState({
-                selectedPlace: {
-                    lat: result.lat,
-                    lng: result.lng
-                }
-            });
-        }
-        else {
-            console.log(result.message);
-        }
-    }
-
     onChange = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         this.setState(prev => ({
@@ -97,20 +76,6 @@ class ModalCreateApp extends React.Component<IProps, IState> {
 
     onChangeFile = (picture: string) => {
         this.setState({ picture: picture });
-    }
-
-    onMapClicked = async (place: LatLng) => {
-        this.setState({
-            selectedPlace: place
-        });
-        const result = await codePlace(place)
-        if (!('message' in result)) {
-            this.setState({
-                location: result
-            });
-        } else {
-            console.log(result.message);
-        }
     }
 
     render() {
@@ -220,14 +185,10 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                     </div>
                                     <div className="location divRight">
                                         <p>Enter Your App Location</p>
-                                        <TextField
-                                            label="Enter Your Location"
-                                            onChange={this.onChangeLocation}
-                                            value={location}
-                                            margin="normal"
-                                            className="inputInfo"
+                                        <InputMap 
+                                            selectedPlace={selectedPlace}
+                                            onChangePlace={(selectedPlace) => {this.setState({selectedPlace})}}
                                         />
-                                        <MapContainer onMapClicked={this.onMapClicked} selectedPlace={selectedPlace} />
                                     </div>
                                 </div>
                                 <div className={`blocks features ${(this.whichBlockActive() === 3) ? `active` : ``}`}>

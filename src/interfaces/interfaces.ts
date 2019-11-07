@@ -3,6 +3,11 @@ export interface LatLng {
     lng: number
 }
 
+export interface IAddress {
+    location: string
+    pos: LatLng
+}
+
 export interface Application {
     userID: any,
     appName: string,

@@ -45,7 +45,7 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
         const { firstName, email, password } = this.state
         if (firebase !== null) {
             registration(firebase, firstName, email, password, authUser => {
-                this.setState({ ... this.value });
+                this.setState({ ...this.value });
                 history.push(ROUTES.DASHBOARD);
             }, (error: any) => {
                 this.setState({ error });
