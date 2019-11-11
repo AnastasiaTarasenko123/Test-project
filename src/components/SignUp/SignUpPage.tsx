@@ -5,12 +5,12 @@ import SignInLink from '../SignIn/SignInLink'
 
 
 export const SignUpPage: React.FC = (): React.ReactElement => (
-    <div className="loginPage">
-        <div className="loginContext">
-            <h1>Sign Up</h1>
-            <p>Account Information</p>
+    <div className="sign-up-page">
+        <div className="sign-up-content">
             <SignUpForm />
             <SignInLink />
+        </div>
+        <div className="sign-up-bg">
         </div>
     </div>
 )

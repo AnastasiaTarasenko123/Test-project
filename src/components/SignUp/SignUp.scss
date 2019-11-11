@@ -6,16 +6,42 @@
     }
 }
 
-// .signUpForm {
-//     div {
-//         margin: 0.4rem;
+.sign-up-page {
+    display: flex;
+    height: 100vh;
 
-//         label {
-//             padding: 0.4rem;
-//         }
-//     }
+    .sign-up-content {
+        flex: 1;
+        margin: auto;
+        text-align: center;
 
-//     .emailSignUp {
-//         width: 28.2vw;
-//     }
-// }
+        .sign-up-form {
+            margin: 2rem;
+
+            .sign-up-title {
+                font-size: 1.5rem;
+                margin: 2rem;
+            }
+
+            .sign-up-description {
+                margin: 0.5rem;
+            }
+
+            .sign-up-input {
+                margin: 0.5rem;
+            }
+        }
+    }
+
+    .sign-up-bg {
+        flex: 1;
+        background: url("../../assets/images/sign-up/bg.jpg") no-repeat center;
+        background-size: cover;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .sign-up-bg {
+        display: none;
+    }
+}

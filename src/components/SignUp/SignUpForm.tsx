@@ -65,57 +65,65 @@ class SignUpFormBase extends React.Component<IProps, IStateSignUp> {
     render() {
         const { firstName, lastName, email, password, confPassword } = this.state;
         return (
-            <form className="signUpForm" noValidate autoComplete="off" onSubmit={this.onSubmit}>
-                <TextField
-                    label="First Name"
-                    value={firstName}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.onChange('firstName')}
-                />
-                <TextField
-                    label="Last Name"
-                    value={lastName}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.onChange('lastName')}
-                />
-                <br />
-                <TextField
-                    label="Email"
-                    className="emailSignUp"
-                    value={email}
-                    type="email"
-                    autoComplete="email"
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.onChange('email')}
-                />
-                <br />
-                <TextField
-                    label="Password"
-                    value={password}
-                    type="password"
-                    autoComplete="current-password"
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.onChange('password')}
-                />
-                <TextField
-                    label="Confirm Password"
-                    value={confPassword}
-                    type="password"
-                    autoComplete="current-password"
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.onChange('confPassword')}
-                />
-                <br />
-                <br />
-                <Button variant="contained" className="button-sign-up" color="primary" type="submit" disabled={isDataValidSignUp(this.state)}>
-                    Submit
+            <div className="sign-up-form">
+                <h1 className="sign-up-title">Sign Up</h1>
+                <p className="sign-up-description">Account Information</p>
+                <form autoComplete="off" onSubmit={this.onSubmit}>
+                    <TextField
+                        label="First Name"
+                        value={firstName}
+                        margin="normal"
+                        variant="outlined"
+                        onChange={this.onChange('firstName')}
+                        className="sign-up-input"
+                    />
+                    <TextField
+                        label="Last Name"
+                        value={lastName}
+                        margin="normal"
+                        variant="outlined"
+                        onChange={this.onChange('lastName')}
+                        className="sign-up-input"
+                    />
+                    <br />
+                    <TextField
+                        label="Email"
+                        value={email}
+                        type="email"
+                        autoComplete="email"
+                        margin="normal"
+                        variant="outlined"
+                        onChange={this.onChange('email')}
+                        className="sign-up-input"
+                    />
+                    <br />
+                    <TextField
+                        label="Password"
+                        value={password}
+                        type="password"
+                        autoComplete="current-password"
+                        margin="normal"
+                        variant="outlined"
+                        onChange={this.onChange('password')}
+                        className="sign-up-input"
+                    />
+                    <TextField
+                        label="Confirm Password"
+                        value={confPassword}
+                        type="password"
+                        autoComplete="current-password"
+                        margin="normal"
+                        variant="outlined"
+                        onChange={this.onChange('confPassword')}
+                        className="sign-up-input"
+                    />
+                    <br />
+                    <br />
+                    <Button variant="contained" className="button-sign-up" color="primary" type="submit" disabled={isDataValidSignUp(this.state)}>
+                        Submit
                 </Button>
-            </form>
+                </form>
+            </div>
         );
     }
 }
