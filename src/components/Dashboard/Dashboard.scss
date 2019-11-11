@@ -1,9 +1,9 @@
 @import '../../constants/style';
 
-.dashboardContent {
+.dashboard {
     margin: 3rem 15rem;
 
-    .headerDashboard {
+    .header-dashboard {
         display: flex;
         align-items: center;
 
@@ -11,16 +11,16 @@
             width: 50%;
         }
 
-        .headerText {
+        .header-text {
             color: $useColor;
         }
 
-        .headerBtn {
+        .header-btn {
             text-align: right;
         }
     }
 
-    .myApps {
+    .apps {
         margin-top: 3rem;
     }
 }

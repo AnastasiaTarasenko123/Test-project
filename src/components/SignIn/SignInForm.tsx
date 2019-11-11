@@ -36,7 +36,7 @@ class SignInFormBase extends React.Component<IProps, IStateSignIn> {
         const { firebase, history } = this.props;
         const { email, password } = this.state;
         if (firebase) {
-            login(firebase, email, password, authUser => { this.setState({ ...this.value }); history.push(ROUTES.DASHBOARD); }, (error) => this.setState({ error }))
+            login(firebase, email, password, authUser => { this.setState({ ...this.value }); history.push(ROUTES.DASHBOARD); }, (error) => this.setState({ error }));
         }
         event.preventDefault();
     }

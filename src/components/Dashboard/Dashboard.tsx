@@ -30,16 +30,16 @@ class Dashboard extends React.Component<IProps, IState> {
     render() {
         const { isModalActive } = this.state;
         return (
-            <div className="dashboardContent">
-                <div className="headerDashboard">
-                    <div className="headerText">
+            <div className="dashboard">
+                <div className="header-dashboard">
+                    <div className="header-text">
                         <h1>My Dashboard</h1>
                     </div>
-                    <div className="headerBtn">
+                    <div className="header-btn">
                         <Button variant="outlined" color="primary" type="submit" onClick={this.openModal.bind(this)}>+ Create App</Button>
                     </div>
                 </div>
-                <div className="myApps">
+                <div className="apps">
                     <Application />
                 </div>
                 <div className={`modals ${isModalActive ? `active` : ``}`}>

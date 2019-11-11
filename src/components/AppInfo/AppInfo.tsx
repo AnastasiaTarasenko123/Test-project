@@ -49,25 +49,15 @@ class AppInfo extends React.Component<IProps, IState> {
 
     onChangeFile = (picture: string) => {
         const { uid } = this.state;
-        this.setState({picture});
+        this.setState({ picture });
         update('application', this.props.firebase, uid, 'picture', picture);
     }
 
     onChangePlace = (selectedPlace: LatLng) => {
         const { uid } = this.state;
-        this.setState({
-            selectedPlace: selectedPlace
-        })
+        this.setState({ selectedPlace });
         update('application', this.props.firebase, uid, 'selectedPlace', selectedPlace);
     }
-
-    // onChangeKey = (key: keyof IState, value: any) => {
-    //     const { uid } = this.state;
-    //     // this.setState({
-    //     //     key: value
-    //     // })
-    //     update('application', this.props.firebase, uid, key, value);
-    // }
 
     componentDidMount() {
         const { uid } = this.state;
