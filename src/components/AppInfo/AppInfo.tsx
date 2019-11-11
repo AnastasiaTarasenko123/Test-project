@@ -76,9 +76,9 @@ class AppInfo extends React.Component<IProps, IState> {
                 <div className="border-app">
                     <p>App Info</p>
                 </div>
-                <div className="content content-app-img">
+                <div className="content-bg content-app-img content">
                     <div className="img in-content-app">
-                        <p>App Image</p>
+                        <p className="app-img-text">App Image</p>
                         <Picture picture={picture} onChangeFile={this.onChangeFile} />
                     </div>
                     <div className="choose-color in-content-app">
@@ -86,7 +86,7 @@ class AppInfo extends React.Component<IProps, IState> {
                         <div className="color">
                             <TextField
                                 label="Choose your color"
-                                className="field-content-img"
+                                className="field-content-app"
                                 margin="normal"
                                 value={color}
                                 onChange={this.onChange("color")}
@@ -95,20 +95,22 @@ class AppInfo extends React.Component<IProps, IState> {
                         </div>
                     </div>
                 </div>
-                <div className="content content-app-name">
+                <div className="content content-app-name content-bg">
                     <div className="in-content-app">
                         <label>App Name</label>
+                        <br/>
                         <TextField
                             onChange={this.onChange('appName')}
                             type="text"
                             margin="normal"
                             variant="outlined"
                             value={appName}
-                            className="field-content-app"
+                            className="field-content-img"
                         />
                     </div>
                     <div className="in-content-app">
                         <label>App Description</label>
+                        <br/>
                         <TextField
                             multiline
                             rows="5"
@@ -120,7 +122,7 @@ class AppInfo extends React.Component<IProps, IState> {
                         />
                     </div>
                 </div>
-                <div className="content content-location">
+                <div className="content-bg content-location">
                     <InputMap onChangePlace={this.onChangePlace} selectedPlace={selectedPlace} displayLatLng={true} />
                 </div >
                 <div>
