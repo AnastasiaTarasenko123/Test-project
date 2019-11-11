@@ -1,34 +1,42 @@
 @import '../../constants/style';
 
 .content-stop {
-    width: 100%;
-    padding-top: 1rem;
 
-    .title {
-        padding: 1rem 5rem;
-        color: $useColor !important;
-        text-align: left !important;
+    .stop-select-category {
+        width: 90%;
+    }
+
+    .title-content-stop {
+        padding: 2rem 5rem;
+        color: $useColor;
+        font-size: 1.2rem;
     }
 
     .btn-add-stop {
+        padding: 3rem;
         text-align: center;
-        margin: 3rem;
     }
 
-    .stop-information{
+    .stop-information {
         display: flex;
         align-items: center;
-        justify-content: center;
-        color: $useColor;
-        text-align: center;
 
         .stop-block {
             width: 50%;
-            padding: 1rem;
 
             .input-field {
                 width: 80%;
             }
+
+            .content-stop-img {
+                width: 50%;
+            }
         }
+    }
+
+    .content-stop-block {
+        margin: 0rem auto;
+        padding: 0rem 4rem;
+
     }
 }

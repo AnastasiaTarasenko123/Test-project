@@ -124,11 +124,11 @@ class StopItem extends React.Component<IProps, IState> {
             <div className="content-stop">
                 <form onSubmit={event => this.addStop(event)}>
                     {(application && application.isCategories) ?
-                        <SelectCategory selectCategory={this.getCategory(categoryID)} categories={categories} onChangeCategory={this.onChangeCategory} />
+                        <div className="stop-select-category"><SelectCategory selectCategory={this.getCategory(categoryID)} categories={categories} onChangeCategory={this.onChangeCategory} /></div>
                         :
                         ''}
-                    <h2 className="title">Stop</h2>
-                    <div className="stop-information">
+                    <h2 className="title-content-stop">Stop</h2>
+                    <div className="stop-information content-stop-block">
                         <div className="stop-block">
                             <TextField
                                 margin="normal"
@@ -138,7 +138,9 @@ class StopItem extends React.Component<IProps, IState> {
                                 className="input-field"
                                 value={title}
                             />
-                            <Picture picture={picture} onChangeFile={this.onChangeFile} />
+                            <div className="content-stop-img">
+                                <Picture picture={picture} onChangeFile={this.onChangeFile} />
+                            </div>
                             <TextField
                                 margin="normal"
                                 onChange={this.onChange('videoURL')}
@@ -161,12 +163,14 @@ class StopItem extends React.Component<IProps, IState> {
                         </div>
                     </div>
                     {(application && application.isGPS) ?
-                        <div>
-                            <h2 className="title">Coogle Map</h2>
-                            <div className="stop-map">
-                                <InputMap onChangePlace={this.onChangePlace} selectedPlace={place}  displayLatLng={true}/>
+                        <>
+                            <h2 className="title-content-stop">Coogle Map</h2>
+                            <div className="content-stop-block">
+                                <div className="stop-map">
+                                    <InputMap onChangePlace={this.onChangePlace} selectedPlace={place} displayLatLng={true} />
+                                </div>
                             </div>
-                        </div>
+                        </>
                         : ''}
                     {uid === '' ?
                         <div className="btn-add-stop">
