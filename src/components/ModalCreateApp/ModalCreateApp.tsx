@@ -83,8 +83,8 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         return (
             <AuthUserContext.Consumer>
                 {authUser => (
-                    <div className="modal-window">
-                        <div className="modal-block">
+                    <div className="modal-window-create-app">
+                        <div className="modal-block-create-app">
                             <div className="navigation-modal">
                                 <div className="radio-btn">
                                     <Radio

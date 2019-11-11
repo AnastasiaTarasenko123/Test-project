@@ -5,13 +5,12 @@
     width: 85%;
     height: 35rem;
     display: inline-block;
-    border-left: 1px solid $useColor;
-    border-bottom: 1px solid $useColor;
+    border-left: 1px solid grey;
+    border-bottom: 1px solid grey;
 
     .border-app {
-        color: $useColor;
         background-color: white;
-        height: 47px;
+        height: 50px;
 
         p {
             margin: 0;
@@ -40,5 +39,15 @@
             width: 20%;
         }
 
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .content-features {
+        .main-features {
+            width: 90%;
+            margin-top: 2rem;
+            padding: 1rem 1rem;
+        }
     }
 }

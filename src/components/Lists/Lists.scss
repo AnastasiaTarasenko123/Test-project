@@ -8,7 +8,7 @@
 
     .border-lists {
         display: flex;
-        height: 6rem;
+        height: 99px;
         padding: 1rem;
         color: $useColor;
         align-items: center;
@@ -40,10 +40,6 @@
             display: none;
 
             ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-
                 li {
                     float: left;
                 }
