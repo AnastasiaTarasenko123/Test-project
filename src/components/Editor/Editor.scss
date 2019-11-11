@@ -6,3 +6,9 @@
     width: 15%;
     padding-top: 50px;
 }
+
+@media only screen and (max-width: 768px) {
+    .editorNav {
+        width: 25%;
+    }
+}

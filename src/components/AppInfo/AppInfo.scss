@@ -1,7 +1,7 @@
 @import '../../constants/style';
 
 .content-app-info {
-    background-color: $colorBgModal;
+    background-color: $colorEditor;
     width: 85%;
     display: inline-block;
     border-left: 1px solid grey;
@@ -9,90 +9,82 @@
     .border-app {
         background-color: white;
         height: 50px;
-
-        p {
-            padding: 1rem;
-        }
-    }
-
-    .content-bg {
-        background-color: white;
-        border-radius: 1rem;
-        margin: auto;
-        width: 95%;
-        margin-top: 2rem;
+        border-bottom: 1px solid grey;
+        line-height: 50px;
+        padding-left: 3rem;
     }
 
     .content {
         display: flex;
-        padding: 1rem 3rem;
+        background-color: white;
+        border-radius: 1rem;
+        margin: 2rem auto;
+        padding: 3rem 4rem;
+        width: 95%;
 
         .in-content-app {
             width: 50%;
 
-            .field-content-app {
+            .title-app-info {
+                margin-bottom: 2rem;
+                font-size: 1.2rem;
+                color: $useColor;
+            }
+
+            .field-app-info {
                 width: 80%;
-            }
-
-            .field-content-img {
-                width: 50%;
-            }
-
-            .app-img-text {
-                padding-bottom: 1rem;
             }
         }
     }
 
     .content-app-img {
-        height: 35rem;
-    }
-
-    .content-app-name {
-        height: 20rem;
-        padding-top: 3rem;
-    }
-
-    .content-location {
-        padding-top: 2.5rem;
-        height: 25rem;
-        margin-bottom: 2.5rem;
-
-        .field-content-latlng {
-            width: 90%;
-        }
+        width: 50%;
     }
 }
 
 @media screen and (max-width: 1024px) {
     .content-app-info {
         .content {
-            padding: 1rem 2rem;
+            padding: 2rem 2rem;
 
             .in-content-app {
                 width: 50%;
 
-                .field-content-app {
-                    width: 90%;
+                .title-app-info {
+                    margin-bottom: 1rem;
                 }
 
-                .field-content-img {
+                .field-app-info {
                     width: 90%;
                 }
             }
         }
 
         .content-app-img {
-            height: 20rem;
+            width: 50%;
         }
+    }
+}
 
-        .content-app-name {
-            height: 15rem;
-        }
+@media only screen and (max-width: 768px) {
+    .content-app-info {
+        width: 75%;
 
-        .content-location {
-            height: 25rem;
-            padding: 2rem 0rem;
+        .content {
+            display: block;
+
+            .in-content-app {
+                width: 100%;
+
+                .title-app-info {
+                    margin: 1rem;
+
+                }
+
+                .field-app-info {
+                    width: 100%;
+                }
+            }
         }
     }
 }

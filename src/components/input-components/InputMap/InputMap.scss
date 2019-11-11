@@ -16,14 +16,37 @@ div {
 
     .in-content {
         width: 50%;
-        text-align: center;
     }
 
-    .content-map {
-        width: 80%;
-    }
-
+    .content-map,
     .field-content {
         width: 80%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    div {
+
+        .content-map,
+        .field-content {
+            width: 90%;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .input-map {
+        display: block;
+    }
+
+    div {
+        .in-content {
+            width: 100%;
+        }
+
+        .content-map,
+        .field-content {
+            width: 100%;
+        }
     }
 }

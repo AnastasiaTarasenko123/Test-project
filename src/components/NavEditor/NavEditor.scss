@@ -27,3 +27,16 @@
         }
     }
 }
+
+
+@media only screen and (max-width: 768px) {
+    .navEditor {
+        ul {
+            li {
+                a {
+                    padding: 16px 5px;
+                }
+            }
+        }
+    }
+}
