@@ -31,7 +31,7 @@ class Picture extends React.Component<IProps, IState> {
         const { picture } = this.props;
         return (
             <div className="my-picture">
-                <div className={`img-block ${(picture !== '') ? `active` : ``}`}>
+                <div className={`my-img-block ${(picture !== '') ? `my-active` : ``}`}>
                     <img src={picture} alt="app" className="img-modal" />
                 </div>
                 <TextField

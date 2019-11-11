@@ -10,7 +10,7 @@ interface IProps {
     history: any
 }
 
-export const withAuthorization = (condition: any) => (Component: any) => {
+export const withAuthorization = (condition: any, altRoute: string = ROUTES.SIGN_IN) => (Component: any) => {
     class WithAuthorization extends React.Component<IProps> {
         listener: any;
 
@@ -18,7 +18,7 @@ export const withAuthorization = (condition: any) => (Component: any) => {
             this.listener = this.props.firebase.auth.onAuthStateChanged(
                 authUser => {
                     if (!condition(authUser)) {
-                        this.props.history.push(ROUTES.SIGN_IN);
+                        this.props.history.push(altRoute);
                     }
                 },
             );

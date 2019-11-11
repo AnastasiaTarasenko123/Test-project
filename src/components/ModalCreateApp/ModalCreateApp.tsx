@@ -83,10 +83,10 @@ class ModalCreateApp extends React.Component<IProps, IState> {
         return (
             <AuthUserContext.Consumer>
                 {authUser => (
-                    <div className="modalWindow">
-                        <div className="modalBlock">
-                            <div className="navigationModal">
-                                <div className="radioBtn">
+                    <div className="modal-window">
+                        <div className="modal-block">
+                            <div className="navigation-modal">
+                                <div className="radio-btn">
                                     <Radio
                                         checked={this.whichBlockActive() === 0}
                                         onChange={this.onChange('blockActive')}
@@ -97,7 +97,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                     <br />
                                     <label>Welcome</label>
                                 </div>
-                                <div className="radioBtn">
+                                <div className="radio-btn">
                                     <Radio
                                         checked={this.whichBlockActive() === 1}
                                         onChange={this.onChange('blockActive')}
@@ -108,7 +108,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                     <br />
                                     <label>Branding</label>
                                 </div>
-                                <div className="radioBtn">
+                                <div className="radio-btn">
                                     <Radio
                                         checked={this.whichBlockActive() === 2}
                                         onChange={this.onChange('blockActive')}
@@ -119,7 +119,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                     <br />
                                     <label>Info</label>
                                 </div>
-                                <div className="radioBtn">
+                                <div className="radio-btn">
                                     <Radio
                                         checked={this.whichBlockActive() === 3}
                                         onChange={this.onChange('blockActive')}
@@ -130,7 +130,7 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                     <br />
                                     <label>Features</label>
                                 </div>
-                                <div className="radioBtn">
+                                <div className="radio-btn">
                                     <Radio
                                         checked={this.whichBlockActive() === 4}
                                         onChange={this.onChange('blockActive')}
@@ -143,84 +143,92 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                 </div>
                             </div>
                             <form onSubmit={event => this.onCreateApp(event, authUser)}>
-                                <div className={`blocks welcome ${(this.whichBlockActive() === 0) ? `active` : ``}`}>
-                                    <p>Welcome! Let us help you get started!</p>
-                                    <TextField
-                                        label="Your App Name"
-                                        onChange={this.onChange('appName')}
-                                        type="text"
-                                        margin="normal"
-                                    />
-                                    <p className="textRemember">Remember, you can always change your options in our App Configuration screens.</p>
-                                </div>
-                                <div className={`blocks branding ${(this.whichBlockActive() === 1) ? `active` : ``}`}>
-                                    <div className="uploadImg divLeft">
-                                        <p>Upload Your App Image</p>
-                                        <Picture picture={picture} onChangeFile={this.onChangeFile} />
-                                    </div>
-                                    <div className="chooseColor divRight">
-                                        <p>Choose Your Accent</p>
+                                <div className={`blocks ${(this.whichBlockActive() === 0) ? `active` : ``}`}>
+                                    <div className="welcome">
+                                        <p>Welcome! Let us help you get started!</p>
                                         <TextField
-                                            label="Choose your color"
-                                            className="colorInput"
+                                            label="Your App Name"
+                                            onChange={this.onChange('appName')}
+                                            type="text"
                                             margin="normal"
-                                            value={color}
-                                            onChange={this.onChange('color')}
-                                            type="color"
                                         />
+                                        <p>Remember, you can always change your options in our App Configuration screens.</p>
                                     </div>
                                 </div>
-                                <div className={`blocks info ${(this.whichBlockActive() === 2) ? `active` : ``}`}>
-                                    <div className="description divLeft">
-                                        <p>Add Your Description</p>
-                                        <TextField
-                                            label="Add a description of your app"
-                                            multiline
-                                            rows="18"
-                                            value={description}
-                                            onChange={this.onChange('description')}
-                                            margin="normal"
-                                            className="inputInfo"
-                                        />
-                                    </div>
-                                    <div className="location divRight">
-                                        <p>Enter Your App Location</p>
-                                        <InputMap 
-                                            selectedPlace={selectedPlace}
-                                            onChangePlace={(selectedPlace) => {this.setState({selectedPlace})}}
-                                        />
+                                <div className={`blocks ${(this.whichBlockActive() === 1) ? `active` : ``}`}>
+                                    <div className="block-flex">
+                                        <div className="upload-img in-block-flex">
+                                            <p>Upload Your App Image</p>
+                                            <Picture picture={picture} onChangeFile={this.onChangeFile} />
+                                        </div>
+                                        <div className="choose-color in-block-flex">
+                                            <p>Choose Your Accent</p>
+                                            <TextField
+                                                label="Choose your color"
+                                                className="input-create-app"
+                                                margin="normal"
+                                                value={color}
+                                                onChange={this.onChange('color')}
+                                                type="color"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                                <div className={`blocks features ${(this.whichBlockActive() === 3) ? `active` : ``}`}>
+                                <div className={`blocks ${(this.whichBlockActive() === 2) ? `active` : ``}`}>
+                                    <div className="block-flex">
+                                        <div className="description in-block-flex">
+                                            <p>Add Your Description</p>
+                                            <TextField
+                                                label="Add a description of your app"
+                                                multiline
+                                                rows="18"
+                                                value={description}
+                                                onChange={this.onChange('description')}
+                                                margin="normal"
+                                                className="input-create-app"
+                                            />
+                                        </div>
+                                        <div className="location in-block-flex">
+                                            <p>Enter Your App Location</p>
+                                            <InputMap
+                                                selectedPlace={selectedPlace}
+                                                onChangePlace={(selectedPlace) => { this.setState({ selectedPlace }) }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={`blocks ${(this.whichBlockActive() === 3) ? `active` : ``}`}>
                                     <p>Turn on the feature you want to include in your app.</p>
-                                    <div className="categories divLeft">
-                                        <h1>Categories</h1>
-                                        <p>Include more than one list of categories</p>
-                                        <Switch
-                                            checked={isCategories}
-                                            onChange={this.onChangeSwitch('isCategories')}
-                                            value={!isCategories}
-                                            color="primary"
-                                        />
-                                    </div>
-                                    <div className="GPS divRight">
-                                        <h1>GPS Map</h1>
-                                        <p>Include a GPS map</p>
-                                        <Switch
-                                            checked={isGPS}
-                                            onChange={this.onChangeSwitch('isGPS')}
-                                            value={!isGPS}
-                                            color="primary"
-                                            className="gpsSwitch"
-                                        />
+                                    <div className="block-flex">
+                                        <div className="categories in-block-flex block-features">
+                                            <h1 className="features-title">Categories</h1>
+                                            <p className="features-description">Include more than one list of categories</p>
+                                            <Switch
+                                                checked={isCategories}
+                                                onChange={this.onChangeSwitch('isCategories')}
+                                                value={!isCategories}
+                                                color="primary"
+                                            />
+                                        </div>
+                                        <div className="GPS in-block-flex block-features">
+                                            <h1 className="features-title">GPS Map</h1>
+                                            <p className="features-description">Include a GPS map</p>
+                                            <Switch
+                                                checked={isGPS}
+                                                onChange={this.onChangeSwitch('isGPS')}
+                                                value={!isGPS}
+                                                color="primary"
+                                                className="gpsSwitch"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                                 <div className={`blocks preview ${(this.whichBlockActive() === 4) ? `active` : ``}`}>
-                                    <h1>{appName}</h1>
-                                    <div className={`imgBlock ${(picture !== '') ? `imgActive` : ``}`}>
-                                        <img src={picture} alt="app" className="imgPreview" />
+                                    <h1 className="app-name">{appName}</h1>
+                                    <div className={`img-block ${(picture !== '') ? `img-active` : ``}`}>
+                                        <img src={picture} alt="app" className="img-preview" />
                                     </div>
-                                    <div className="tablePreview" >
+                                    <div className="table-preview" >
                                         <Table>
                                             <TableBody>
                                                 <TableRow>
@@ -244,15 +252,16 @@ class ModalCreateApp extends React.Component<IProps, IState> {
                                         </Table>
                                     </div>
                                 </div>
-                                <Button color="primary" className="btn buttonClose" onClick={this.props.modalChange}>X</Button>
-                                <Button variant="contained" color="primary" className={`buttonNext ${(blockActive < 4) ? `active` : ``}`}
+                                <Button color="primary" className="btn button-close" onClick={this.props.modalChange}>X</Button>
+                                <Button variant="contained" color="primary" className={`button-next ${(blockActive < 4) ? `active` : ``}`}
                                     disabled={isModalsValid(appName)} onClick={this.nextBlock.bind(this)}>Next</Button>
-                                <Button variant="contained" color="primary" className={`buttonNext ${(Number(blockActive) === 4) ? `active` : ``}`}
+                                <Button variant="contained" color="primary" className={`button-next ${(Number(blockActive) === 4) ? `active` : ``}`}
                                     type="submit">Finish</Button>
                             </form>
                         </div>
                     </div>
-                )}
+                )
+                }
             </AuthUserContext.Consumer>
         )
     }

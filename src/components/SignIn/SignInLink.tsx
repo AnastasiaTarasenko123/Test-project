@@ -7,7 +7,7 @@ import './SignIn.scss'
 const SignInLink: React.FC = (): React.ReactElement => (
     <div className="sign-in-link">
         <p className="link-title">Do you have an account?</p>
-        <Button variant="outlined" color="primary"><Link to={ROUTES.SIGN_IN}>Sign In</Link></Button>
+        <Link to={ROUTES.SIGN_IN}><Button variant="outlined" color="primary">Sign In</Button></Link>
     </div>
 )
 

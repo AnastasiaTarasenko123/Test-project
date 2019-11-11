@@ -7,7 +7,7 @@ import './SignUp.scss'
 const SignUpLink: React.FC = (): React.ReactElement => (
     <div className="sign-up-link">
         <p className="link-title">Don't have an account?</p>
-        <Button variant="outlined" color="primary"><Link to={ROUTES.SIGN_UP}>Sign Up</Link></Button>
+        <Link to={ROUTES.SIGN_UP}><Button variant="outlined" color="primary">Sign Up</Button></Link>
     </div>
 )
 

@@ -1,8 +1,8 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, RouteComponentProps, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, RouteComponentProps } from 'react-router-dom'
 import Navigation from '../Navigation/Navigation'
 import { SignUpPage } from '../SignUp/SignUpPage'
-import { SignInPage } from '../SignIn/SignInPage'
+import SignInPage from '../SignIn/SignInPage'
 import Dashboard from '../Dashboard/Dashboard'
 import * as ROUTES from '../../constants/routs'
 import { withFirebase } from '../../firebase/FirebaseContext'
@@ -24,8 +24,7 @@ const App: React.FC<IProps> = (props: IProps) => (
     <Route path={`${ROUTES.EDITOR}/:appId`} component={Editor} />
     <Route path={`${ROUTES.EDITOR}/:appId${ROUTES.APP_INFO}`} component={AppInfo} />
     <Route path={`${ROUTES.EDITOR}/:appId${ROUTES.LISTS}`} component={Lists} />
-    <Route path={`${ROUTES.EDITOR}/:appId${ROUTES.FEATURES}`} component={Features} />
-    <Redirect from='' to={ROUTES.SIGN_IN}/> 
+    <Route path={`${ROUTES.EDITOR}/:appId${ROUTES.FEATURES}`} component={Features} /> 
   </Router>
 );
 
