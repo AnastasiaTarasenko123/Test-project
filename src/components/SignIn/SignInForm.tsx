@@ -77,7 +77,7 @@ class SignInFormBase extends React.Component<IProps, IStateSignIn> {
                     <Button variant="contained" color="primary" type="submit" disabled={isDataValidSignIn(this.state)}>
                         Login
                 </Button>
-                    {error && <p>{error.message}</p>}
+                    {error && <p className="error-message">{error.message}</p>}
                 </form>
             </div>
         );

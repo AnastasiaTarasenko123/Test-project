@@ -8,7 +8,7 @@ import { Link } from '@material-ui/core'
 
 const Navigation: React.FC = () => (
   <AuthUserContext.Consumer>
-    {authUser => authUser ? <NavigationAuth /> : <NavigationNonAuth />}
+    {authUser => authUser ? <NavigationAuth /> : ''}
   </AuthUserContext.Consumer>
 );
 
@@ -19,16 +19,12 @@ const NavigationAuth: React.FC = () => (
         <SignOut />
       </li>
       <li>
-        <Link component="button">
+        <Link component="button" className="btn-navigator">
           <RouterLink to={ROUTES.DASHBOARD}>Dashboard</RouterLink>
         </Link>
       </li>
     </ul>
   </div>
-);
-
-export const NavigationNonAuth: React.FC = () => (
-  <></>
 );
 
 export default Navigation

@@ -5,7 +5,7 @@ import './Applications.scss'
 import { ReadApplication } from '../../interfaces/interfaces'
 import { AuthUserContext } from '../Session/SessionContext'
 import { readItems } from '../../services/itemFirebase'
-import { Button } from '@material-ui/core'
+import { Button, Card, CardActionArea, CardContent, CardActions, CardMedia } from '@material-ui/core'
 import { Link, withRouter } from 'react-router-dom'
 import * as ROUTES from '../../constants/routs'
 import { compose } from 'recompose'
@@ -43,14 +43,14 @@ class Applications extends React.Component<IProps, IState>{
         const { applications } = this.state;
         return (
             applications.length > 0 ? (
-                <div className="appList">
+                <div className="list-apps">
                     <ApplicationList applications={applications} />
                 </div>)
                 :
                 (
-                    <div>
+                    <>
                         <p>No applications yet.</p>
-                    </div>
+                    </>
                 )
         );
     }
@@ -58,34 +58,36 @@ class Applications extends React.Component<IProps, IState>{
 
 const ApplicationList: React.FC<IListApplications> = ({ applications }) => {
     return (
-        <ul>
-            <AuthUserContext.Consumer>
-                {(authUser: any) => (
-                    applications.map(application => (
-                        application.userID === authUser!.uid ? (<ApplicationItem key={application.uid} application={application} />) : ("")
-                    ))
-                )}
-            </AuthUserContext.Consumer>
-        </ul>
+        <AuthUserContext.Consumer>
+            {(authUser: any) => (
+                applications.map(application => (
+                    application.userID === authUser!.uid ? (<ApplicationItem key={application.uid} application={application} />) : ('')
+                ))
+            )}
+        </AuthUserContext.Consumer>
     )
 }
 
 const ApplicationItem: React.FC<any> = ({ application }) => (
-    <li>
-        <div className="appItem">
-            <div className="imgContainer">
-                <img src={application.picture} alt="App" className="imgApp" />
-            </div>
-            <div className="appNameContainer">
-                <h1 className="appName">{application.appName} </h1>
-            </div>
-            <div className="btnContainer">
-                <Button variant="contained" color="primary" className="btnEdit">
-                    <Link to={`${ROUTES.EDITOR}/${application.uid}${ROUTES.APP_INFO}`}>App Edit</Link>
-                </Button>
-            </div>
-        </div>
-    </li>
+    <Card className="item-app">
+        <CardActionArea>
+            {application.picture !== '' &&
+                <CardMedia
+                    component="img"
+                    alt="Application"
+                    height="300"
+                    image={application.picture}
+                />}
+        </CardActionArea>
+        <CardContent>
+            <p>{application.appName}</p>
+        </CardContent>
+        <CardActions>
+            <Button variant="outlined" color="primary" className="btnEdit">
+                <Link to={`${ROUTES.EDITOR}/${application.uid}${ROUTES.APP_INFO}`}>App Edit</Link>
+            </Button>
+        </CardActions>
+    </Card >
 )
 
 export const Application = compose<IProps, {}>(withFirebase, withRouter)(Applications)

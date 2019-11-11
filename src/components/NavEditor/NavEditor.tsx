@@ -1,8 +1,7 @@
 import React from 'react'
 import * as ROUTES from '../../constants/routs'
 import { Link } from 'react-router-dom'
-import { AuthUserContext } from '../Session/SessionContext'
-import { NavigationNonAuth } from '../Navigation/Navigation'
+import { AuthUserContext } from '../Session/SessionContext' 
 import './NavEditor.scss'
 
 interface IProps {
@@ -11,7 +10,7 @@ interface IProps {
 
 const NavEditor: React.FC<IProps> = (props) => (
   <AuthUserContext.Consumer>
-    {authUser => authUser ? <NavigationEditor appId={props.appId} /> : <NavigationNonAuth />}
+    {authUser => authUser ? <NavigationEditor appId={props.appId} /> : ''}
   </AuthUserContext.Consumer>
 );
 

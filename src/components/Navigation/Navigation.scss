@@ -2,20 +2,22 @@
 
 .navigaton {
     ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        background-color: $useColor;
         height: 70px;
+        border-bottom: 0.1px solid grey;
 
         li {
             float: right;
 
+            .btn-navigator {
+                width: 8rem;
+                height: auto;
+                text-align: center;
+                line-height: 70px;
+            }
+
             a {
-                display: block;
-                color: white;
-                padding: 14px 16px;
-                text-decoration: none;
+                color: black;
+                font-size: 1rem;
             }
         }
     }
