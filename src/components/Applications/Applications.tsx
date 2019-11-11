@@ -83,7 +83,7 @@ const ApplicationItem: React.FC<any> = ({ application }) => (
             <p>{application.appName}</p>
         </CardContent>
         <CardActions>
-            <Button variant="outlined" color="primary" className="btnEdit">
+            <Button variant="outlined" color="default" className="btnEdit">
                 <Link to={`${ROUTES.EDITOR}/${application.uid}${ROUTES.APP_INFO}`}>App Edit</Link>
             </Button>
         </CardActions>

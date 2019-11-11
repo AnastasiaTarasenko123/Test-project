@@ -36,7 +36,7 @@ class Dashboard extends React.Component<IProps, IState> {
                         <h1>My Dashboard</h1>
                     </div>
                     <div className="header-btn">
-                        <Button variant="outlined" color="primary" type="submit" onClick={this.openModal.bind(this)}>+ Create App</Button>
+                        <Button variant="outlined" color="default" type="submit" onClick={this.openModal.bind(this)}>+ Create App</Button>
                     </div>
                 </div>
                 <div className="apps">
