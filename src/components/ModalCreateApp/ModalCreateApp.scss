@@ -140,70 +140,39 @@
     }
 }
 
+@media only screen and (max-width : 768px) {
+    .modal-window {
+        .modal-block {
+            height: 35rem;
 
-//         .branding {
-//             .colorInput {
-//                 width: 100%;
-//             }
+            .navigation-modal {
+                display: none;
+            }
 
-//             .imageInput {
-//                 margin-top: 2.05rem;
-//             }
+            form {
+                height: inherit;
 
-//             .imgModal {
-//                 margin-top: 3vh;
-//                 width: 100%;
-//             }
-//         }
+                p {
+                   padding: 2rem;
+                }
 
-//         .info {
-//             .inputInfo {
-//                 width: 16vw;
-//             }
-//         }
+                .blocks {
+                    
+                    .block-features {
+                        margin: 1rem 1rem;
+                        padding: 4rem 1rem;
 
-//         .features {
-//             text-align: center;
-//             margin-top: 3rem;
+                    }
+                }
+            }
+        }
+    }
+}
 
-//             div {
-//                 box-sizing: border-box;
-//                 margin: 4vh 1vw;
-//                 border: 1px solid $navigationColor;
-//                 border-radius: 10px;
-//                // width: 43% !important;
-//                 height: 33vh;
-//                 padding: 5vh 3vw;
-
-//                 h1 {
-//                     margin-bottom: 3vh;
-//                 }
-
-//                 p {
-//                     margin-bottom: 4vh;
-//                 }
-
-//                 .gpsSwitch {
-//                     margin-top: 1.5vh;
-//                 }
-//             }
-//         }
-
-//         .preview {
-//             text-align: center;
-
-//             .imgBlock {
-//                 height: 20vh;
-
-//                 .imgPreview {
-//                     max-width: 50%;
-//                     max-height: 100%;
-//                 }
-//             }
-
-//             .tablePreview {
-//                 overflow-x: auto;
-//             }
-//         }
-//     }
-// }
+@media screen and (max-width: 1024px) {
+    .modal-window {
+        .modal-block {
+            width: 100%;
+        }
+    }
+}
