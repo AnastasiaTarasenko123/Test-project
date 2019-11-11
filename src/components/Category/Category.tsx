@@ -71,12 +71,12 @@ class Category extends React.Component<IProps, IState> {
         const { categoryName, description, uid } = this.state;
         return (
             <div className="my-category">
-                <h2 className={`${uid === '' ? `title-add` : ``}`}>Category</h2>
+                <h2 className={`title-category ${uid === '' ? `` : `title-category-in-list`}`}>Category</h2>
                 <form onSubmit={event => this.addCategory(event)}>
                     <TextField
                         margin="normal"
                         type="text"
-                        className="input-field"
+                        className="input-field-category"
                         value={categoryName}
                         label="Category Name"
                         onChange={this.onChange('categoryName')}
@@ -88,14 +88,14 @@ class Category extends React.Component<IProps, IState> {
                         rows="3"
                         value={description}
                         margin="normal"
-                        className="input-field"
+                        className="input-field-category"
                         onChange={this.onChange('description')}
                     />
                     <br />
 
                     {uid === '' ?
                         <div className="my-category-add">
-                            <Button variant="contained" color="primary" className="btn-add-category" type="submit">ADD</Button>
+                            <Button variant="contained" color="primary" type="submit">ADD</Button>
                         </div>
                         : ''}
                 </form>

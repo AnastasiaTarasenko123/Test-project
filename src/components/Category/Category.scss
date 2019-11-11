@@ -2,20 +2,23 @@
 
 .my-category {
     width: 100%;
-    padding: 1rem;
     color: $useColor;
-    text-align: left;
+    text-align: center;
 
-    .title-add {
-        text-align: center;
+    .title-category{
+        font-size: 1.2rem;
+        padding: 1rem 0rem;
     }
 
-    .input-field {
+    .title-category-in-list {
+        text-align: left;
+    }
+
+    .input-field-category {
         width: 100%;
     }
 
     .my-category-add {
-        text-align: center;
         margin: 3rem;
     }
 }
