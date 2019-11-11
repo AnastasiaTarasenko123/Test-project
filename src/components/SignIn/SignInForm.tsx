@@ -52,31 +52,34 @@ class SignInFormBase extends React.Component<IProps, IStateSignIn> {
     render() {
         const { error } = this.state;
         return (
-            <form className="test-form" noValidate autoComplete="off" onSubmit={this.onSubmit}>
-                <TextField
-                    label="Email"
-                    onChange={this.onChange('email')}
-                    type="email"
-                    autoComplete="email"
-                    margin="normal"
-                    variant="outlined"
-                />
-                <br />
-                <TextField
-                    label="Password"
-                    onChange={this.onChange('password')}
-                    type="password"
-                    autoComplete="current-password"
-                    margin="normal"
-                    variant="outlined"
-                />
-                <br />
-                <br />
-                <Button variant="contained" color="primary" type="submit" disabled={isDataValidSignIn(this.state)}>
-                    Login
+            <div className="sign-in-form">
+                <h1 className="sign-in-title">Sign In</h1>
+                <form autoComplete="off" onSubmit={this.onSubmit}>
+                    <TextField
+                        label="Email"
+                        onChange={this.onChange('email')}
+                        type="email"
+                        autoComplete="email"
+                        margin="normal"
+                        variant="outlined"
+                    />
+                    <br />
+                    <TextField
+                        label="Password"
+                        onChange={this.onChange('password')}
+                        type="password"
+                        autoComplete="current-password"
+                        margin="normal"
+                        variant="outlined"
+                    />
+                    <br />
+                    <br />
+                    <Button variant="contained" color="primary" type="submit" disabled={isDataValidSignIn(this.state)}>
+                        Login
                 </Button>
-                {error && <p>{error.message}</p>}
-            </form>
+                    {error && <p>{error.message}</p>}
+                </form>
+            </div>
         );
     }
 }

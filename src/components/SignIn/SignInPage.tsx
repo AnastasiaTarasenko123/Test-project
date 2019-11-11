@@ -4,11 +4,11 @@ import SignUpLink from '../SignUp/SignUpLink'
 import './SignIn.scss'
 
 export const SignInPage: React.FC = (): React.ReactElement => (
-    <div className="loginPage">
-        <div className="loginContext">
-            <h1>Sign In</h1>
+    <div className="sign-in-page">
+        <div className="sign-in-bg">
+        </div>
+        <div className="sign-in-content">
             <SignInForm />
-            <br />
             <SignUpLink />
         </div>
     </div>

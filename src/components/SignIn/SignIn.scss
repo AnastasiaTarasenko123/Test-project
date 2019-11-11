@@ -1,16 +1,39 @@
-.loginPage {
-    text-align: center;
+.sign-in-page {
     display: flex;
-    height: 95vh;
+    height: 100vh;
 
-    .loginContext {
-        width: 40vw;
-        height: 50vh;
-        margin: auto;
+    .sign-in-bg {
+        flex: 1;
+        background: url("../../assets/images/sign-in/bg.jpg") no-repeat center;
+        background-size: cover;
     }
 
-    a {
-        color: black;
-        text-decoration: none;
+    .sign-in-content {
+        flex: 1;
+        margin: auto;
+        text-align: center;
+
+        .sign-in-form {
+            margin: 2rem;
+
+            .sign-in-title {
+                font-size: 1.5rem;
+                margin: 2rem;
+            }
+        }
+    }
+}
+
+.sign-in-link {
+    .link-title {
+        margin: 1rem;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .sign-in-bg {
+        display: none;
+        animation-name: examplу_animation;
+        animation-duration: 4s;
     }
 }

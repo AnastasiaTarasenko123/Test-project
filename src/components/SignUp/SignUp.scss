@@ -1,23 +1,21 @@
 @import '../../constants/style';
 
-.signUpLink {
-    margin-top: 1.5rem;
-
-    a {
-        color: $useColor !important;
+.sign-up-link {
+    .link-title {
+        margin: 1rem;
     }
 }
 
-.signUpForm {
-    div {
-        margin: 0.4rem;
+// .signUpForm {
+//     div {
+//         margin: 0.4rem;
 
-        label {
-            padding: 0.4rem;
-        }
-    }
+//         label {
+//             padding: 0.4rem;
+//         }
+//     }
 
-    .emailSignUp {
-        width: 28.2vw;
-    }
-}
+//     .emailSignUp {
+//         width: 28.2vw;
+//     }
+// }

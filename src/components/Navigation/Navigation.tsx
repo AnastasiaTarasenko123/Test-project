@@ -28,15 +28,7 @@ const NavigationAuth: React.FC = () => (
 );
 
 export const NavigationNonAuth: React.FC = () => (
-  <div className="navigaton">
-    <ul>
-      <li>
-        <Link component="button">
-          <RouterLink to={ROUTES.SIGN_IN}>Sign In</RouterLink>
-        </Link>
-      </li>
-    </ul>
-  </div>
+  <></>
 );
 
 export default Navigation

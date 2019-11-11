@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom'
 import { Button } from '@material-ui/core'
 import './SignUp.scss'
 
-const SignUpLink: React.FC = ():React.ReactElement =>(
-    <div className="signUpLink">
-        <p>Don't have an account?</p>
-        <Button variant="outlined" color="primary" className="btnSignUp"><Link to={ROUTES.SIGN_UP}>Sign Up</Link></Button>
+const SignUpLink: React.FC = (): React.ReactElement => (
+    <div className="sign-up-link">
+        <p className="link-title">Don't have an account?</p>
+        <Button variant="outlined" color="primary"><Link to={ROUTES.SIGN_UP}>Sign Up</Link></Button>
     </div>
 )
 
 export default SignUpLink
+
