@@ -11,28 +11,45 @@
 
     .modal-block-category {
         height: 25rem;
-        width: 40%;
-        margin: 15% auto;
+        width: 40rem;
         padding: 1rem 5rem;
     }
 
     .modal-block-stop {
         height: 55rem;
         overflow-y: auto;
-        width: 80vw;
-        margin: 3% auto;
+        width: 80rem;
     }
 
     .modal-block {
         position: relative;
         background-color: white;
         border-radius: 10px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
 
         .btn-close {
             position: $positionButton;
             top: 2%;
             right: 1%;
             color: $useColor;
+        }
+    }
+}
+
+@media only screen and (max-width : 768px) {
+    .modal-window {    
+        .modal-block-category {
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width : 1224px) {
+    .modal-window {    
+        .modal-block-stop {
+            width: 100%;
         }
     }
 }
