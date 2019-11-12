@@ -65,7 +65,7 @@ class AppInfo extends React.Component<IProps, IState> {
             () => { });
     }
 
-    componentWillUnmoun() {
+    componentWillUnmount() {
         this.props.firebase.db.ref().off();
     }
 
