@@ -1,8 +1,6 @@
 import React from 'react'
-import { TextField } from '@material-ui/core'
 import { readFileASync } from '../../../services/readFile'
 import './Picture.scss'
-import { TextFieldClassKey } from '@material-ui/core/TextField';
 
 interface IProps {
     picture: string,
@@ -25,7 +23,6 @@ class Picture extends React.Component<IProps, IState> {
     defaultPicture = "../../../assets/images/upload.png";
 
     onChangeFile = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log('hee');
         e.target.files &&
             readFileASync(e.target.files[0]).then(v => {
                 this.props.onChangeFile(v);
