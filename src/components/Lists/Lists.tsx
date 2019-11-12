@@ -148,7 +148,9 @@ class Lists extends React.Component<IProps, IState> {
                 </div>
                 {selectCategory !== null ?
                     <div className="list-item">
-                        <Category uid={selectCategory.uid} />
+                        <div className="list-category">
+                            <Category uid={selectCategory.uid} />
+                        </div>
                         <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteCategory}>
                             Delete
                         </Button>
@@ -178,7 +180,7 @@ class Lists extends React.Component<IProps, IState> {
                             <StopItem uid={stop.uid} application={application} categories={categories} />
                             <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteStop(stop.uid)}>
                                 Delete
-                                </Button> 
+                                </Button>
                         </div> : null))
                     :
                     ''}
