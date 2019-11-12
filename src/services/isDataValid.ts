@@ -8,7 +8,7 @@ const checkEmail = (check: string): boolean => {
 export const isDataValidSignUp = (data: IStateSignUp): boolean => (
     data.password !== data.confPassword ||
     data.password === "" ||
-    data.password.length <= 8 ||
+    data.password.length < 8 ||
     data.firstName === "" ||
     data.lastName === "" ||
     !checkEmail(data.email)
@@ -17,7 +17,7 @@ export const isDataValidSignUp = (data: IStateSignUp): boolean => (
 export const isDataValidSignIn = (data: IStateSignIn): boolean => (
     data.email === '' ||
     data.password === '' ||
-    data.password.length <= 8 ||
+    data.password.length < 8 ||
     !checkEmail(data.email)
 )
 

@@ -60,7 +60,7 @@ const ApplicationList: React.FC<IListApplications> = ({ applications }) => {
         <AuthUserContext.Consumer>
             {(authUser: any) => (
                 applications.map(application => (
-                    application.userID === authUser!.uid ? (<ApplicationItem key={application.uid} application={application} />) : ('')
+                    authUser !== null ? (application.userID === authUser!.uid ? (<ApplicationItem key={application.uid} application={application} />) : ('')) : ('')
                 ))
             )}
         </AuthUserContext.Consumer>
