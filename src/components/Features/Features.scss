@@ -1,7 +1,7 @@
 @import '../../constants/style';
 
 .content-features {
-    background-color: $colorBgModal;
+    background-color: $colorEditor;
     width: 85%;
     height: 35rem;
     display: inline-block;
@@ -14,7 +14,7 @@
 
         p {
             margin: 0;
-            padding: 1rem;
+            padding: 1rem 3rem;
         }
     }
 
@@ -22,7 +22,6 @@
         background-color: white;
         border-radius: 1rem;
         display: flex;
-        justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
         margin: auto;
@@ -33,12 +32,22 @@
 
         .choose-features {
             width: 80%;
+
+            h1 {
+                margin-bottom: 2rem;
+                font-size: 1.2rem;
+                color: $useColor;
+            }
+
+            p {
+                line-height: 1.5rem;
+            }
         }
 
         .features-active {
             width: 20%;
+            text-align: center;
         }
-
     }
 }
 
@@ -48,6 +57,17 @@
             width: 90%;
             margin-top: 2rem;
             padding: 1rem 1rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .content-features {
+        width: 75%;
+        height: 37rem;
+
+        .main-features {
+            height: 30rem;
         }
     }
 }
