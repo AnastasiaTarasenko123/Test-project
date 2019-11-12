@@ -3,7 +3,7 @@
 .select-category-block {
 
     .select-category-title {
-        padding: 3rem 5rem;
+        padding: 2rem 1rem;
         font-size: 1.2rem;
         color: $useColor;
     }
@@ -12,14 +12,41 @@
         width: 100%;
         display: flex;
         align-items: center;
-        text-align: left;
 
         .block-category {
             width: 50%;
-            text-align: center;
 
             .input-field {
                 width: 80%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .select-category-block {
+        .my-select-category {
+            .block-category {
+                .input-field {
+                    width: 90%;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .select-category-block {
+
+        .my-select-category {
+            display: block;
+
+            .block-category {
+                width: 100%;
+
+                .input-field {
+                    width: 100%;
+                }
             }
         }
     }

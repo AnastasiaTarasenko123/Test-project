@@ -1,11 +1,6 @@
 @import '../../constants/style';
 
 .content-stop {
-
-    .stop-select-category {
-        width: 90%;
-    }
-
     .title-content-stop {
         padding: 2rem 5rem;
         color: $useColor;
@@ -38,5 +33,42 @@
         margin: 0rem auto;
         padding: 0rem 4rem;
 
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .content-stop {
+        .stop-information {
+            .stop-block {
+                .input-field {
+                    width: 90%;
+                }
+
+                .content-stop-img {
+                    width: 70%;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .content-stop {
+        .stop-information {
+            display: block;
+
+            .stop-block {
+                width: 100%;
+
+                .input-field {
+                    width: 100%;
+                }
+
+                .content-stop-img {
+                    width: 100%;
+                }
+            }
+
+        }
     }
 }

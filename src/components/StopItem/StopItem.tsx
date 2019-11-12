@@ -124,7 +124,7 @@ class StopItem extends React.Component<IProps, IState> {
             <div className="content-stop">
                 <form onSubmit={event => this.addStop(event)}>
                     {(application && application.isCategories) ?
-                        <div className="stop-select-category"><SelectCategory selectCategory={this.getCategory(categoryID)} categories={categories} onChangeCategory={this.onChangeCategory} /></div>
+                        <div className="content-stop-block"><SelectCategory selectCategory={this.getCategory(categoryID)} categories={categories} onChangeCategory={this.onChangeCategory} /></div>
                         :
                         ''}
                     <h2 className="title-content-stop">Stop</h2>
