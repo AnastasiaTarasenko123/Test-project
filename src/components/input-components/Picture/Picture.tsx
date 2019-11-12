@@ -2,6 +2,7 @@ import React from 'react'
 import { TextField } from '@material-ui/core'
 import { readFileASync } from '../../../services/readFile'
 import './Picture.scss'
+import { TextFieldClassKey } from '@material-ui/core/TextField';
 
 interface IProps {
     picture: string,
@@ -20,25 +21,37 @@ class Picture extends React.Component<IProps, IState> {
         }
     }
 
+    ref = React.createRef<any>();
+    defaultPicture = "../../../assets/images/upload.png";
+
     onChangeFile = (key: keyof IState) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log('hee');
         e.target.files &&
             readFileASync(e.target.files[0]).then(v => {
                 this.props.onChangeFile(v);
             })
     }
 
+    handleClick = () => {
+        this.ref.current && this.ref.current.click();
+    }
+
     render() {
         const { picture } = this.props;
         return (
             <div className="my-picture">
-                <div className={`my-img-block ${(picture !== '') ? `my-active` : ``}`}>
-                    <img src={picture} alt="app" className="img-modal" />
+                <div className="my-img-block">
+                    {picture === '' ?
+                        <img src={require("../../../assets/images/upload.png")} alt="app" className="img-modal" onClick={this.handleClick} />
+                        :
+                        <img src={picture} alt="app" className="img-modal" onClick={this.handleClick} />
+                    }
                 </div>
-                <TextField
-                    margin="normal"
+                <input
                     onChange={this.onChangeFile('myPicture')}
                     type="file"
                     className="input-field"
+                    ref={this.ref}
                 />
             </div>
         )
