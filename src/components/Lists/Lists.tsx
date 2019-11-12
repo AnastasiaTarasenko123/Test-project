@@ -1,7 +1,7 @@
 import React from 'react'
 import './Lists.scss'
 import { Button } from '@material-ui/core'
-import { RouteComponentProps, withRouter } from 'react-router'
+import { RouteComponentProps } from 'react-router'
 import { RouteParams, ReadApplication, IReadCategory, IReadStop } from '../../interfaces/interfaces'
 import Firebase from '../../firebase/Firebase'
 import { readItem, readItems, deleteItem } from '../../services/itemFirebase'
@@ -204,4 +204,4 @@ class Lists extends React.Component<IProps, IState> {
     }
 }
 
-export default withFirebase(withRouter(Lists))
+export default withFirebase(Lists)

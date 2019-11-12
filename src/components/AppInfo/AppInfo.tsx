@@ -1,6 +1,6 @@
 import React from 'react'
 import './AppInfo.scss'
-import { RouteComponentProps, withRouter } from 'react-router'
+import { RouteComponentProps } from 'react-router'
 import Firebase from '../../firebase/Firebase'
 import { ReadApplication, LatLng, RouteParams } from '../../interfaces/interfaces'
 import { withFirebase } from '../../firebase/FirebaseContext'
@@ -130,4 +130,4 @@ class AppInfo extends React.Component<IProps, IState> {
     }
 }
 
-export default withFirebase(withRouter(AppInfo))
+export default withFirebase(AppInfo)

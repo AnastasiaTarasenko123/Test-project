@@ -6,9 +6,8 @@ import { ReadApplication } from '../../interfaces/interfaces'
 import { AuthUserContext } from '../Session/SessionContext'
 import { readItems } from '../../services/itemFirebase'
 import { Button, Card, CardActionArea, CardContent, CardActions, CardMedia } from '@material-ui/core'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import * as ROUTES from '../../constants/routs'
-import { compose } from 'recompose'
 
 interface IProps {
     firebase: Firebase,
@@ -90,4 +89,4 @@ const ApplicationItem: React.FC<any> = ({ application }) => (
     </Card >
 )
 
-export const Application = compose<IProps, {}>(withFirebase, withRouter)(Applications)
+export const Application = withFirebase(Applications)

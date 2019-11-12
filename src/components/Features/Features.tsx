@@ -3,7 +3,7 @@ import './Features.scss'
 import { Switch } from '@material-ui/core'
 import { RouteParams, ReadApplication } from '../../interfaces/interfaces'
 import Firebase from '../../firebase/Firebase'
-import { RouteComponentProps, withRouter } from 'react-router'
+import { RouteComponentProps } from 'react-router'
 import { readItem, update } from '../../services/itemFirebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
 
@@ -93,4 +93,4 @@ class Features extends React.Component<IProps, IState> {
     }
 }
 
-export default withFirebase(withRouter(Features))
+export default withFirebase(Features)
