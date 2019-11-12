@@ -119,10 +119,10 @@ class Lists extends React.Component<IProps, IState> {
         return (
             <div className="content-lists">
                 <div className="border-lists">
-                    <div className="border-item">
+                    <div className="border-item border-item-main">
                         <p>Lists</p>
                     </div>
-                    <div className={`border-list border-category ${application && application.isCategories ? `active` : ``}`}>
+                    <div className={`border-item border-item-list border-category-none ${application && application.isCategories ? `active` : ``}`}>
                         <ul>
                             {
                                 categories.map((category, index) => (
@@ -139,15 +139,15 @@ class Lists extends React.Component<IProps, IState> {
                             </Button></li>
                         </ul>
                     </div>
-                    <div className="border-item border-stop">
-                        <Button variant="contained" color="primary" onClick={this.handleOpen(0)}>+ New Stop</Button>
+                    <div className="border-item border-item-main border-item-btn">
+                        <Button variant="outlined" color="default" onClick={this.handleOpen(0)}>+ New Stop</Button>
                     </div>
-                    <div className={`border-item border-category ${application && application.isCategories ? `active` : ``}`}>
-                        <Button variant="contained" color="primary" className="btn-category" onClick={this.handleOpen(1)}>+ New Category</Button>
+                    <div className={`border-item border-item-category border-item-btn border-category-none ${application && application.isCategories ? `active` : ``}`}>
+                        <Button variant="outlined" color="default" className="btn-category" onClick={this.handleOpen(1)}>+ New Category</Button>
                     </div>
                 </div>
                 {selectCategory !== null ?
-                    <div className="list-item category">
+                    <div className="list-item">
                         <Category uid={selectCategory.uid} />
                         <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteCategory}>
                             Delete
@@ -162,7 +162,7 @@ class Lists extends React.Component<IProps, IState> {
                     ?
                     stops.map(stop => (stop.categoryID === selectCategory.uid
                         ?
-                        <div className="list-item stop" key={stop.uid}>
+                        <div className="list-item" key={stop.uid}>
                             <StopItem uid={stop.uid} application={application} categories={categories} />
                             <div className="btn-stop"> <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteStop(stop.uid)}>
                                 Delete
@@ -174,18 +174,18 @@ class Lists extends React.Component<IProps, IState> {
                     ?
                     stops.map(stop => (stop.categoryID === ''
                         ?
-                        <div className="list-item stop" key={stop.uid}>
+                        <div className="list-item" key={stop.uid}>
                             <StopItem uid={stop.uid} application={application} categories={categories} />
-                            <div className="btn-stop"> <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteStop(stop.uid)}>
+                            <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteStop(stop.uid)}>
                                 Delete
-                                </Button> </div>
+                                </Button> 
                         </div> : null))
                     :
                     ''}
                 {application !== null && selectCategory === null && !uncategorized
                     ?
                     stops.map(stop => (
-                        <div className="list-item stop" key={stop.uid}>
+                        <div className="list-item" key={stop.uid}>
                             <StopItem uid={stop.uid} application={application} categories={categories} />
                             <div className="btn-stop"> <Button variant="contained" color="primary" className="btn-delete" onClick={this.deleteStop(stop.uid)}>
                                 Delete

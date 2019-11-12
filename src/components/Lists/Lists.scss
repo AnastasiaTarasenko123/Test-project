@@ -3,40 +3,40 @@
 .content-lists {
     display: inline-block;
     width: 85%;
-    border-left: 1px solid $useColor;
-    background-color: $colorBgModal;
+    border-left: 1px solid grey;
+    background-color: $colorEditor;
 
     .border-lists {
         display: flex;
-        height: 99px;
-        padding: 1rem;
-        color: $useColor;
         align-items: center;
-        justify-content: flex-start;
-        border-bottom: 1px solid $useColor;
+        border-bottom: 1px solid grey;
         background-color: white;
 
-        .border-list {
-            width: 70%;
+        .border-item {
+            padding: 0.4rem 2.5rem;
+        }
+
+        .border-item-main {
+            flex-grow: 1;
+        }
+
+        .border-item-list {
+            flex-grow: 7;
 
             button {
-                margin: 0.5rem;
+                margin: 0.5rem 0.5rem;
             }
         }
 
-        .category {
-            display: none;
+        .border-item-category {
+            flex-grow: 2;
         }
 
-        .border-item {
-            width: 10%;
+        .border-item-btn {
+            text-align: right;
         }
 
-        .border-stop {
-            margin-left: auto;
-        }
-
-        .border-category {
+        .border-category-none {
             display: none;
 
             ul {
@@ -57,27 +57,8 @@
         margin: 2rem auto;
         width: 95%;
 
-        p {
-            color: $useColor;
-            text-align: left;
-        }
-
         .btn-delete {
-            margin: 1rem;
-        }
-    }
-
-    .category {
-        height: 25rem;
-        padding: 1rem 5rem;
-        text-align: right;
-    }
-
-    .stop {
-        .btn-stop {
-            text-align: right;
-            margin-right: 5rem;
-            padding-bottom: 3rem;
+            margin: 2rem 2rem;
         }
     }
 
@@ -87,5 +68,36 @@
 
     .active {
         display: block;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .content-lists {
+        .border-lists {
+            display: block;
+
+            .border-item {
+                padding: 0.4rem 2rem;
+                display: block;
+            }
+
+            .border-item-btn {
+                text-align: left;
+            }
+
+            .border-item-list {
+                display: inline-block;
+ 
+                button {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .content-lists {
+        width: 75%;
     }
 }
