@@ -55,7 +55,6 @@
 
                 p {
                     text-align: center;
-                    margin: 1rem;
                 }
 
                 .block-flex {
@@ -121,7 +120,7 @@
 
                 .app-name {
                     font-size: 1.5rem;
-                    margin: 0.5rem;
+                    padding: 0.5rem;
                 }
             }
 
@@ -140,10 +139,18 @@
     }
 }
 
+@media screen and (max-width: 1024px) {
+    .modal-window-create-app {
+        .modal-block-create-app {
+            width: 100%;
+        }
+    }
+}
+
 @media only screen and (max-width : 768px) {
-    .modal-window {
-        .modal-block {
-            height: 35rem;
+    .modal-window-create-app {
+        .modal-block-create-app {
+            height: 40rem;
 
             .navigation-modal {
                 display: none;
@@ -153,26 +160,22 @@
                 height: inherit;
 
                 p {
-                   padding: 2rem;
+                    padding: 2rem;
                 }
 
                 .blocks {
-                    
+
                     .block-features {
                         margin: 1rem 1rem;
                         padding: 4rem 1rem;
 
                     }
+
+                    .welcome {
+                        width: 80%;
+                    }
                 }
             }
-        }
-    }
-}
-
-@media screen and (max-width: 1024px) {
-    .modal-window {
-        .modal-block {
-            width: 100%;
         }
     }
 }

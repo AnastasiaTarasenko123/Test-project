@@ -38,17 +38,17 @@
     }
 }
 
-@media only screen and (max-width : 768px) {
+@media only screen and (max-width : 1224px) {
     .modal-window {    
-        .modal-block-category {
+        .modal-block-stop {
             width: 100%;
         }
     }
 }
 
-@media only screen and (max-width : 1224px) {
+@media only screen and (max-width : 768px) {
     .modal-window {    
-        .modal-block-stop {
+        .modal-block-category {
             width: 100%;
         }
     }
