@@ -3,7 +3,6 @@
 .content-features {
     background-color: $colorEditor;
     width: 85%;
-    height: 35rem;
     display: inline-block;
     border-left: 1px solid grey;
     border-bottom: 1px solid grey;
@@ -20,32 +19,24 @@
     .main-features {
         background-color: white;
         border-radius: 1rem;
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        margin: auto;
-        width: 95%;
-        margin-top: 2rem;
-        padding: 1rem 5rem;
-        height: 28rem;
+        display: grid;
+        grid-template-columns: 70% 20%;
+        grid-gap: 3rem;
+        margin: 2rem;
+        padding: 3rem 5rem;
+        line-height: 1.5rem;
 
         .choose-features {
-            width: 80%;
-
             h1 {
-                margin-bottom: 2rem;
+                margin-bottom: 1rem;
                 font-size: 1.2rem;
                 color: $useColor;
-            }
-
-            p {
-                line-height: 1.5rem;
             }
         }
 
         .features-active {
-            width: 20%;
             text-align: center;
+
         }
     }
 }
@@ -53,9 +44,7 @@
 @media screen and (max-width: 1024px) {
     .content-features {
         .main-features {
-            width: 90%;
-            margin-top: 2rem;
-            padding: 1rem 1rem;
+            margin: 1rem;
         }
     }
 }
@@ -63,10 +52,10 @@
 @media only screen and (max-width: 768px) {
     .content-features {
         width: 75%;
-        height: 37rem;
 
         .main-features {
-            height: 30rem;
+            padding: 1rem 2rem;
+            grid-gap: 1rem;
         }
     }
 }

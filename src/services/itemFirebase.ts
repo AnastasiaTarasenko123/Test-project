@@ -1,15 +1,8 @@
 import Firebase from '../firebase/Firebase'
 import { ReadApplication } from '../interfaces/interfaces'
 
-
-export const createItem = (nameItem: string, firebase: Firebase, item: any) => {
-    let ref = null;
-    switch (nameItem) {
-        case 'applications': ref = firebase.applications(); break;
-        case 'stops': ref = firebase.stops(); break;
-        case 'categories': ref = firebase.categories(); break;
-    }
-
+export const createItem = (name: 'applications' | 'categories' | 'stops', firebase: Firebase, item: any) => {
+    let ref = firebase[name]();
     if (ref !== null)
         ref.push({
             ...item
@@ -33,7 +26,7 @@ export const readItem = (
                     uid: key,
                 }
                 ));
-                if (appList !== undefined) {
+                if (appList.length > 0) {
                     successfunction && successfunction(appList[0]);
                 }
             } else {
@@ -48,12 +41,14 @@ export const readItems = (
     child: string,
     successfunction?: (result: any) => void,
     emptyfunction?: () => void) => {
-    let ref: firebase.database.Reference = firebase.db.ref().child(child);
+    const ref: firebase.database.Reference = firebase.db.ref().child(child);
     let ordered: firebase.database.Query = ref;
-    if (child === 'applications')
+    if (child === 'applications') {
         ordered = appId === '' ? ordered.orderByChild('userID') : ordered.orderByKey().equalTo(appId);
-    else
+    }
+    else {
         ordered = ordered.orderByChild('appID').equalTo(appId);
+    }
     ordered.on('value', snapshot => {
         const appObject = snapshot.val();
         if (appObject) {
@@ -62,7 +57,7 @@ export const readItems = (
                 uid: key,
             }
             ));
-            if (appList !== undefined) {
+            if (appList.length > 0) {
                 successfunction && successfunction(appList);
             }
         } else {
@@ -72,27 +67,19 @@ export const readItems = (
 }
 
 export const update = (
-    nameItem: string,
+    name: 'application' | 'category' | 'stop',
     firebase: Firebase,
     uid: string,
     key: any,
     value: any
 ) => {
-    switch(nameItem) {
-        case 'application': firebase.application(uid).update({ [key]: value } ); break;
-        case 'category': firebase.category(uid).update({ [key]: value } ); break;
-        case 'stop': firebase.stop(uid).update({ [key]: value } ); break;
-    }
+    firebase[name](uid).update({ [key]: value });
 }
 
 export const deleteItem = (
     firebase: Firebase,
-    name: string,
+    name: 'application' | 'category' | 'stop',
     uid: string
 ) => {
-    switch(name) {
-        case 'application': firebase.application(uid).remove(); break;
-        case 'category': firebase.category(uid).remove(); break;
-        case 'stop': firebase.stop(uid).remove(); break;
-    }
+    firebase[name](uid).remove();
 }

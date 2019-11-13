@@ -6,6 +6,7 @@ import Firebase from '../../firebase/Firebase'
 import { RouteComponentProps } from 'react-router'
 import { readItem, update } from '../../services/itemFirebase'
 import { withFirebase } from '../../firebase/FirebaseContext'
+import { EMPTY_APP } from '../../constants/emptyValue'
 
 interface IProps extends RouteComponentProps<RouteParams> {
     firebase: Firebase
@@ -19,14 +20,7 @@ class Features extends React.Component<IProps, IState> {
         super(props);
         this.state = {
             uid: this.props.match.params.appId || '',
-            appName: '',
-            picture: '',
-            color: '#000000',
-            description: '',
-            selectedPlace: { lat: 0, lng: 0 },
-            isCategories: false,
-            isGPS: false,
-            userID: ''
+            ...EMPTY_APP
         }
     }
 
@@ -88,7 +82,7 @@ class Features extends React.Component<IProps, IState> {
                         />
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 }

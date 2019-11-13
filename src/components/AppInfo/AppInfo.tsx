@@ -8,6 +8,7 @@ import { readItem, update } from '../../services/itemFirebase'
 import { TextField } from '@material-ui/core'
 import InputMap from '../input-components/InputMap/InputMap'
 import Picture from '../input-components/Picture/Picture'
+import { EMPTY_APP } from '../../constants/emptyValue'
 
 interface IProps extends RouteComponentProps<RouteParams> {
     firebase: Firebase
@@ -21,14 +22,7 @@ class AppInfo extends React.Component<IProps, IState> {
         super(props);
         this.state = {
             uid: this.props.match.params.appId || '',
-            appName: '',
-            picture: '',
-            color: '#000000',
-            description: '',
-            selectedPlace: { lat: 0, lng: 0 },
-            isCategories: false,
-            isGPS: false,
-            userID: ''
+            ...EMPTY_APP
         }
     }
 
