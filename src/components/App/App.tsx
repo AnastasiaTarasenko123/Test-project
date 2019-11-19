@@ -13,6 +13,7 @@ import Features from '../Features/Features'
 import Editor from '../Editor/Editor'
 import { RouteParams } from '../../interfaces/interfaces'
 import NeatlyMain from '../../components2/NeatlyMain'
+import SignUp_N from '../../components2/SignUp_N'
 
 interface IProps extends RouteComponentProps<RouteParams> {}
 
@@ -23,6 +24,7 @@ const App: React.FC<IProps> = (props: IProps) => (
     <Route path={ROUTES.SIGN_IN} component={SignInPage} />
     <Route path={ROUTES.DASHBOARD} component={Dashboard} />
     <Route path={ROUTES.NEATLY_REGISTRATION_PAGE} component={NeatlyMain} />
+    <Route path={ROUTES.NEATLY_SIGN_UP} component={SignUp_N} />
     <Route path={`${ROUTES.EDITOR}/:appId`} component={Editor} />
     <Route path={`${ROUTES.EDITOR}/:appId${ROUTES.APP_INFO}`} component={AppInfo} />
     <Route path={`${ROUTES.EDITOR}/:appId${ROUTES.LISTS}`} component={Lists} />

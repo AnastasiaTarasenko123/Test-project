@@ -1,13 +1,24 @@
+@import './constants/style2';
+
 html {
-    font-family: "Arial Black", Gadget, sans-serif;
-    font-size: 16px;
+	font-family: Roboto;
+	font-size: 16px;
 
-    div {
-        box-sizing: border-box;
-    }
+	div {
+		box-sizing: border-box;
+	}
+
+	h2 {
+		font-weight: 500;
+		font-size: 1.5rem;
+		line-height: 1.75rem;
+		margin-bottom: 1rem;
+		color: $colorH2;
+	}
+
+	.tooltip {
+		font-size: 0.875rem;
+		line-height: 1rem;
+		color: $colorTooltip;
+	}
 }
-
-// input[type="file"]::-webkit-file-upload-button {
-//     background-color: red;
-//     border: 100px solid orange;
-// }
