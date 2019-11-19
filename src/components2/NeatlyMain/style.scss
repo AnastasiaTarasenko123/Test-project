@@ -18,3 +18,11 @@
     justify-content: center;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .neatly-main {
+    .neatly-content {
+      width: 100%;
+    }
+  }
+}

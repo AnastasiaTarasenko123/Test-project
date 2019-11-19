@@ -26,3 +26,9 @@
     color: $colorTooltip;
   }
 }
+
+@media only screen and (max-width: 1440px) {
+  .neatly-sign-up {
+    width: 80%;
+  }
+}
