@@ -17,7 +17,7 @@ interface IProps extends RouteComponentProps<RouteParams> {}
 
 const App: React.FC<IProps> = (props: IProps) => (
   <Router>
-    <Navigation />
+    {/* <Navigation /> */}
     <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
     <Route path={ROUTES.SIGN_IN} component={SignInPage} />
     <Route path={ROUTES.DASHBOARD} component={Dashboard} />

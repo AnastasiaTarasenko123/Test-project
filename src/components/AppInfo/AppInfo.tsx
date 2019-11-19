@@ -117,8 +117,6 @@ class AppInfo extends React.Component<IProps, IState> {
                 <div className="content">
                     <InputMap onChangePlace={this.onChangePlace} selectedPlace={selectedPlace} displayLatLng={true} />
                 </div >
-                <div>
-                </div>
             </div>
         );
     }
