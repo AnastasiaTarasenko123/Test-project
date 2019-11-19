@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, RouteComponentProps } from 'react-router-dom'
-import Navigation from '../Navigation/Navigation'
+//import Navigation from '../Navigation/Navigation'
 import { SignUpPage } from '../SignUp/SignUpPage'
 import SignInPage from '../SignIn/SignInPage'
 import Dashboard from '../Dashboard/Dashboard'
@@ -12,6 +12,7 @@ import Lists from '../Lists/Lists'
 import Features from '../Features/Features'
 import Editor from '../Editor/Editor'
 import { RouteParams } from '../../interfaces/interfaces'
+import NeatlyMain from '../../components2/NeatlyMain'
 
 interface IProps extends RouteComponentProps<RouteParams> {}
 
@@ -21,6 +22,7 @@ const App: React.FC<IProps> = (props: IProps) => (
     <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
     <Route path={ROUTES.SIGN_IN} component={SignInPage} />
     <Route path={ROUTES.DASHBOARD} component={Dashboard} />
+    <Route path={ROUTES.NEATLY_REGISTRATION_PAGE} component={NeatlyMain} />
     <Route path={`${ROUTES.EDITOR}/:appId`} component={Editor} />
     <Route path={`${ROUTES.EDITOR}/:appId${ROUTES.APP_INFO}`} component={AppInfo} />
     <Route path={`${ROUTES.EDITOR}/:appId${ROUTES.LISTS}`} component={Lists} />

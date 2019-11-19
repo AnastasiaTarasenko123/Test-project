@@ -1,0 +1,21 @@
+@import '../../constants/style2';
+
+.neatly-main {
+  background:
+    url('../../assets/images2/main-page/first-vector.png') no-repeat,
+    url('../../assets/images2/main-page/second-vector.png') no-repeat;
+  background-color: $bgColor;
+  background-position: center bottom;
+  height: 100vh;
+  display: flex;
+
+  .neatly-logo {
+    width: 62%;
+    text-align: center;
+  }
+
+  .neatly-content {
+    width: 38%;
+    background-color: white;
+  }
+}
