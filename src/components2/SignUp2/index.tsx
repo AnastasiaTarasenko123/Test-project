@@ -10,7 +10,7 @@ class SignUp2 extends React.Component {
     return (
       <NeatlyMain>
         <div className="neatly-sign-up">
-          <h2>SignUp</h2>
+          <h2>Sign Up</h2>
           <p className="tooltip">Neatly help employees to find the files and documents</p>
           <TextField
             className="input-sign-up"
@@ -56,7 +56,7 @@ class SignUp2 extends React.Component {
             variant="contained"
             startIcon={<GoogleIcon />}
           >
-            Sign in with Google
+            Sign up with Google
       </Button>
         </div>
       </NeatlyMain>

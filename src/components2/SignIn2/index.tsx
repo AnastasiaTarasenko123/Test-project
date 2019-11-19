@@ -1,6 +1,6 @@
 import React from 'react'
 import NeatlyMain from '../NeatlyMain'
-import { TextField, Button } from '@material-ui/core'
+import { TextField, Button, FormControlLabel, Checkbox, Link } from '@material-ui/core'
 import { GoogleIcon } from '../Icons'
 
 import './style.scss'
@@ -10,7 +10,7 @@ class SignIn2 extends React.Component {
     return (
       <NeatlyMain>
         <div className="neatly-sign-in">
-          <h2>SignIn</h2>
+          <h2>Sign In</h2>
           <p className="tooltip">Neatly help employees to find the files and documents</p>
           <TextField
             className="input-sign-in"
@@ -25,9 +25,24 @@ class SignIn2 extends React.Component {
             type="password"
             margin="normal"
           />
-          <br />
+          <div className="input-sign-in remember-forgot">
+            <div className="sign-in-remember">
+              <FormControlLabel
+                control={
+                  <Checkbox /*checked={state.checkedA} onChange={handleChange('checkedA')} */ value="checkedA" />
+                }
+                label="Remember me"
+                className="label-remember-me sign-in-text"
+              />
+            </div>
+            <div className="sign-in-forgot">
+              <Link href="#" className="link-forgot-password sign-in-text"/*onClick={preventDefault} className={classes.link}*/>
+                Forgot Password?
+          </Link>
+            </div>
+          </div>
           <Button variant="contained" className="input-sign-in btn-neatly btn-neatly-blue">
-            Register
+            Sign in
         </Button>
           <br />
           <Button
