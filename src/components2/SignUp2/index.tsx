@@ -1,16 +1,11 @@
 import React from 'react'
 import NeatlyMain from '../NeatlyMain'
 import { TextField, Button } from '@material-ui/core'
+import { GoogleIcon } from '../Icons'
 
 import './style.scss'
 
-const GoogleIcon: React.FC = () => (
-  <>
-    <img src={require('../../assets/images2/main-page/Google.png')} alt="google" />
-  </>
-);
-
-class SignUp_N extends React.Component {
+class SignUp2 extends React.Component {
   render() {
     return (
       <NeatlyMain>
@@ -52,12 +47,12 @@ class SignUp_N extends React.Component {
             margin="normal"
           />
           <br />
-          <Button variant="contained" className="input-sign-up btn-sign-up sign-up-register">
+          <Button variant="contained" className="input-sign-up btn-neatly btn-neatly-blue">
             Register
         </Button>
           <br />
           <Button
-            className="input-sign-up btn-sign-up sign-up-with-Google"
+            className="input-sign-up btn-neatly btn-with-Google"
             variant="contained"
             startIcon={<GoogleIcon />}
           >
@@ -69,4 +64,4 @@ class SignUp_N extends React.Component {
   }
 }
 
-export default SignUp_N
+export default SignUp2

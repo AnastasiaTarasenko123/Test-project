@@ -1,0 +1,13 @@
+.neatly-sign-in {
+  width: 48%;
+
+  .input-sign-in {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .neatly-sign-in {
+    width: 80%;
+  }
+}
