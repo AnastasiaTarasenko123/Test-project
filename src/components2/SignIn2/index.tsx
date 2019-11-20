@@ -26,20 +26,16 @@ class SignIn2 extends React.Component {
             margin="normal"
           />
           <div className="input-sign-in remember-forgot">
-            <div className="sign-in-remember">
-              <FormControlLabel
-                control={
-                  <Checkbox /*checked={state.checkedA} onChange={handleChange('checkedA')} */ value="checkedA" />
-                }
-                label="Remember me"
-                className="label-remember-me sign-in-text"
-              />
-            </div>
-            <div className="sign-in-forgot">
-              <Link href="#" className="link-forgot-password sign-in-text"/*onClick={preventDefault} className={classes.link}*/>
-                Forgot Password?
-          </Link>
-            </div>
+            <FormControlLabel
+              control={
+                <Checkbox /*checked={state.checkedA} onChange={handleChange('checkedA')} */ value="checkedA" />
+              }
+              label="Remember me"
+              className="label-remember-me sign-in-text"
+            />
+            <Link href="#" className="link-forgot-password sign-in-text"/*onClick={preventDefault} className={classes.link}*/>
+              Forgot Password?
+              </Link>
           </div>
           <Button variant="contained" className="input-sign-in btn-neatly-blue">
             Sign in

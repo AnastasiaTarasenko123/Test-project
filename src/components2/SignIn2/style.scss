@@ -7,27 +7,20 @@
     width: 100%;
   }
 
-  div {
-    .sign-in-text {
-      line-height: 2.5rem;
-      font-size: 0.875rem;
-    }
-  }
-
   .remember-forgot {
     display: flex;
     justify-content: space-between;
 
-    .sign-in-remember {
-      .label-remember-me {
-        color: #757575;
-      }
+    .label-remember-me span {
+      line-height: 2.5rem;
+      font-size: 0.875rem;
+      color: #757575;
     }
 
-    .sign-in-forgot {
-      .link-forgot-password {
-        color: #2979FF;
-      }
+    .link-forgot-password {
+      line-height: 2.5rem;
+      font-size: 0.875rem;
+      color: #2979FF;
     }
   }
 
