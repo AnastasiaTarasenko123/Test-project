@@ -18,39 +18,33 @@ class SignUp2 extends React.Component {
             margin="normal"
             color="default"
           />
-          <br />
           <TextField
             className="input-sign-up"
             label="Company"
             margin="normal"
             color="default"
           />
-          <br />
           <TextField
             className="input-sign-up"
             label="Email"
             margin="normal"
             color="default"
           />
-          <br />
           <TextField
             className="input-sign-up"
             label="Password"
             type="password"
             margin="normal"
           />
-          <br />
           <TextField
             className="input-sign-up"
             label="Confirm Password"
             type="password"
             margin="normal"
           />
-          <br />
           <Button variant="contained" className="input-sign-up btn-neatly-blue">
             Register
         </Button>
-          <br />
           <Button
             className="input-sign-up btn-with-Google"
             variant="contained"

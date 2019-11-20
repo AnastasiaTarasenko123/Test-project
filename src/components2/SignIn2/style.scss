@@ -1,5 +1,10 @@
 @import '../../constants/style2';
 
+%remember-forgot {
+  line-height: 2.5rem;
+  font-size: 0.875rem;
+}
+
 .neatly-sign-in {
   width: 48%;
 
@@ -12,14 +17,12 @@
     justify-content: space-between;
 
     .label-remember-me span {
-      line-height: 2.5rem;
-      font-size: 0.875rem;
+      @extend %remember-forgot;
       color: #757575;
     }
 
     .link-forgot-password {
-      line-height: 2.5rem;
-      font-size: 0.875rem;
+      @extend %remember-forgot;
       color: #2979FF;
     }
   }

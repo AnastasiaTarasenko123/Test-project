@@ -18,7 +18,6 @@ class SignIn2 extends React.Component {
             margin="normal"
             color="default"
           />
-          <br />
           <TextField
             className="input-sign-in"
             label="Password"
@@ -40,7 +39,6 @@ class SignIn2 extends React.Component {
           <Button variant="contained" className="input-sign-in btn-neatly-blue">
             Sign in
         </Button>
-          <br />
           <Button
             className="input-sign-in btn-with-Google"
             variant="contained"
