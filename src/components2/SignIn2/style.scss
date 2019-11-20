@@ -1,3 +1,5 @@
+@import '../../constants/style2';
+
 .neatly-sign-in {
   width: 48%;
 
@@ -27,6 +29,16 @@
         color: #2979FF;
       }
     }
+  }
+
+  .btn-neatly-blue {
+    @extend %btn;
+    @extend %btn-blue;
+  }
+
+  .btn-with-Google {
+    @extend %btn;
+    @extend %btn-with-Google;
   }
 }
 

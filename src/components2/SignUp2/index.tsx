@@ -47,12 +47,12 @@ class SignUp2 extends React.Component {
             margin="normal"
           />
           <br />
-          <Button variant="contained" className="input-sign-up btn-neatly btn-neatly-blue">
+          <Button variant="contained" className="input-sign-up btn-neatly-blue">
             Register
         </Button>
           <br />
           <Button
-            className="input-sign-up btn-neatly btn-with-Google"
+            className="input-sign-up btn-with-Google"
             variant="contained"
             startIcon={<GoogleIcon />}
           >

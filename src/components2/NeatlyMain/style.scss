@@ -17,27 +17,6 @@
     align-items: center;
     justify-content: center;
   }
-
-  div {
-    .btn-neatly {
-      height: 46px;
-      font-weight: normal;
-      font-size: 1.125rem;
-      text-transform: none;
-    }
-
-    .btn-neatly-blue {
-      margin-top: 60px;
-      background-color: $bgColor;
-      color: white;
-    }
-
-    .btn-with-Google {
-      margin-top: 20px;
-      background-color: white;
-      color: $colorTooltip;
-    }
-  }
 }
 
 @media only screen and (max-width: 768px) {

@@ -41,12 +41,12 @@ class SignIn2 extends React.Component {
           </Link>
             </div>
           </div>
-          <Button variant="contained" className="input-sign-in btn-neatly btn-neatly-blue">
+          <Button variant="contained" className="input-sign-in btn-neatly-blue">
             Sign in
         </Button>
           <br />
           <Button
-            className="input-sign-in btn-neatly btn-with-Google"
+            className="input-sign-in btn-with-Google"
             variant="contained"
             startIcon={<GoogleIcon />}
           >

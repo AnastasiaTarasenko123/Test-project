@@ -6,6 +6,16 @@
   .input-sign-up {
     width: 100%;
   }
+
+  .btn-neatly-blue {
+    @extend %btn;
+    @extend %btn-blue;
+  }
+
+  .btn-with-Google {
+    @extend %btn;
+    @extend %btn-with-Google;
+  }
 }
 
 @media only screen and (max-width: 1440px) {

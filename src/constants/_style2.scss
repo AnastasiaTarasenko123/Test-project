@@ -1,3 +1,22 @@
 $bgColor: #2979FF;
 $colorH2: #424242;
 $colorTooltip: #757575;
+
+%btn {
+  height: 46px;
+  font-weight: normal;
+  font-size: 1.125rem;
+  text-transform: none;
+}
+
+%btn-blue {
+  margin-top: 60px;
+  background-color: $bgColor;
+  color: white;
+}
+
+%btn-with-Google {
+  margin-top: 20px;
+  background-color: white;
+  color: $colorTooltip;
+}
