@@ -9,6 +9,8 @@ class Congratulations extends React.Component {
     return (
       <NeatlyMain>
         <div className="neatly-congratulations">
+          <img src={require('../../assets/images2/main-page/CheckMark.png'
+          )} alt="check" className="check-mark" />
           <h2>Congratulations!</h2>
           <p className="tooltip">Your email successfully verified.
           Start use your account right now!</p>

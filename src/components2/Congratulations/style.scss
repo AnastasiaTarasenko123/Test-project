@@ -4,6 +4,10 @@
   width: 60%;
   text-align: center;
 
+  .check-mark {
+    margin-bottom: 33px;
+  }
+
   .neatly-congratulations {
     margin-bottom: 18px;
   }
@@ -17,7 +21,7 @@
 }
 
 @media only screen and (max-width: 1440px) {
-  .neatly-congratulations{
+  .neatly-congratulations {
     width: 80%;
   }
 }
