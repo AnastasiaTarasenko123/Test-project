@@ -18,7 +18,7 @@ import SignIn2 from '../../components2/SignIn2'
 import ForgotPassword2 from '../../components2/ForgotPassword2'
 import ResetPassword2 from '../../components2/ResetPassword2'
 import Congratulations from '../../components2/Congratulations'
-import { ConfirmEmail } from '../../components2/ConfirmEmail'
+import ConfirmEmail from '../../components2/ConfirmEmail'
 import SignInCompany from '../../components2/SignInCompany'
 
 interface IProps extends RouteComponentProps<RouteParams> { }

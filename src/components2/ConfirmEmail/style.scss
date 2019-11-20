@@ -1,0 +1,25 @@
+@import '../../constants/style2';
+
+.neatly-confirm-email {
+  width: 55%;
+  text-align: center;
+
+  .info {
+    margin-bottom: 33px;
+  }
+
+  .tooltip {
+    margin-top: 18px;
+  }
+}
+
+.go-to {
+  position: absolute;
+  bottom: 13%;
+}
+
+@media only screen and (max-width: 1440px) {
+  .neatly-confirm-email {
+    width: 80%;
+  }
+}

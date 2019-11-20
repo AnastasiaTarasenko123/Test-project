@@ -5,7 +5,7 @@ import * as ROUTES from '../../../constants/routs'
 import './style.scss'
 
 interface IProps {
-  message: 'account' | 'back'
+  message: 'account' | 'back' | 'goto'
 }
 
 export const SignInLink2: React.FC<IProps> = (props) => (
@@ -15,8 +15,12 @@ export const SignInLink2: React.FC<IProps> = (props) => (
         <p className="tooltip">Already have an account ? Go to
       <Link to={ROUTES.NEATLY_SIGN_IN} className="in-link"> Sign In</Link></p>
         :
-        <p className="tooltip">Back to
+        props.message === 'back' ?
+          <p className="tooltip">Back to
       <Link to={ROUTES.NEATLY_SIGN_IN} className="in-link"> Sign In</Link></p>
+          :
+          <p className="tooltip">Go to
+    <Link to={ROUTES.NEATLY_SIGN_IN} className="in-link"> Sign In</Link></p>
     }
   </div>
 )
