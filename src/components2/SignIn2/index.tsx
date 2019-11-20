@@ -1,8 +1,10 @@
 import React from 'react'
 import NeatlyMain from '../NeatlyMain'
-import { TextField, Button, FormControlLabel, Checkbox, Link } from '@material-ui/core'
+import { TextField, Button, FormControlLabel, Checkbox } from '@material-ui/core'
 import { GoogleIcon } from '../Icons'
 import { SignUpLink2 } from '../SignUp2/SignUpLink2'
+import { Link } from 'react-router-dom'
+import * as ROUTES from '../../constants/routs'
 
 import './style.scss'
 
@@ -33,7 +35,7 @@ class SignIn2 extends React.Component {
               label="Remember me"
               className="label-remember-me sign-in-text"
             />
-            <Link href="#" className="link-forgot-password sign-in-text"/*onClick={preventDefault} className={classes.link}*/>
+            <Link to={ROUTES.NEATLY_FORGOT_PASSWORD} className="link-forgot-password sign-in-text"/*onClick={preventDefault} className={classes.link}*/>
               Forgot Password?
               </Link>
           </div>

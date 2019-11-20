@@ -1,0 +1,20 @@
+@import '../../constants/style2';
+
+.neatly-forgot-password {
+  width: 48%;
+
+  .input-forgot-pass {
+    width: 100%;
+  }
+
+  .btn-neatly-blue {
+    @extend %btn;
+    @extend %btn-blue;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .neatly-sign-up {
+    width: 80%;
+  }
+}

@@ -53,7 +53,7 @@ class SignUp2 extends React.Component {
           >
             Sign up with Google
       </Button>
-          <SignInLink2 />
+          <SignInLink2 message={'account'}/>
         </div>
       </NeatlyMain>
     )

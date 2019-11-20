@@ -4,9 +4,19 @@ import * as ROUTES from '../../../constants/routs'
 
 import './style.scss'
 
-export const SignInLink2: React.FC = () => (
+interface IProps {
+  message: 'account' | 'back'
+}
+
+export const SignInLink2: React.FC<IProps> = (props) => (
   <div className="sign-in-link">
-    <p className="tooltip">Already have an account ? Go to
+    {
+      props.message === 'account' ?
+        <p className="tooltip">Already have an account ? Go to
       <Link to={ROUTES.NEATLY_SIGN_IN} className="in-link"> Sign In</Link></p>
+        :
+        <p className="tooltip">Back to
+      <Link to={ROUTES.NEATLY_SIGN_IN} className="in-link"> Sign In</Link></p>
+    }
   </div>
 )
