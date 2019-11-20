@@ -1,0 +1,20 @@
+@import '../../constants/style2';
+
+.neatly-sign-company {
+  width: 48%;
+
+  .input-sign-company {
+    width: 100%;
+  }
+
+  .btn-neatly-blue {
+    @extend %btn;
+    @extend %btn-blue;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .neatly-sign-company {
+    width: 80%;
+  }
+}
