@@ -1,0 +1,23 @@
+@import '../../constants/style2';
+
+.neatly-congratulations {
+  width: 60%;
+  text-align: center;
+
+  .neatly-congratulations {
+    margin-bottom: 18px;
+  }
+
+  .btn-neatly-blue {
+    margin-top: 37px;
+    width: 183px;
+    @extend %btn;
+    @extend %btn-blue;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .neatly-congratulations{
+    width: 80%;
+  }
+}
