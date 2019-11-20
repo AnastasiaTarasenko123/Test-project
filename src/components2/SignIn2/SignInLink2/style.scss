@@ -1,0 +1,11 @@
+@import '../../../constants/style2';
+
+.sign-in-link {
+  text-align: center;
+  margin-top: 60px;
+  .tooltip {
+    .in-link {
+      color: $bgColor;
+    }
+  }
+}

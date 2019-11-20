@@ -2,6 +2,7 @@ import React from 'react'
 import NeatlyMain from '../NeatlyMain'
 import { TextField, Button } from '@material-ui/core'
 import { GoogleIcon } from '../Icons'
+import { SignInLink2 } from '../SignIn2/SignInLink2'
 
 import './style.scss'
 
@@ -52,6 +53,7 @@ class SignUp2 extends React.Component {
           >
             Sign up with Google
       </Button>
+          <SignInLink2 />
         </div>
       </NeatlyMain>
     )
