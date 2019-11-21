@@ -7,17 +7,19 @@
 
 .neatly-main-page {
   height: 100vh;
-
+  flex-flow: column;
+  display:flex;
+  
   header {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
-    height: 66px;
+    flex: 0 0 66px;
     display: flex;
     align-items: center;
 
     .logo {
       padding: 20px 0;
       text-align: center;
-      width: 260px;
+      width: 14%;
       background-color: $bgColor;
       text-transform: uppercase;
     }
@@ -38,11 +40,11 @@
 
   .content {
     display: flex;
+    flex: 1 1 auto;
     min-height: 500px;
-    height: 93vh;
 
     .menu {
-      width: 260px;
+      width: 14%;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
       padding-top: 76px;
       position: relative;
@@ -73,37 +75,57 @@
         color: $colorNewCategory;
       }
     }
+
+    .main-content {
+      width: 86%;
+      background-color: $colorBgMainPage;
+      padding: 30px;
+
+      .in-main-content {
+        background-color: white;
+        height: 100%;
+        overflow-y: auto;
+      }
+    }
   }
 }
 
+
+@media only screen and (max-width: 1024px) {
+  .neatly-main-page {
+    header {
+      .logo {
+        width: 25%;
+      }
+    }
+
+    .content {
+      .menu {
+        width: 25%;
+      }
+
+      .main-content {
+        width: 75%;
+      }
+    }
+  }
+}
 
 @media only screen and (max-width: 768px) {
   .neatly-main-page {
     header {
       .logo {
-        width: 170px;
+        width: 30%;
       }
     }
 
     .content {
       .menu {
-        width: 170px;
+        display: none;
       }
-    }
-  }
-}
 
-@media only screen and (max-width: 375px) {
-  .neatly-main-page {
-    header {
-      .logo {
-        width: 100px;
-      }
-    }
-
-    .content {
-      .menu {
-        width: 100px;
+      .main-content {
+        width: 100%;
       }
     }
   }
