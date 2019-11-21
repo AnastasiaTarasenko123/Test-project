@@ -40,7 +40,7 @@ class MainPage2 extends React.Component {
               <MenuItem>Legal</MenuItem>
               <MenuItem className="new-category">+ Add New Category</MenuItem>
             </MenuList>
-            {/* <Button
+             <Button
               className="btn-log-out"
               color="primary"
               startIcon={<FontAwesomeIcon icon={faPowerOff}
@@ -48,7 +48,7 @@ class MainPage2 extends React.Component {
                 className="setting-logo" />}
             >
               Log Out
-              </Button> */}
+              </Button> 
           </div>
           <div className="main-content">
             {this.props.children}

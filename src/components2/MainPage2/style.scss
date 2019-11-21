@@ -38,13 +38,14 @@
 
   .content {
     display: flex;
-    min-height: 847px;
+    min-height: 500px;
     height: 93vh;
 
     .menu {
       width: 260px;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
       padding-top: 76px;
+      position: relative;
 
       li {
         padding: 12px 23px;
@@ -58,15 +59,15 @@
         font-weight: bold;
       }
 
-      // .btn-log-out {
-      //   @extend %btn;
-      //   position: relative;
-      //   left: 50%;
-      //   top: 400px;
-      //   transform: translate(-50%, 0);
-      //   font-size: 0.875rem;
-      //   opacity: 0.9;
-      // }
+      .btn-log-out {
+        @extend %btn;
+        position: absolute;
+        left: 50%;
+        bottom: 44px;
+        transform: translate(-50%, 0);
+        font-size: 0.875rem;
+        opacity: 0.9;
+      }
 
       .new-category {
         color: $colorNewCategory;
@@ -80,13 +81,13 @@
   .neatly-main-page {
     header {
       .logo {
-        width: 200px;
+        width: 170px;
       }
     }
 
     .content {
       .menu {
-        width: 200px;
+        width: 170px;
       }
     }
   }
@@ -96,13 +97,13 @@
   .neatly-main-page {
     header {
       .logo {
-        width: 150px;
+        width: 100px;
       }
     }
 
     .content {
       .menu {
-        width: 150px;
+        width: 100px;
       }
     }
   }
