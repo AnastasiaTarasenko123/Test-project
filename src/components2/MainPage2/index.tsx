@@ -1,9 +1,9 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCog, faBell } from '@fortawesome/free-solid-svg-icons'
+import { faCog, faBell, faPowerOff } from '@fortawesome/free-solid-svg-icons'
 
 import './style.scss'
-import { Button } from '@material-ui/core'
+import { Button, MenuList, MenuItem } from '@material-ui/core'
 
 class MainPage2 extends React.Component {
   render() {
@@ -30,6 +30,30 @@ class MainPage2 extends React.Component {
             Settings
               </Button>
         </header>
+        <section className="content">
+          <div className="menu">
+            <MenuList>
+              <li className="list-name">Category</li>
+              <MenuItem>Marketing</MenuItem>
+              <MenuItem>Sales</MenuItem>
+              <MenuItem>HR</MenuItem>
+              <MenuItem>Legal</MenuItem>
+              <MenuItem className="new-category">+ Add New Category</MenuItem>
+            </MenuList>
+            {/* <Button
+              className="btn-log-out"
+              color="primary"
+              startIcon={<FontAwesomeIcon icon={faPowerOff}
+                color="grey"
+                className="setting-logo" />}
+            >
+              Log Out
+              </Button> */}
+          </div>
+          <div className="main-content">
+            {this.props.children}
+          </div>
+        </section>
       </div>
     )
   }

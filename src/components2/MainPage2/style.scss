@@ -1,13 +1,23 @@
 @import '../../constants/style2';
 
+%btn {
+  color: $colorTooltip;
+  text-transform: none;
+}
+
 .neatly-main-page {
+  height: 100vh;
+
   header {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
     height: 66px;
     display: flex;
+    align-items: center;
 
     .logo {
-      padding: 20px 89px;
+      padding: 20px 0;
+      text-align: center;
+      width: 260px;
       background-color: $bgColor;
       text-transform: uppercase;
     }
@@ -21,18 +31,62 @@
     }
 
     .btn-settings {
+      @extend %btn;
       padding: 0 28px;
-      color: $colorTooltip;
-      text-transform: none;
+    }
+  }
+
+  .content {
+    display: flex;
+    min-height: 847px;
+    height: 93vh;
+
+    .menu {
+      width: 260px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+      padding-top: 76px;
+
+      li {
+        padding: 12px 23px;
+        line-height: 1.5rem;
+        font-size: 0.75rem;
+        color: $colorH2;
+      }
+
+      .list-name {
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      // .btn-log-out {
+      //   @extend %btn;
+      //   position: relative;
+      //   left: 50%;
+      //   top: 400px;
+      //   transform: translate(-50%, 0);
+      //   font-size: 0.875rem;
+      //   opacity: 0.9;
+      // }
+
+      .new-category {
+        color: $colorNewCategory;
+      }
     }
   }
 }
+
 
 @media only screen and (max-width: 768px) {
   .neatly-main-page {
     header {
       .logo {
-        padding: 20px 40px;
+        width: 200px;
+      }
+    }
+
+    .content {
+      .menu {
+        width: 200px;
       }
     }
   }
@@ -42,7 +96,13 @@
   .neatly-main-page {
     header {
       .logo {
-        padding: 20px 25px;
+        width: 150px;
+      }
+    }
+
+    .content {
+      .menu {
+        width: 150px;
       }
     }
   }
