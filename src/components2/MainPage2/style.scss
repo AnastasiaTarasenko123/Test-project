@@ -1,46 +1,29 @@
 @import '../../constants/style2';
 
-%size-icons {
-  width: 14px;
-  height: 14px;
-}
-
 .neatly-main-page {
   header {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
     height: 66px;
+    display: flex;
 
-    ul {
-      display: flex;
-      align-items: center;
+    .logo {
+      padding: 20px 89px;
+      background-color: $bgColor;
+      text-transform: uppercase;
+    }
 
-      .logo {
-        padding: 20px 89px;
-        background-color: $bgColor;
-        text-transform: uppercase;
+    .btn-notification {
+      margin-left: auto;
+
+      span {
+        margin: 0%;
       }
+    }
 
-      .notification {
-        margin-left: auto;
-
-        .bell {
-          @extend %size-icons;
-        }
-      }
-
-      .settings {
-        display: flex;
-        margin: 0 28px;
-
-        .setting-logo {
-          @extend %size-icons;
-          margin-right: 10px;
-        }
-
-        .tooltip {
-          opacity: 0.9;
-        }
-      }
+    .btn-settings {
+      padding: 0 28px;
+      color: $colorTooltip;
+      text-transform: none;
     }
   }
 }
