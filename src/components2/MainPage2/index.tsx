@@ -5,9 +5,30 @@ import { Button, MenuList, MenuItem } from '@material-ui/core'
 import Navigation from '../Navigation'
 
 import './style.scss'
+import MyProfile from '../MyProfile/MyProfile'
+import BillingInfo from '../Billing info/BillingInfo'
+import UserList from '../UserList/UserList'
 
-class MainPage2 extends React.Component {
+interface IState {
+  active: number
+}
+
+interface IProps { }
+
+class MainPage2 extends React.Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+    this.state = {
+      active: 0
+    }
+  }
+
+  onChange = (active: number) => {
+    this.setState({ active: active });
+  }
+
   render() {
+    const { active } = this.state;
     return (
       <div className="neatly-main-page">
         <header>
@@ -50,8 +71,17 @@ class MainPage2 extends React.Component {
           </div>
           <div className="main-content">
             <div className="in-main-content">
-              <Navigation />
-              {this.props.children}
+              <Navigation activeBlock={active} onChange={this.onChange} />
+              {Number(active) === 0
+                ?
+                <MyProfile />
+                :
+                Number(active) === 1
+                  ?
+                  <BillingInfo />
+                  :
+                  <UserList />
+              }
             </div>
           </div>
         </section>

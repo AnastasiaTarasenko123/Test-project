@@ -9,7 +9,10 @@ interface IState {
   active: number;
 }
 
-interface IProps { }
+interface IProps {
+  activeBlock: number;
+  onChange: (activeBlock: number) => void
+}
 
 class Navigation extends React.Component<IProps, IState> {
   constructor(props: IProps) {
@@ -21,6 +24,7 @@ class Navigation extends React.Component<IProps, IState> {
 
   handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     this.setState({ active: newValue });
+    this.props.onChange(newValue);
   };
 
   render() {
@@ -43,7 +47,7 @@ class Navigation extends React.Component<IProps, IState> {
             className="setting-logo" />}
         >
           Close account
-              </Button>
+          </Button>
       </div>
     )
   }
