@@ -1,5 +1,7 @@
 import React from 'react'
-import { Tab, Tabs, Paper } from '@material-ui/core'
+import { Tab, Tabs, Button } from '@material-ui/core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import './style.scss'
 
@@ -35,6 +37,13 @@ class Navigation extends React.Component<IProps, IState> {
           <Tab label="Billing info" />
           <Tab label="User List" />
         </Tabs>
+        <Button
+          className="close"
+          startIcon={<FontAwesomeIcon icon={faTimes}
+            className="setting-logo" />}
+        >
+          Close account
+              </Button>
       </div>
     )
   }

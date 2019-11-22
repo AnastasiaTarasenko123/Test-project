@@ -16,14 +16,12 @@ class MainPage2 extends React.Component {
           </div>
           <Button
             className="btn-notification"
-            color="primary"
             startIcon={<FontAwesomeIcon icon={faBell}
               color="grey"
               className="bell" />}
           > </Button>
           <Button
             className="btn-settings"
-            color="primary"
             startIcon={<FontAwesomeIcon icon={faCog}
               color="grey"
               className="setting-logo" />}
@@ -43,7 +41,6 @@ class MainPage2 extends React.Component {
             </MenuList>
             <Button
               className="btn-log-out"
-              color="primary"
               startIcon={<FontAwesomeIcon icon={faPowerOff}
                 color="grey"
                 className="setting-logo" />}

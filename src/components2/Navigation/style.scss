@@ -3,6 +3,7 @@
 .navigator {
   margin: 16px 30px;
   border-bottom: 1px solid rgba(196, 196, 196, 0.35);
+  display: flex;
 
   button {
     text-transform: none;
@@ -19,5 +20,10 @@
 
   .MuiTabs-indicator {
     background-color: $colorActiveBtn;
+  }
+
+  .close {
+    margin-left: auto;
+    color: $colorRed;
   }
 }
