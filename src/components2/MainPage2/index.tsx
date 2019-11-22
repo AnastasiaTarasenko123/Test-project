@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCog, faBell, faPowerOff } from '@fortawesome/free-solid-svg-icons'
 import { Button, MenuList, MenuItem } from '@material-ui/core'
 import Navigation from '../Navigation'
+import MyProfile from '../MyProfile'
+import BillingInfo from '../Billing info'
+import UserList from '../UserList'
 
 import './style.scss'
-import MyProfile from '../MyProfile/MyProfile'
-import BillingInfo from '../Billing info/BillingInfo'
-import UserList from '../UserList/UserList'
 
 interface IState {
   active: number

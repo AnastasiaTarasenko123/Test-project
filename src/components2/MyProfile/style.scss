@@ -1,0 +1,22 @@
+%same-block {
+  flex: 1 1 0;
+  width: 0;
+}
+
+.my-profile {
+  .user-data {
+    display: flex;
+
+    .info {
+      @extend %same-block;
+    }
+
+    .organization {
+      @extend %same-block;
+    }
+
+    .permission {
+      @extend %same-block;
+    }
+  }
+}
