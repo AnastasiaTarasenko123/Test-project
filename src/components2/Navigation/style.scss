@@ -1,0 +1,23 @@
+@import '../../constants/style2';
+
+.navigator {
+  margin: 16px 30px;
+  border-bottom: 1px solid rgba(196, 196, 196, 0.35);
+
+  button {
+    text-transform: none;
+    font-weight: normal;
+    font-size: 0.875rem;
+    color: $colorTooltip;
+  }
+
+  .Mui-selected {
+    .MuiTab-wrapper {
+      color: $colorActiveBtn;
+    }
+  }
+
+  .MuiTabs-indicator {
+    background-color: $colorActiveBtn;
+  }
+}

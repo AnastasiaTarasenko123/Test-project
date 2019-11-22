@@ -1,9 +1,10 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCog, faBell, faPowerOff } from '@fortawesome/free-solid-svg-icons'
+import { Button, MenuList, MenuItem } from '@material-ui/core'
+import Navigation from '../Navigation'
 
 import './style.scss'
-import { Button, MenuList, MenuItem } from '@material-ui/core'
 
 class MainPage2 extends React.Component {
   render() {
@@ -52,6 +53,7 @@ class MainPage2 extends React.Component {
           </div>
           <div className="main-content">
             <div className="in-main-content">
+              <Navigation />
               {this.props.children}
             </div>
           </div>
